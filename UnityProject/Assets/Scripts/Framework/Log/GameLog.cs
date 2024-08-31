@@ -1,5 +1,6 @@
 using Cysharp.Text;
 using Microsoft.Extensions.Logging;
+using UnityEngine;
 using ZLogger;
 using ZLogger.Providers;
 using ZLogger.Unity;
@@ -8,20 +9,26 @@ namespace Framework.Log;
 
 public static class GameLog
 {
+#if UNITY_EDITOR
+    private const string logPath = "Logs/Runtime/";
+#else
+    private static readonly string logPath = Application.persistentDataPath + "/Logs/Runtime/";
+#endif
+
     private static readonly ILogger<Log> logger = LoggerFactory.Create(logging =>
     {
         logging.SetMinimumLevel(LogLevel.Trace);
         logging.AddZLoggerUnityDebug(); // log to UnityDebug
 
         // Add to output to the file
-        logging.AddZLoggerFile("Logs/Runtime/GameLog.log", options => { options.UseJsonFormatter(); });
+        logging.AddZLoggerFile(logPath + "GameLog.log", options => { options.UseJsonFormatter(); });
 
         // Add to output the file that rotates at constant intervals.
         logging.AddZLoggerRollingFile(options =>
             {
                 // File name determined by parameters to be rotated
                 options.FilePathSelector = (timestamp, sequenceNumber) =>
-                    $"Logs/Runtime/GameLog_{timestamp.ToLocalTime():yyyy-MM-dd}_{sequenceNumber:000}.log";
+                    $"{logPath}GameLog_{timestamp.ToLocalTime():yyyy-MM-dd}_{sequenceNumber:000}.log";
 
                 // The period of time for which you want to rotate files at time intervals.
                 options.RollingInterval = RollingInterval.Day;
