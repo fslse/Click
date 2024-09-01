@@ -22,7 +22,7 @@ public static class HybridCLRBuilder
     }
 
     /// <summary>
-    /// 将 HotUpdateDLL 和 AOT DLLs 打入common包.
+    /// 将 HotUpdateDLL 和 AOT DLL 打入common包.
     /// </summary>
     /// <param name="tempDir"></param>
     /// <param name="outputDir"></param>
@@ -51,7 +51,7 @@ public static class HybridCLRBuilder
         }
 
         // 生成待补充的元数据列表
-        AOTReferenceGeneratorCommand.CompileAndGenerateAOTGenericReference();
+        // AOTReferenceGeneratorCommand.CompileAndGenerateAOTGenericReference();
         // 将 AOT Assembly 加入元数据列表 
         HybridCLRSettings.Instance.patchAOTAssemblies = AOTGenericReferences.PatchedAOTAssemblyList.Select(aotAssembly => aotAssembly[..^4]).ToArray();
 
