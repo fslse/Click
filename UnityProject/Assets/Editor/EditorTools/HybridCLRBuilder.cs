@@ -4,26 +4,25 @@ using System.IO;
 using System.Linq;
 using HybridCLR.Editor;
 using HybridCLR.Editor.Commands;
+using HybridCLR.Editor.Settings;
 using UnityEditor;
 using UnityEngine;
 
 public static class HybridCLRBuilder
 {
-    public static string HybridCLRBuildCacheDir => Application.dataPath + "/HybridCLRBuildCache";
+    private static string HybridCLRBuildCacheDir => Application.dataPath + "/HybridCLRBuildCache";
 
-    public static string AssetBundleOutputDir => $"{HybridCLRBuildCacheDir}/AssetBundleOutput";
+    private static string AssetBundleOutputDir => $"{HybridCLRBuildCacheDir}/AssetBundleOutput";
 
-    public static string AssetBundleSourceDataTempDir => $"{HybridCLRBuildCacheDir}/AssetBundleSourceData";
+    private static string AssetBundleSourceDataTempDir => $"{HybridCLRBuildCacheDir}/AssetBundleSourceData";
 
     public static void BuildAssetBundleByTarget(BuildTarget target)
     {
         BuildAssetBundles(GetAssetBundleTempDirByTarget(target), GetAssetBundleOutputDirByTarget(target), target);
     }
 
-
     /// <summary>
-    /// 将HotFix.dll和HotUpdatePrefab.prefab打入common包.
-    /// 将HotUpdateScene.unity打入scene包.
+    /// 将 HotUpdateDLL 和 AOT DLLs 打入common包.
     /// </summary>
     /// <param name="tempDir"></param>
     /// <param name="outputDir"></param>
@@ -51,10 +50,14 @@ public static class HybridCLRBuilder
             Debug.Log($"[BuildAssetBundles] Copy HotUpdate Dll : {dllPath} -> {dllBytesPath}");
         }
 
+        // 生成待补充的元数据列表
+        AOTReferenceGeneratorCommand.CompileAndGenerateAOTGenericReference();
+        // 将 AOT Assembly 加入元数据列表 
+        HybridCLRSettings.Instance.patchAOTAssemblies = AOTGenericReferences.PatchedAOTAssemblyList.Select(aotAssembly => aotAssembly[..^4]).ToArray();
+
         // 裁减后AOT dll输出根目录
         // "HybridCLRData/AssembliesPostIl2CppStrip/{target}"
         string aotDllDir = SettingsUtil.GetAssembliesPostIl2CppStripDir(target);
-
         // 补充元数据AOT dlls
         foreach (var dll in SettingsUtil.AOTAssemblyNames)
         {
@@ -94,17 +97,17 @@ public static class HybridCLRBuilder
         }
     }
 
-    public static string ToRelativeAssetPath(string str)
+    private static string ToRelativeAssetPath(string str)
     {
         return str[str.IndexOf("Assets/", StringComparison.Ordinal)..];
     }
 
-    public static string GetAssetBundleOutputDirByTarget(BuildTarget target)
+    private static string GetAssetBundleOutputDirByTarget(BuildTarget target)
     {
         return $"{AssetBundleOutputDir}/{target}";
     }
 
-    public static string GetAssetBundleTempDirByTarget(BuildTarget target)
+    private static string GetAssetBundleTempDirByTarget(BuildTarget target)
     {
         return $"{AssetBundleSourceDataTempDir}/{target}";
     }
