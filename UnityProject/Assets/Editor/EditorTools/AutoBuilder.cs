@@ -15,7 +15,7 @@ public static class AutoBuilder
     private const string versionFlag = VERSION_RELEASE;
 #endif
 
-    private static readonly string PACKAGE_PATH = string.Format("Builds/" + Application.productName + "_{0}_{1}_v{2}",
+    private static readonly string PACKAGE_PATH = string.Format("Build/" + Application.productName + "_{0}_{1}_v{2}",
         DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"), versionFlag, Application.version);
 
     [MenuItem("Builder/切换版本/开发环境", false, 1)]

@@ -10,12 +10,14 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - NeverMind Rounded
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 348325cbd21ce334b9fc28024e11796a, type: 3}
+  - {fileID: 12800000, guid: b6b2888e0ee3367429a760a93f313f00, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: assetspackage_font
+  assetBundleVariant: ab

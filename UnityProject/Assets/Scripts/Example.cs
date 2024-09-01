@@ -1,3 +1,4 @@
+using System.IO;
 using Framework.Log;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ using ZLogger;
 public class Example : MonoBehaviour
 {
     [SerializeField] private TMP_Text tmp;
+    [SerializeField] private TMP_Text tmp1;
 
     private void Start()
     {
@@ -23,5 +25,8 @@ public class Example : MonoBehaviour
 
         const string world = "World";
         GameLog.Logger.ZLogInformation($"Hello {world}!");
+
+        tmp.text = Directory.GetFiles(Application.streamingAssetsPath).Length.ToString();
+        tmp1.text = Directory.GetFiles(Application.streamingAssetsPath)[0];
     }
 }
