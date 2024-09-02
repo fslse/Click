@@ -3,13 +3,13 @@ CRC: 3687723189
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b0b3c2c84fb60f3f24c3c02c5b1f2c45
+    Hash: 864ec50e7a2b1282669b61507bd41a84
   TypeTreeHash:
     serializedVersion: 2
     Hash: 668d67a36072575eecb74bf7580e5e46
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b0b3c2c84fb60f3f24c3c02c5b1f2c45
+    Hash: 864ec50e7a2b1282669b61507bd41a84
 HashAppended: 1
 ClassTypes:
 - Class: 1
@@ -64,4 +64,4 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/AssetsPackage/Common/Panel.prefab
 Dependencies:
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assetspackage_font_971dcae01b7248aa8f94402efc9e7627.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assetspackage_font_dbb9af3f3254cbef56beac0b6dc89d03.ab

@@ -511,7 +511,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 211915798}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_CameraType: 0
   m_Cameras:
   - {fileID: 211915798}
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1

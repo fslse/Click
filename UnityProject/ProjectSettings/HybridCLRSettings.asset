@@ -23,7 +23,17 @@ MonoBehaviour:
   hotUpdateDllCompileOutputRootDir: HybridCLRData/HotUpdateDlls
   externalHotUpdateAssembliyDirs: []
   strippedAOTDllOutputRootDir: HybridCLRData/AssembliesPostIl2CppStrip
-  patchAOTAssemblies: []
+  patchAOTAssemblies:
+  - StompyRobot.SRF
+  - System.Core
+  - System.Runtime.CompilerServices.Unsafe
+  - System.Text.Json
+  - UnityEngine.AndroidJNIModule
+  - UnityEngine.AssetBundleModule
+  - UnityEngine.CoreModule
+  - Utf8StringInterpolation
+  - ZLogger
+  - mscorlib
   outputLinkFile: HybridCLRGenerate/link.xml
   outputAOTGenericReferenceFile: HybridCLRGenerate/AOTGenericReferences.cs
   maxGenericReferenceIteration: 10

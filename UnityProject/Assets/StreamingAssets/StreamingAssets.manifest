@@ -1,11 +1,11 @@
 ManifestFileVersion: 0
-CRC: 49554090
+CRC: 2883108271
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assetspackage_common_b0b3c2c84fb60f3f24c3c02c5b1f2c45.ab
+      Name: assetspackage_common_864ec50e7a2b1282669b61507bd41a84.ab
       Dependencies:
-        Dependency_0: assetspackage_font_971dcae01b7248aa8f94402efc9e7627.ab
+        Dependency_0: assetspackage_font_dbb9af3f3254cbef56beac0b6dc89d03.ab
     Info_1:
-      Name: assetspackage_font_971dcae01b7248aa8f94402efc9e7627.ab
+      Name: assetspackage_font_dbb9af3f3254cbef56beac0b6dc89d03.ab
       Dependencies: {}
