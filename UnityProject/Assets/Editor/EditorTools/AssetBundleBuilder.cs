@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -8,13 +8,11 @@ using UnityEditor;
 /// </summary>
 public static class AssetBundleBuilder
 {
-    private static DateTime timeStamp;
-
     // AssetBundle 自定义扩展名
     private const string extension = "ab";
 
     // 资源目录
-    private const string sourceDirectory = "Assets/AssetsPackage/";
+    private const string sourceDirectory = "Assets/AssetPackages/";
 
     // 输出目录
     private static readonly string assetBundleDirectory = Application.streamingAssetsPath;
@@ -36,9 +34,14 @@ public static class AssetBundleBuilder
         // This option saves runtime memory and loading performance for asset bundles.
         BuildAssetBundleOptions.DisableLoadAssetByFileNameWithExtension;
 
+    /// <summary>
+    /// 打包的核心逻辑
+    /// </summary>
     public static void SetAssetBundleNames()
     {
         string[] paths = Directory.GetFiles(sourceDirectory, "*", SearchOption.AllDirectories);
+        paths = paths.Concat(Directory.GetFiles("Assets/Scenes/", "*.unity", SearchOption.AllDirectories)).ToArray();
+
         int count = 0;
         foreach (string path in paths)
         {
@@ -70,31 +73,13 @@ public static class AssetBundleBuilder
         Debug.Log("Assets number: " + count);
     }
 
-    public static void RemoveAssetBundleName()
-    {
-        string[] assetBundleNames = AssetDatabase.GetAllAssetBundleNames();
-        int length = assetBundleNames.Length;
-
-        if (length > 0)
-        {
-            for (int i = length - 1; i >= 0; i--)
-            {
-                AssetDatabase.RemoveAssetBundleName(assetBundleNames[i], true);
-            }
-        }
-
-        AssetDatabase.Refresh();
-        Debug.LogWarning("Remove AssetBundleName: " + length);
-    }
-
     /// <summary>
     /// 打包
     /// </summary>
     /// <param name="buildTarget"></param>
     public static void BuildAssetBundles(BuildTarget buildTarget)
     {
-        timeStamp = DateTime.Now;
-        Debug.Log("Build AssetBundle for " + buildTarget + " in " + assetBundleDirectory);
+        Debug.LogWarning("Build AssetBundles for " + buildTarget + " in " + assetBundleDirectory);
         if (!Directory.Exists(assetBundleDirectory))
         {
             Directory.CreateDirectory(assetBundleDirectory);
@@ -109,8 +94,6 @@ public static class AssetBundleBuilder
                 // todo: 加密
             }
         }
-
-        Debug.LogWarning("Success && " + "Time: " + (DateTime.Now - timeStamp).TotalSeconds);
     }
 
     /// <summary>
@@ -138,5 +121,22 @@ public static class AssetBundleBuilder
         }
 
         return bundleName.ToLower();
+    }
+
+    public static void RemoveAssetBundleName()
+    {
+        string[] assetBundleNames = AssetDatabase.GetAllAssetBundleNames();
+        int length = assetBundleNames.Length;
+
+        if (length > 0)
+        {
+            for (int i = length - 1; i >= 0; i--)
+            {
+                AssetDatabase.RemoveAssetBundleName(assetBundleNames[i], true);
+            }
+        }
+
+        AssetDatabase.Refresh();
+        Debug.LogWarning("Remove AssetBundleName: " + length);
     }
 }

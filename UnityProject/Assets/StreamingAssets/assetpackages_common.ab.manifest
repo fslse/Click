@@ -1,0 +1,47 @@
+ManifestFileVersion: 0
+CRC: 968352888
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 652f5626b480ce6ba1d3b2e99fb9160e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 668d67a36072575eecb74bf7580e5e46
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 652f5626b480ce6ba1d3b2e99fb9160e
+HashAppended: 1
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c03dd5268e112a24989e2dbc29d707ec, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/AssetPackages/Common/Panel.prefab
+Dependencies:
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assetpackages_font_667b59a5ae13aaffc604887feec72a44.ab
