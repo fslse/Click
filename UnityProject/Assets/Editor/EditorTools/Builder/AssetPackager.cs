@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Diagnostics;
+using Framework;
 using Framework.Cryptography;
 using UnityEditor;
 using UnityEngine;
@@ -16,33 +17,39 @@ public class AssetPackager
     {
 #if UNITY_ANDROID
         Debug.LogWarning("Build AssetBundle for Android");
-        BuildAssetBundle_(BuildTarget.Android);
+        BuildAssetBundle(BuildTarget.Android);
 #elif UNITY_IOS
         Debug.LogWarning("Build AssetBundle for IOS");
-        BuildAssetBundle_(BuildTarget.iOS);
+        BuildAssetBundle(BuildTarget.iOS);
 #elif UNITY_STANDALONE_WIN
         Debug.LogWarning("Build AssetBundle for Windows");
-        BuildAssetBundle_(BuildTarget.StandaloneWindows64);
+        BuildAssetBundle(BuildTarget.StandaloneWindows64);
 #endif
     }
 
-    private static void BuildAssetBundle_(BuildTarget target)
+    private static void BuildAssetBundle(BuildTarget target)
     {
         timeStamp = DateTime.Now;
 
-        if (Directory.Exists(Application.streamingAssetsPath))
-            Directory.CreateDirectory(Application.streamingAssetsPath);
+        // 清空StreamingAssets目录
+        if (Directory.Exists(AppConst.AssetsPath))
+            Directory.Delete(AppConst.AssetsPath, true);
+        Directory.CreateDirectory(AppConst.AssetsPath);
 
+        // 构建版本文件
         BuildVersionFile();
 
+        // 资源（不含代码）打包
         AssetBundleBuilder.SetAssetBundleNames();
         AssetBundleBuilder.BuildAssetBundles(target);
 
         // 代码打包
         HybridCLRHelper.BuildAssetBundleByTarget(EditorUserBuildSettings.activeBuildTarget);
 
+        // 生成文件索引
         BuildFileIndex();
 
+        // 刷新
         AssetDatabase.Refresh();
 
         Debug.LogWarning("Success && " + "Time: " + (DateTime.Now - timeStamp).TotalSeconds);
@@ -51,7 +58,7 @@ public class AssetPackager
     private static void BuildVersionFile()
     {
         const string fileName = "version.txt";
-        string targetPath = Application.streamingAssetsPath + "/" + fileName;
+        string targetPath = AppConst.AssetsPath + "/" + fileName;
         if (File.Exists(targetPath))
         {
             File.Delete(targetPath);
@@ -65,7 +72,7 @@ public class AssetPackager
 
     private static void BuildFileIndex()
     {
-        string path = Application.streamingAssetsPath + "/files.txt";
+        string path = AppConst.AssetsPath + "/files.txt";
         if (File.Exists(path)) File.Delete(path);
 
         string[] files = Directory.GetFiles(Application.streamingAssetsPath, "*.*", SearchOption.AllDirectories);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Framework;
 
-public class AppConst
+public static class AppConst
 {
     private const string HTTP_SERVER_TEST = "";
     private const string HTTP_SERVER_RELEASE = "";
@@ -18,17 +18,24 @@ public class AppConst
     public static bool DevMode = false;
 #endif
 
+    public const string AssetsDir = "assets";
+
+    // 资源路径（编辑器下打包用）
+    public static readonly string AssetsPath = Application.streamingAssetsPath + "/" + AssetsDir + "/";
+
+    // 资源路径（运行时）
+    public static readonly string StreamingAssetsPath = Application.streamingAssetsPath + "/" + AssetsDir + "/";
+    public static readonly string PersistentDataPath = Application.persistentDataPath + "/" + AssetsPath + "/";
+
+
     // 是否开启热更新
     public const bool HotUpdate = true;
 
+    // 资源下载路径
+    public static readonly string DownloadPath = Application.persistentDataPath + "/temp/";
+
     // 帧率
     public const int GameFrameRate = 60;
-
-#if UNITY_EDITOR
-    public static string AssetDir = Application.streamingAssetsPath + "/assets/";
-#else // 资源路径
-    public static string AssetDir = Application.persistentDataPath + "/assets/";
-#endif
 
     // todo: 设备唯一标识码（Android、IOS） 要求卸载重装不变化
 }

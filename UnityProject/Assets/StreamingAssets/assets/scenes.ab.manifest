@@ -75,5 +75,5 @@ Assets:
 - Assets/Scenes/Loading.unity
 - Assets/Scenes/Game.unity
 Dependencies:
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assetpackages_common_652f5626b480ce6ba1d3b2e99fb9160e.ab
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assetpackages_loading_887e1f50366ff111ec519fc467c968cf.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_common_652f5626b480ce6ba1d3b2e99fb9160e.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_loading_f66ac98295d240d66dcf0089e59705e4.ab

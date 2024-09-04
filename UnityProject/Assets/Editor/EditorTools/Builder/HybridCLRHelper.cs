@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Framework;
 using HybridCLR.Editor;
 using HybridCLR.Editor.Commands;
 using HybridCLR.Editor.Settings;
@@ -93,7 +94,7 @@ public static class HybridCLRHelper
         foreach (var ab in abs) // 复制打包后的DLL到StreamingAssets文件夹
         {
             AssetDatabase.CopyAsset(ToRelativeAssetPath($"{outputDir}/{ab.assetBundleName}"),
-                ToRelativeAssetPath($"{Application.streamingAssetsPath}/{ab.assetBundleName}"));
+                ToRelativeAssetPath($"{AppConst.AssetsPath}/{ab.assetBundleName}"));
         }
     }
 

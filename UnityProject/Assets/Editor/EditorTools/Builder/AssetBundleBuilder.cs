@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Framework;
 using UnityEngine;
 using UnityEditor;
 
@@ -15,7 +16,7 @@ public static class AssetBundleBuilder
     private const string sourceDirectory = "Assets/AssetPackages/";
 
     // 输出目录
-    private static readonly string assetBundleDirectory = Application.streamingAssetsPath;
+    private static readonly string destinationDirectory = AppConst.AssetsPath;
 
     // 打包选项
     private const BuildAssetBundleOptions buildOptions =
@@ -79,18 +80,18 @@ public static class AssetBundleBuilder
     /// <param name="buildTarget"></param>
     public static void BuildAssetBundles(BuildTarget buildTarget)
     {
-        Debug.LogWarning("Build AssetBundles for " + buildTarget + " in " + assetBundleDirectory);
-        if (!Directory.Exists(assetBundleDirectory))
+        Debug.LogWarning("Build AssetBundles for " + buildTarget + " in " + destinationDirectory);
+        if (!Directory.Exists(destinationDirectory))
         {
-            Directory.CreateDirectory(assetBundleDirectory);
+            Directory.CreateDirectory(destinationDirectory);
         }
 
-        AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(assetBundleDirectory, buildOptions, buildTarget);
+        AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(destinationDirectory, buildOptions, buildTarget);
         if (manifest != null)
         {
             foreach (string assetBundleName in manifest.GetAllAssetBundles())
             {
-                Debug.Log("AssetBundle: " + Path.Combine(assetBundleDirectory, assetBundleName));
+                Debug.Log("AssetBundle: " + Path.Combine(destinationDirectory, assetBundleName));
                 // todo: 加密
             }
         }
