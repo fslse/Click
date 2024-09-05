@@ -1,16 +1,16 @@
 ManifestFileVersion: 0
-CRC: 968352888
+CRC: 3220952721
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 652f5626b480ce6ba1d3b2e99fb9160e
+    Hash: c21e45e84e5b20551fc5c4f75923a3a8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 668d67a36072575eecb74bf7580e5e46
+    Hash: c3a6c5cc2d404d2a84250d92441c3582
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 652f5626b480ce6ba1d3b2e99fb9160e
-HashAppended: 1
+    Hash: c21e45e84e5b20551fc5c4f75923a3a8
+HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
@@ -44,4 +44,4 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/AssetPackages/Common/Panel.prefab
 Dependencies:
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_font_95d0716efd569a24bfb0f829454b62f8.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_font.ab

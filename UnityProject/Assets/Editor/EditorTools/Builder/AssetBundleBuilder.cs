@@ -20,10 +20,10 @@ public static class AssetBundleBuilder
 
     // 打包选项
     private const BuildAssetBundleOptions buildOptions =
-        BuildAssetBundleOptions.ForceRebuildAssetBundle |
+        // BuildAssetBundleOptions.ForceRebuildAssetBundle |
 
         // 保证包的唯一
-        BuildAssetBundleOptions.AppendHashToAssetBundleName |
+        // BuildAssetBundleOptions.AppendHashToAssetBundleName |
 
         // 递归处理依赖
         BuildAssetBundleOptions.RecurseDependencies |

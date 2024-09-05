@@ -1,19 +1,22 @@
 ManifestFileVersion: 0
-CRC: 652199889
+CRC: 3763012590
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assetpackages_common_652f5626b480ce6ba1d3b2e99fb9160e.ab
+      Name: assetpackages_common.ab
       Dependencies:
-        Dependency_0: assetpackages_font_95d0716efd569a24bfb0f829454b62f8.ab
+        Dependency_0: assetpackages_font.ab
     Info_1:
-      Name: assetpackages_font_95d0716efd569a24bfb0f829454b62f8.ab
+      Name: assetpackages_font.ab
       Dependencies: {}
     Info_2:
-      Name: assetpackages_loading_f66ac98295d240d66dcf0089e59705e4.ab
+      Name: assetpackages_loading.ab
       Dependencies: {}
     Info_3:
-      Name: scenes_8d444ef3ba79abdf6ec039d66cfbd9c8.ab
+      Name: scenes.ab
       Dependencies:
-        Dependency_0: assetpackages_common_652f5626b480ce6ba1d3b2e99fb9160e.ab
-        Dependency_1: assetpackages_loading_f66ac98295d240d66dcf0089e59705e4.ab
+        Dependency_0: assetpackages_common.ab
+        Dependency_1: assetpackages_loading.ab
+    Info_4:
+      Name: assetpackages_game.ab
+      Dependencies: {}

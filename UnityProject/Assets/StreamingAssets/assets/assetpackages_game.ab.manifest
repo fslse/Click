@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2507359107
+CRC: 864373854
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 887e1f50366ff111ec519fc467c968cf
+    Hash: 2dec8918615613d9f55cf96b8ad23331
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 887e1f50366ff111ec519fc467c968cf
+    Hash: 2dec8918615613d9f55cf96b8ad23331
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -18,5 +18,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/AssetPackages/Loading/Bg.png
+- Assets/AssetPackages/Game/panel_border_grey_detail.png
+- Assets/AssetPackages/Game/panel_border_brown.png
 Dependencies: []

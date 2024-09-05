@@ -1,16 +1,16 @@
 ManifestFileVersion: 0
-CRC: 602623050
+CRC: 261752372
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8d444ef3ba79abdf6ec039d66cfbd9c8
+    Hash: 8030a64199732ced60cc49973b4a8c8c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4a81d6e50087ab2383dd0c845e871796
+    Hash: 279be2eee868f5fc327d47d9d5b1cca8
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 8d444ef3ba79abdf6ec039d66cfbd9c8
-HashAppended: 1
+    Hash: 8030a64199732ced60cc49973b4a8c8c
+HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
@@ -75,5 +75,5 @@ Assets:
 - Assets/Scenes/Loading.unity
 - Assets/Scenes/Game.unity
 Dependencies:
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_common_652f5626b480ce6ba1d3b2e99fb9160e.ab
-- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_loading_f66ac98295d240d66dcf0089e59705e4.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_common.ab
+- W:/UnityProjects/fslse-droid/Click/UnityProject/Assets/StreamingAssets/assets/assetpackages_loading.ab
