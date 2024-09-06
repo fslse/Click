@@ -2,13 +2,15 @@ using System;
 using System.IO;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Framework;
-using Framework.Log;
-using Framework.Manager;
+using Scripts.Framework;
+using Scripts.Framework.Log;
+using Scripts.Framework.Manager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ZLogger;
+
+namespace HotFix;
 
 public class Example : MonoBehaviour
 {
@@ -22,18 +24,18 @@ public class Example : MonoBehaviour
     {
         GameLog.LogDebug("1");
         GameLog.LogDebug("2", "3");
-        GameLog.LogDebug(null, "4", "5", "6");
 
         GameLog.LogWarning("1");
         GameLog.LogWarning("2", "3");
-        GameLog.LogWarning(null, "4", "5", "6");
 
         GameLog.LogError("1");
         GameLog.LogError("2", "3");
-        GameLog.LogError(null, "4", "5", "6");
 
         const string world = "World";
         GameLog.Logger.ZLogInformation($"Hello {world}!");
+
+        Debug.Log("Hello World!");
+        tmp.text = world;
 
         try
         {
@@ -50,7 +52,7 @@ public class Example : MonoBehaviour
         }
         catch (Exception e)
         {
-            GameLog.LogError(e.Message);
+            Debug.LogError(e.Message);
         }
 
         Init().Forget();
@@ -58,8 +60,8 @@ public class Example : MonoBehaviour
 
     private async UniTaskVoid Init()
     {
+        tmp1.text = "资源加载中...";
         await AssetManager.Instance.Initialize();
-        await AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/panel_border_brown.png");
         img.sprite = await AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/panel_border_brown.png");
         img1.sprite = await AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/panel_border_grey_detail.png");
     }

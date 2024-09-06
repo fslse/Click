@@ -1,11 +1,11 @@
 using System;
 using System.Reflection;
 
-namespace Framework.Singleton;
+namespace Scripts.Framework.Singleton;
 
 public abstract class Singleton<T> where T : Singleton<T>
 {
-    private static T? instance;
+    private static T instance;
 
     // ReSharper disable once StaticMemberInGenericType
     // ReSharper disable once MemberCanBePrivate.Global

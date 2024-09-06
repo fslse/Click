@@ -1,6 +1,6 @@
-using Framework.Singleton;
+using Scripts.Framework.Singleton;
 
-namespace Framework.Manager;
+namespace Scripts.Framework.Manager;
 
 public interface IManager
 {

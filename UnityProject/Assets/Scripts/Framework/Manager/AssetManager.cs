@@ -1,14 +1,14 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Framework.Log;
-using Framework.Singleton;
+using Scripts.Framework.Log;
+using Scripts.Framework.Singleton;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Framework.Manager;
+namespace Scripts.Framework.Manager;
 
 public class AssetManager : MonoSingleton<AssetManager>
 {
@@ -25,7 +25,7 @@ public class AssetManager : MonoSingleton<AssetManager>
         AssetBundle ab = await LoadAssetBundle(AppConst.AssetsDir);
         abManifest = ab.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
         string[] abs = abManifest.GetAllAssetBundles();
-        GameLog.LogDebug(null, abs);
+        GameLog.LogDebug(ZString.Join('\n', abs));
     }
 
     private async UniTask<AssetBundle> LoadAssetBundle(string abName)

@@ -1,11 +1,11 @@
-using Cysharp.Text;
 using Microsoft.Extensions.Logging;
+using Scripts.Framework.Manager;
 using UnityEngine;
 using ZLogger;
 using ZLogger.Providers;
 using ZLogger.Unity;
 
-namespace Framework.Log;
+namespace Scripts.Framework.Log;
 
 public static class GameLog
 {
@@ -15,10 +15,19 @@ public static class GameLog
     private static readonly string logPath = Application.persistentDataPath + "/Logs/Runtime/";
 #endif
 
-    private static readonly ILogger<Log> logger = LoggerFactory.Create(logging =>
+    public abstract class Log
+    {
+    }
+
+    public static ILogger<Log> Logger { get; } = LoggerFactory.Create(logging =>
     {
         logging.SetMinimumLevel(LogLevel.Trace);
         logging.AddZLoggerUnityDebug(); // log to UnityDebug
+    }).CreateLogger<Log>();
+
+    private static ILogger<Log> RuntimeLogger { get; } = LoggerFactory.Create(logging =>
+    {
+        logging.SetMinimumLevel(LogLevel.Trace);
 
         // Add to output to the file
         logging.AddZLoggerFile(logPath + "GameLog.log", options => { options.UseJsonFormatter(); });
@@ -39,92 +48,46 @@ public static class GameLog
                 options.UseJsonFormatter();
             }
         );
+
+        if (MonoManager.Instance is null)
+        {
+            LogError("MonoManager.Instance is null");
+        }
     }).CreateLogger<Log>();
 
-    public static ILogger<Log> Logger => logger;
 
     public static void LogDebug(string message)
     {
-        logger.LogDebug(message);
+        Logger.ZLogDebug($"message: {message}");
     }
 
     public static void LogDebug(string key, string value)
     {
-        using var message = ZString.CreateStringBuilder();
-        message.Append(key);
-        message.Append(" : ");
-        message.Append(value);
-        logger.LogDebug(message.ToString());
-    }
-
-    public static void LogDebug(string? info, params string[] strings)
-    {
-        using var message = ZString.CreateStringBuilder();
-        if (info != null) message.Append(info);
-        foreach (var str in strings)
-        {
-            message.Append("\n");
-            message.Append(str);
-        }
-
-        logger.LogDebug(message.ToString());
+        Logger.ZLogDebug($"{key} : {value}");
     }
 
     public static void LogWarning(string message)
     {
-        logger.LogWarning(message);
+        Logger.ZLogWarning($"message: {message}");
     }
 
     public static void LogWarning(string key, string value)
     {
-        using var message = ZString.CreateStringBuilder();
-        message.Append(key);
-        message.Append(" : ");
-        message.Append(value);
-        logger.LogWarning(message.ToString());
-    }
-
-    public static void LogWarning(string? info, params string[] strings)
-    {
-        using var message = ZString.CreateStringBuilder();
-        if (info != null) message.Append(info);
-        foreach (var str in strings)
-        {
-            message.Append("\n");
-            message.Append(str);
-        }
-
-        logger.LogWarning(message.ToString());
+        Logger.ZLogWarning($"{key} : {value}");
     }
 
     public static void LogError(string message)
     {
-        logger.LogError(message);
+        Logger.ZLogError($"message: {message}");
     }
 
     public static void LogError(string key, string value)
     {
-        using var message = ZString.CreateStringBuilder();
-        message.Append(key);
-        message.Append(" : ");
-        message.Append(value);
-        logger.LogError(message.ToString());
+        Logger.ZLogError($"{key} : {value}");
     }
 
-    public static void LogError(string? info, params string[] strings)
+    public static void HandleLog(string logString, string stackTrace, LogType type)
     {
-        using var message = ZString.CreateStringBuilder();
-        if (info != null) message.Append(info);
-        foreach (var str in strings)
-        {
-            message.Append("\n");
-            message.Append(str);
-        }
-
-        logger.LogError(message.ToString());
+        RuntimeLogger.ZLogTrace($"{type}\n{logString}\n{stackTrace}");
     }
-}
-
-public abstract class Log
-{
 }

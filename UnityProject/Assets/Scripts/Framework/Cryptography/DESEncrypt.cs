@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
-namespace Framework.Cryptography;
+namespace Scripts.Framework.Cryptography;
 
 public static class DESEncrypt
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Framework;
+namespace Scripts.Framework;
 
 public static class AppConst
 {
