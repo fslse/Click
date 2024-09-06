@@ -48,13 +48,7 @@ public static class GameLog
                 options.UseJsonFormatter();
             }
         );
-
-        if (MonoManager.Instance is null)
-        {
-            LogError("MonoManager.Instance is null");
-        }
     }).CreateLogger<Log>();
-
 
     public static void LogDebug(string message)
     {
