@@ -1,20 +1,21 @@
 using UnityEngine;
 
-namespace Scripts.Framework.Singleton;
-
-public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
+namespace Scripts.Framework.Singleton
 {
-    private static T instance;
-
-    public static T Instance
+    public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
-        get
+        private static T instance;
+
+        public static T Instance
         {
-            if (instance) return instance;
-            GameObject go = new GameObject(typeof(T).Name);
-            instance = go.AddComponent<T>();
-            DontDestroyOnLoad(go);
-            return instance;
+            get
+            {
+                if (instance) return instance;
+                GameObject go = new GameObject(typeof(T).Name);
+                instance = go.AddComponent<T>();
+                DontDestroyOnLoad(go);
+                return instance;
+            }
         }
     }
 }

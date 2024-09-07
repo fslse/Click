@@ -8,58 +8,58 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Scripts.Framework.Manager;
-
-public class AssetManager : MonoSingleton<AssetManager>
+namespace Scripts.Framework.Manager
 {
-    private AssetBundleManifest abManifest;
-    private readonly Dictionary<string, AssetBundle> loadedAssetBundles = new();
-    private readonly Dictionary<string, Object> loadedAssets = new();
-
-    /// <summary>
-    /// Get AssetBundleManifest.
-    /// </summary>
-    public async UniTask Initialize()
+    public class AssetManager : MonoSingleton<AssetManager>
     {
-        // 主包
-        AssetBundle ab = await LoadAssetBundle(AppConst.AssetsDir);
-        abManifest = ab.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-        string[] abs = abManifest.GetAllAssetBundles();
-        GameLog.LogDebug(ZString.Join('\n', abs));
-    }
+        private AssetBundleManifest abManifest;
+        private readonly Dictionary<string, AssetBundle> loadedAssetBundles = new();
+        private readonly Dictionary<string, Object> loadedAssets = new();
 
-    private async UniTask<AssetBundle> LoadAssetBundle(string abName)
-    {
-        if (loadedAssetBundles.TryGetValue(abName, out var bundle))
-            return bundle;
+        /// <summary>
+        /// Get AssetBundleManifest.
+        /// </summary>
+        public async UniTask Initialize()
+        {
+            // 主包
+            AssetBundle ab = await LoadAssetBundle(AppConst.AssetsDir);
+            abManifest = ab.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+            string[] abs = abManifest.GetAllAssetBundles();
+            GameLog.LogDebug(ZString.Join('\n', abs));
+        }
 
-        string path = AppConst.PersistentDataPath + abName;
-        if (!File.Exists(path)) // PersistentData目录不存在该包
-            path = AppConst.StreamingAssetsPath + abName;
+        private async UniTask<AssetBundle> LoadAssetBundle(string abName)
+        {
+            if (loadedAssetBundles.TryGetValue(abName, out var bundle))
+                return bundle;
 
-        // 主包直接加载并返回
-        if (abName == AppConst.AssetsDir)
-            return AssetBundle.LoadFromFile(path);
+            string path = AppConst.PersistentDataPath + abName;
+            if (!File.Exists(path)) // PersistentData目录不存在该包
+                path = AppConst.StreamingAssetsPath + abName;
 
-        // 加载目标包
-        AssetBundle ab = await AssetBundle.LoadFromFileAsync(path);
-        loadedAssetBundles.Add(abName, ab);
+            // 主包直接加载并返回
+            if (abName == AppConst.AssetsDir)
+                return AssetBundle.LoadFromFile(path);
 
-        // 加载依赖包
-        string[] dependencies = abManifest.GetAllDependencies(abName);
-        foreach (string dependency in dependencies)
-            if (!loadedAssetBundles.ContainsKey(dependency))
-            {
-                loadedAssetBundles.Add(dependency, await LoadAssetBundle(dependency));
-            }
+            // 加载目标包
+            AssetBundle ab = await AssetBundle.LoadFromFileAsync(path);
+            loadedAssetBundles.Add(abName, ab);
 
-        return ab;
-    }
+            // 加载依赖包
+            string[] dependencies = abManifest.GetAllDependencies(abName);
+            foreach (string dependency in dependencies)
+                if (!loadedAssetBundles.ContainsKey(dependency))
+                {
+                    loadedAssetBundles.Add(dependency, await LoadAssetBundle(dependency));
+                }
 
-    public async UniTask<T> LoadAsset<T>(string path) where T : Object
-    {
+            return ab;
+        }
+
+        public async UniTask<T> LoadAsset<T>(string path) where T : Object
+        {
 #if UNITY_EDITOR
-        return AssetDatabase.LoadAssetAtPath<T>(path);
+            return AssetDatabase.LoadAssetAtPath<T>(path);
 #else
         var bundleName = GetAssetBundleName(path);
         AssetBundle ab = await LoadAssetBundle(bundleName);
@@ -74,30 +74,31 @@ public class AssetManager : MonoSingleton<AssetManager>
 
         return (asset as T)!;
 #endif
-    }
-
-    private static string GetAssetBundleName(string path)
-    {
-        string[] levels = path.Split(new[] { '/' });
-        string bundleName = string.Empty;
-        if (levels.Length == 0)
-        {
-            return bundleName;
         }
 
-        int end = levels.Length - 1;
-        for (int i = 1; i < end; i++) // 去掉资源名
+        private static string GetAssetBundleName(string path)
         {
-            bundleName += levels[i];
-            if (i < end - 1)
+            string[] levels = path.Split(new[] { '/' });
+            string bundleName = string.Empty;
+            if (levels.Length == 0)
             {
-                bundleName += "_";
+                return bundleName;
             }
+
+            int end = levels.Length - 1;
+            for (int i = 1; i < end; i++) // 去掉资源名
+            {
+                bundleName += levels[i];
+                if (i < end - 1)
+                {
+                    bundleName += "_";
+                }
+            }
+
+            if (!bundleName.EndsWith("ab"))
+                bundleName += ".ab";
+
+            return bundleName.ToLower();
         }
-
-        if (!bundleName.EndsWith("ab"))
-            bundleName += ".ab";
-
-        return bundleName.ToLower();
     }
 }

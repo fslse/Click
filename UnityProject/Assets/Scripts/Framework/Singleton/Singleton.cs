@@ -1,41 +1,42 @@
 using System;
 using System.Reflection;
 
-namespace Scripts.Framework.Singleton;
-
-public abstract class Singleton<T> where T : Singleton<T>
+namespace Scripts.Framework.Singleton
 {
-    private static T instance;
-
-    // ReSharper disable once StaticMemberInGenericType
-    // ReSharper disable once MemberCanBePrivate.Global
-    protected static readonly object lockObj = new();
-
-    public static T Instance
+    public abstract class Singleton<T> where T : Singleton<T>
     {
-        get
-        {
-            if (instance == null)
-            {
-                lock (lockObj)
-                {
-                    if (instance == null)
-                    {
-                        // 获取非公有无参构造函数
-                        var type = typeof(T);
-                        var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-                        var constructor = Array.Find(constructors, c => c.GetParameters().Length == 0);
-                        if (constructor == null)
-                        {
-                            throw new Exception(type.Name);
-                        }
+        private static T instance;
 
-                        instance = constructor.Invoke(null) as T;
+        // ReSharper disable once StaticMemberInGenericType
+        // ReSharper disable once MemberCanBePrivate.Global
+        protected static readonly object lockObj = new();
+
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (lockObj)
+                    {
+                        if (instance == null)
+                        {
+                            // 获取非公有无参构造函数
+                            var type = typeof(T);
+                            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+                            var constructor = Array.Find(constructors, c => c.GetParameters().Length == 0);
+                            if (constructor == null)
+                            {
+                                throw new Exception(type.Name);
+                            }
+
+                            instance = constructor.Invoke(null) as T;
+                        }
                     }
                 }
-            }
 
-            return instance ?? throw new Exception(typeof(T).Name);
+                return instance ?? throw new Exception(typeof(T).Name);
+            }
         }
     }
 }
