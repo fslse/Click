@@ -14,21 +14,31 @@ namespace Scripts.Framework
             // 
             GameLog.LogDebug("HotFixPresenter Start");
 
-            // StartGame().Forget();
+            StartGame().Forget();
+        }
 
+        private async UniTaskVoid StartGame()
+        {
+            // 计时器测试
             var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
-                obj =>
+                _ =>
                 {
                     GameLog.LogDebug("Timer");
                     SceneManager.LoadSceneAsync("Scenes/Game");
-                }, null);
-            timer.Restart();
-        }
+                });
+            timer.Start();
 
-        private static async UniTaskVoid StartGame()
-        {
-            await UniTask.Delay(3000);
-            SceneManager.LoadSceneAsync("Scenes/Game");
+            await UniTask.Delay(1000);
+
+            timer.Dispose();
+
+            var realTimer = new RealTimer(TimeSpan.FromSeconds(2), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
+                _ =>
+                {
+                    GameLog.LogDebug("RealTimer");
+                    SceneManager.LoadSceneAsync("Scenes/Game");
+                });
+            realTimer.Start();
         }
     }
 }
