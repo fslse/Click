@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Scripts.Framework.Fire;
 using Scripts.Framework.Log;
 using UnityEngine;
 using UnityEngine.LowLevel;
@@ -26,6 +27,20 @@ namespace Scripts.Framework
             // Application.logMessageReceived += GameLog.HandleLog;
             Application.logMessageReceivedThreaded += GameLog.HandleLog; // 多线程
             Application.targetFrameRate = AppConst.GameFrameRate;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        }
+
+        private void Start()
+        {
+            GameLog.LogDebug("GameManager Start");
+            Init();
+        }
+
+        private void Init()
+        {
+            // 构建启动流程
+            var workflow = new Workflow();
+            workflow.StartFlow();
         }
 
         private void OnDestroy()
