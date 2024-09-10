@@ -11,7 +11,7 @@ namespace Scripts.Framework.Log
 #if UNITY_EDITOR
         private const string logPath = "Logs/Runtime/";
 #else
-    private static readonly string logPath = Application.persistentDataPath + "/Logs/Runtime/";
+        private static readonly string logPath = Application.persistentDataPath + "/Logs/Runtime/";
 #endif
 
         public abstract class Log
