@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1612389509
+CRC: 1228104552
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8548cba1c6f956015d293c6201bb7ad8
+    Hash: 4d3366f81aa93b38303ad7eb6af2deda
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 8548cba1c6f956015d293c6201bb7ad8
+    Hash: 4d3366f81aa93b38303ad7eb6af2deda
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -17,8 +17,9 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/StompyRobot.SRF.bytes
-- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.AssetBundleModule.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Fire.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/System.Text.Json.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.AssetBundleModule.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/System.Core.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.AndroidJNIModule.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/mscorlib.bytes
@@ -27,4 +28,5 @@ Assets:
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Assembly-CSharp.dll.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.CoreModule.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/ZLogger.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UniTask.bytes
 Dependencies: []

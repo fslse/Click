@@ -1,4 +1,4 @@
-using Scripts.Framework.Log;
+using Scripts.Fire.Log;
 
 namespace HotFix
 {

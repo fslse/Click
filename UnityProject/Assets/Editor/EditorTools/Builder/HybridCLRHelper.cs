@@ -5,7 +5,7 @@ using System.Linq;
 using HybridCLR.Editor;
 using HybridCLR.Editor.Commands;
 using HybridCLR.Editor.Settings;
-using Scripts.Framework;
+using Scripts.Fire;
 using UnityEditor;
 using UnityEngine;
 

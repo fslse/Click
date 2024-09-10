@@ -1,6 +1,6 @@
 using System;
-using Scripts.Framework.Log;
-using Scripts.Framework.Singleton;
+using Scripts.Fire.Log;
+using Scripts.Fire.Singleton;
 
 namespace HotFix
 {

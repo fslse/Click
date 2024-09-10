@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
-  <assembly fullname="Framework">
-    <type fullname="Framework.Log.GameLog" preserve="all" />
-    <type fullname="Framework.Log.Log" preserve="all" />
+  <assembly fullname="Fire">
+    <type fullname="Scripts.Fire.AppConst" preserve="all" />
+    <type fullname="Scripts.Fire.Log.GameLog" preserve="all" />
+    <type fullname="Scripts.Fire.Log.GameLog/Log" preserve="all" />
+    <type fullname="Scripts.Fire.Manager.AssetManager" preserve="all" />
+    <type fullname="Scripts.Fire.Singleton.MonoSingleton`1" preserve="all" />
   </assembly>
   <assembly fullname="Microsoft.Extensions.Logging.Abstractions">
     <type fullname="Microsoft.Extensions.Logging.ILogger" preserve="all" />
@@ -28,7 +31,6 @@
     <type fullname="System.ComponentModel.INotifyPropertyChanged" preserve="all" />
     <type fullname="System.ComponentModel.PropertyChangedEventArgs" preserve="all" />
     <type fullname="System.ComponentModel.PropertyChangedEventHandler" preserve="all" />
-    <type fullname="System.Diagnostics.Stopwatch" preserve="all" />
     <type fullname="System.Text.RegularExpressions.Capture" preserve="all" />
     <type fullname="System.Text.RegularExpressions.Group" preserve="all" />
     <type fullname="System.Text.RegularExpressions.GroupCollection" preserve="all" />
@@ -43,6 +45,14 @@
     <type fullname="System.Collections.Generic.HashSet`1" preserve="all" />
     <type fullname="System.Linq.Enumerable" preserve="all" />
     <type fullname="System.Linq.IGrouping`2" preserve="all" />
+  </assembly>
+  <assembly fullname="UniTask">
+    <type fullname="Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTask" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTask/Awaiter" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTaskVoid" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTask`1" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTask`1/Awaiter" preserve="all" />
   </assembly>
   <assembly fullname="Unity.TextMeshPro">
     <type fullname="TMPro.TMP_Dropdown" preserve="all" />
@@ -112,7 +122,6 @@
     <type fullname="UnityEngine.Random" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
-    <type fullname="UnityEngine.RectOffset" preserve="all" />
     <type fullname="UnityEngine.RectTransform" preserve="all" />
     <type fullname="UnityEngine.RenderTexture" preserve="all" />
     <type fullname="UnityEngine.RenderTextureFormat" preserve="all" />
@@ -216,17 +225,19 @@
     <type fullname="ZLogger.ZLoggerExtensions" preserve="all" />
     <type fullname="ZLogger.ZLoggerInformationInterpolatedStringHandler" preserve="all" />
   </assembly>
+  <assembly fullname="ZString">
+    <type fullname="Cysharp.Text.Utf16ValueStringBuilder" preserve="all" />
+    <type fullname="Cysharp.Text.ZString" preserve="all" />
+  </assembly>
   <assembly fullname="mscorlib">
     <type fullname="System.Action" preserve="all" />
     <type fullname="System.Action`1" preserve="all" />
     <type fullname="System.Action`2" preserve="all" />
     <type fullname="System.Activator" preserve="all" />
     <type fullname="System.ArgumentException" preserve="all" />
-    <type fullname="System.ArgumentNullException" preserve="all" />
     <type fullname="System.ArgumentOutOfRangeException" preserve="all" />
     <type fullname="System.Array" preserve="all" />
     <type fullname="System.AsyncCallback" preserve="all" />
-    <type fullname="System.Attribute" preserve="all" />
     <type fullname="System.AttributeTargets" preserve="all" />
     <type fullname="System.AttributeUsageAttribute" preserve="all" />
     <type fullname="System.BitConverter" preserve="all" />
@@ -267,7 +278,6 @@
     <type fullname="System.Environment" preserve="all" />
     <type fullname="System.Exception" preserve="all" />
     <type fullname="System.FlagsAttribute" preserve="all" />
-    <type fullname="System.FormatException" preserve="all" />
     <type fullname="System.Func`2" preserve="all" />
     <type fullname="System.Globalization.CultureInfo" preserve="all" />
     <type fullname="System.Globalization.NumberStyles" preserve="all" />
@@ -293,21 +303,22 @@
     <type fullname="System.IndexOutOfRangeException" preserve="all" />
     <type fullname="System.Int32" preserve="all" />
     <type fullname="System.Int64" preserve="all" />
-    <type fullname="System.InvalidOperationException" preserve="all" />
     <type fullname="System.Math" preserve="all" />
     <type fullname="System.MulticastDelegate" preserve="all" />
+    <type fullname="System.NotImplementedException" preserve="all" />
     <type fullname="System.NotSupportedException" preserve="all" />
     <type fullname="System.Nullable`1" preserve="all" />
     <type fullname="System.Object" preserve="all" />
     <type fullname="System.ObsoleteAttribute" preserve="all" />
-    <type fullname="System.OverflowException" preserve="all" />
     <type fullname="System.ParamArrayAttribute" preserve="all" />
     <type fullname="System.Predicate`1" preserve="all" />
     <type fullname="System.Reflection.DefaultMemberAttribute" preserve="all" />
     <type fullname="System.Reflection.MemberInfo" preserve="all" />
+    <type fullname="System.Runtime.CompilerServices.AsyncStateMachineAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilationRelaxationsAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilerGeneratedAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.ExtensionAttribute" preserve="all" />
+    <type fullname="System.Runtime.CompilerServices.IAsyncStateMachine" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.IteratorStateMachineAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.RuntimeCompatibilityAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.RuntimeHelpers" preserve="all" />
