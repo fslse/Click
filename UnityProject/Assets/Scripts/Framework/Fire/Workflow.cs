@@ -9,6 +9,9 @@ namespace Scripts.Framework.Fire
         private List<StartupTask> tasks = new();
         private float totalPercent;
 
+        private string localVersion;
+        private string remoteVersion;
+
         public void AddTask(StartupTask task)
         {
             tasks.Add(task);

@@ -1,14 +1,14 @@
 using System;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace Scripts.Framework.Cryptography
 {
-    public static class DESEncrypt
+    public static class AESEncrypt
     {
-        private const string key = "qtel&#78";
-        private const string iv = "x03642!@";
+        private static readonly byte[] key = Encoding.UTF8.GetBytes("`qlst@eclick&!^uni*tyt_est#78fse"); // 32 bytes
+        private static readonly byte[] iv = Encoding.UTF8.GetBytes("4oat+les2o=@w0m#"); // 16 bytes
 
         public static byte[] Encrypt(byte[] originalValue)
         {
@@ -17,13 +17,12 @@ namespace Scripts.Framework.Cryptography
                 throw new ArgumentNullException(nameof(originalValue));
             }
 
+            using Aes aes = Aes.Create();
+            aes.Key = key;
+            aes.IV = iv;
+
             using var ms = new MemoryStream();
-            using (var cs = new CryptoStream(ms, new DESCryptoServiceProvider
-                   {
-                       Key = Encoding.UTF8.GetBytes(key),
-                       IV = Encoding.UTF8.GetBytes(iv),
-                       Mode = CipherMode.CBC
-                   }.CreateEncryptor(), CryptoStreamMode.Write))
+            using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
             {
                 cs.Write(originalValue, 0, originalValue.Length);
                 cs.FlushFinalBlock();
@@ -39,13 +38,12 @@ namespace Scripts.Framework.Cryptography
                 throw new ArgumentNullException(nameof(encryptedValue));
             }
 
+            using Aes aes = Aes.Create();
+            aes.Key = key;
+            aes.IV = iv;
+
             using var ms = new MemoryStream();
-            using (var cs = new CryptoStream(ms, new DESCryptoServiceProvider
-                   {
-                       Key = Encoding.UTF8.GetBytes(key),
-                       IV = Encoding.UTF8.GetBytes(iv),
-                       Mode = CipherMode.CBC
-                   }.CreateDecryptor(), CryptoStreamMode.Write))
+            using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
             {
                 cs.Write(encryptedValue, 0, encryptedValue.Length);
                 cs.FlushFinalBlock();

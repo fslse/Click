@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using Scripts.Framework;
 using Scripts.Framework.Cryptography;
 using UnityEditor;
@@ -65,8 +66,8 @@ public class AssetPackager
         }
 
         string data = File.ReadAllText("Assets/Scenes/" + fileName);
-        byte[] bytes = DESEncrypt.Encrypt(Encoding.UTF8.GetBytes(data));
-        Debug.LogWarning(Encoding.UTF8.GetString(DESEncrypt.Decrypt(bytes)));
+        byte[] bytes = AESEncrypt.Encrypt(Encoding.UTF8.GetBytes(data));
+        Debug.LogWarning(Encoding.UTF8.GetString(AESEncrypt.Decrypt(bytes)));
         File.WriteAllBytes(targetPath, bytes);
     }
 
@@ -84,10 +85,7 @@ public class AssetPackager
         foreach (var file in files)
         {
             if (file.EndsWith(".meta") || file.Contains(".DS_Store")) continue;
-
-            string md5 = GetMD5(file);
-            string value = file.Replace(Application.streamingAssetsPath + "/", string.Empty);
-            sw.WriteLine(value + "|" + md5);
+            sw.WriteLine(file.Replace(Application.streamingAssetsPath + "/", string.Empty) + "|" + HashHelper.ComputeHash<MD5>(file));
         }
     }
 
@@ -148,21 +146,5 @@ public class AssetPackager
             Directory.CreateDirectory(Application.persistentDataPath);
         }
         else Debug.LogError("PersistentData folder does not exist!");
-    }
-
-    private static string GetMD5(string file)
-    {
-        FileStream fs = new FileStream(file, FileMode.Open);
-        System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-        byte[] retVal = md5.ComputeHash(fs);
-        fs.Close();
-
-        StringBuilder _ = new StringBuilder();
-        foreach (var v in retVal)
-        {
-            _.Append(v.ToString("x2"));
-        }
-
-        return _.ToString();
     }
 }
