@@ -17,9 +17,12 @@ namespace Scripts.Framework.Fire
             this.power = power;
         }
 
-        public abstract void Start();
+        public virtual void Start()
+        {
+            workflow.OnTaskStarted(this);
+        }
 
-        public void Skip()
+        public virtual void Skip()
         {
             workflow.OnTaskFinished(this, true);
         }

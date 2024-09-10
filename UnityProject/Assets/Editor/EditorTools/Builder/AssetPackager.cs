@@ -58,13 +58,13 @@ public class AssetPackager
 
     private static void BuildVersionFile()
     {
-        string targetPath = AppConst.AssetsPath + "/version.json";
+        string targetPath = AppConst.AssetsPath + "/version";
         if (File.Exists(targetPath))
         {
             File.Delete(targetPath);
         }
 
-        string data = File.ReadAllText("Assets/Scenes/version");
+        string data = File.ReadAllText("Assets/Scenes/version.json");
         byte[] bytes = AESEncrypt.Encrypt(Encoding.UTF8.GetBytes(data));
         Debug.LogWarning(Encoding.UTF8.GetString(AESEncrypt.Decrypt(bytes)));
         File.WriteAllBytes(targetPath, bytes);

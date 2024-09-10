@@ -51,32 +51,32 @@ namespace Scripts.Framework.Log
 
         public static void LogDebug(string message)
         {
-            Logger.ZLogDebug($"message: {message}");
+            Logger.ZLogDebug($"[GameLog] {message}");
         }
 
         public static void LogDebug(string key, string value)
         {
-            Logger.ZLogDebug($"{key} : {value}");
+            Logger.ZLogDebug($"[GameLog] {key} : {value}");
         }
 
         public static void LogWarning(string message)
         {
-            Logger.ZLogWarning($"message: {message}");
+            Logger.ZLogWarning($"[GameLog] {message}");
         }
 
         public static void LogWarning(string key, string value)
         {
-            Logger.ZLogWarning($"{key} : {value}");
+            Logger.ZLogWarning($"[GameLog] {key} : {value}");
         }
 
         public static void LogError(string message)
         {
-            Logger.ZLogError($"message: {message}");
+            Logger.ZLogError($"[GameLog] {message}");
         }
 
         public static void LogError(string key, string value)
         {
-            Logger.ZLogError($"{key} : {value}");
+            Logger.ZLogError($"[GameLog] {key} : {value}");
         }
 
         public static void HandleLog(string logString, string stackTrace, LogType type)

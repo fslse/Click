@@ -25,7 +25,7 @@ namespace Scripts.Framework
 
         // 资源路径（运行时）
         public static readonly string StreamingAssetsPath = Application.streamingAssetsPath + "/" + AssetsDir + "/";
-        public static readonly string PersistentDataPath = Application.persistentDataPath + "/" + AssetsPath + "/";
+        public static readonly string PersistentDataPath = Application.persistentDataPath + "/" + AssetsDir + "/";
 
 
         // 是否开启热更新

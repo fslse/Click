@@ -33,13 +33,13 @@ namespace Scripts.Framework
         private void Start()
         {
             GameLog.LogDebug("GameManager Start");
-            Init();
-        }
 
-        private void Init()
-        {
             // 构建启动流程
             var workflow = new Workflow();
+            workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 20));
+            workflow.AddTask(new DownloadAssets(workflow, "DownloadRes", 30));
+            workflow.AddTask(new Preload(workflow, "Preload", 20));
+            workflow.AddTask(new LoadDLL(workflow, "LoadHotFix", 30));
             workflow.StartFlow();
         }
 

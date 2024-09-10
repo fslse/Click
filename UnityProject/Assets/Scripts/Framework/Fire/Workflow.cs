@@ -6,11 +6,11 @@ namespace Scripts.Framework.Fire
 {
     public class Workflow
     {
-        private List<StartupTask> tasks = new();
+        private readonly List<StartupTask> tasks = new();
         private float totalPercent;
 
-        private string localVersion;
-        private string remoteVersion;
+        public long localVersion;
+        public long remoteVersion;
 
         public void AddTask(StartupTask task)
         {
@@ -32,27 +32,28 @@ namespace Scripts.Framework.Fire
         {
             if (tasks.Count > 0)
             {
-                GameLog.LogDebug($"启动流程 {tasks[0].taskName}");
                 tasks[0].Start();
             }
         }
 
         public void OnTaskStarted(StartupTask task)
         {
-            GameLog.LogDebug($">>>开始任务: {task.taskName}");
+            GameLog.LogDebug($">>> Progress: {totalPercent}%");
+            GameLog.LogDebug($">>> Start: {task.taskName}");
         }
 
         public void OnTaskFinished(StartupTask task, bool skip)
         {
-            GameLog.LogDebug(skip ? $">>>跳过任务: {task.taskName}" : $">>>完成任务: {task.taskName}");
+            GameLog.LogDebug(skip ? $">>> Skip: {task.taskName}" : $">>> Finish: {task.taskName}");
             OnProgress(task, 100);
             totalPercent += task.percent;
             tasks.Remove(task);
+            DoNextTask();
         }
 
         public void OnTaskFailed(StartupTask task)
         {
-            GameLog.LogError($">>>任务失败: {task.taskName}");
+            GameLog.LogError($">>> Fail: {task.taskName}");
         }
 
         /// <summary>
