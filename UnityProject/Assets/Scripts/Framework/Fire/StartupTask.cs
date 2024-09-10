@@ -10,7 +10,7 @@ namespace Scripts.Framework.Fire
         public readonly int power;
         public float percent;
 
-        public StartupTask(Workflow workflow, string taskName, int power)
+        protected StartupTask(Workflow workflow, string taskName, int power)
         {
             this.workflow = workflow;
             this.taskName = taskName;
@@ -25,12 +25,12 @@ namespace Scripts.Framework.Fire
         }
     }
 
-    public class StartupProgressMessage
+    public sealed class StartupProgressMessage
     {
         public float Value { get; set; }
     }
 
-    public class StartupModel
+    public sealed class StartupModel
     {
         public ReactiveProperty<float> CurrentProgress { get; }
 
