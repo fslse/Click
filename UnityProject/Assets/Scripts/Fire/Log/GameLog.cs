@@ -81,6 +81,9 @@ namespace Scripts.Fire.Log
 
         public static void HandleLog(string logString, string stackTrace, LogType type)
         {
+#if VERSION_RELEASE
+            if (type == LogType.Log) return;
+#endif
             RuntimeLogger.ZLogTrace($"{type}\n{logString}\n{stackTrace}");
         }
     }

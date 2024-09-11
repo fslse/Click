@@ -13,9 +13,9 @@ namespace Scripts.Fire.Manager
         private event UnityAction OnUpdate;
         private event UnityAction OnLateUpdate;
 
-        public void AddListener(UnityAction action, UpdateType updateType)
+        public void AddListener(UnityAction action, UpdateType type = UpdateType.Update)
         {
-            switch (updateType)
+            switch (type)
             {
                 case UpdateType.FixedUpdate:
                     OnFixedUpdate += action;
@@ -27,13 +27,13 @@ namespace Scripts.Fire.Manager
                     OnLateUpdate += action;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(updateType), updateType, null);
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
-        public void RemoveListener(UnityAction action, UpdateType updateType)
+        public void RemoveListener(UnityAction action, UpdateType type = UpdateType.Update)
         {
-            switch (updateType)
+            switch (type)
             {
                 case UpdateType.FixedUpdate:
                     OnFixedUpdate -= action;
@@ -45,13 +45,13 @@ namespace Scripts.Fire.Manager
                     OnLateUpdate -= action;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(updateType), updateType, null);
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
-        public void RemoveAllListeners(UpdateType updateType)
+        public void RemoveAllListeners(UpdateType type)
         {
-            switch (updateType)
+            switch (type)
             {
                 case UpdateType.FixedUpdate:
                     OnFixedUpdate = null;
@@ -63,7 +63,7 @@ namespace Scripts.Fire.Manager
                     OnLateUpdate = null;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(updateType), updateType, null);
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 

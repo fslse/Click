@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Defective.JSON;
-using Newtonsoft.Json;
 using Scripts.Fire.Cryptography;
 using Scripts.Fire.Log;
 
@@ -45,7 +44,7 @@ namespace Scripts.Fire.Startup
                     var obj = JSONObject.Create(Encoding.UTF8.GetString(AESEncrypt.Decrypt(File.ReadAllBytes(AppConst.StreamingAssetsPath + "/version"))));
                     GameLog.LogDebug(path, obj.GetField("AppVersion").ToString());
 
-                    version = JsonConvert.DeserializeObject<string>(obj.GetField("AppVersion").ToString()).Split('.').Aggregate(0L, (res, s) => (res + int.Parse(s)) * 1000);
+                    version = obj.GetField("AppVersion").stringValue.Split('.').Aggregate(0L, (res, s) => (res + int.Parse(s)) * 1000);
                     version += int.Parse(obj.GetField("ResVersion").ToString());
                 }
                 else
