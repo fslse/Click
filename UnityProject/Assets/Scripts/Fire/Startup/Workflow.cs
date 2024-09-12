@@ -66,7 +66,7 @@ namespace Scripts.Fire.Startup
         {
             UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
             {
-                Value = totalPercent + task.percent * p / 100
+                Value = (totalPercent + task.percent * p / 100) / 100
             });
         }
     }

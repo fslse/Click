@@ -1,4 +1,3 @@
-using System.Globalization;
 using DG.Tweening;
 using Scripts.Fire.Log;
 using Scripts.Fire.Startup;
@@ -34,7 +33,6 @@ namespace Scripts.Fire
 
             slider.minValue = 0;
             slider.maxValue = 1;
-
             slider.value = 0;
             slider.wholeNumbers = false;
             text.text = "0.0%";
@@ -47,10 +45,11 @@ namespace Scripts.Fire
                 if (target <= slider.value) return;
 
                 tween?.Kill();
+
                 tween = DOTween.To(() => slider.value, x =>
                 {
-                    slider.value = x / 100f;
-                    text.text = $"{x:F1}%";
+                    slider.value = x;
+                    text.text = $"{x * 100:F1}%";
                 }, target, 1);
 
                 tween.OnComplete(() =>
