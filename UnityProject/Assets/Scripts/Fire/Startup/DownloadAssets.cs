@@ -43,14 +43,22 @@ namespace Scripts.Fire.Startup
             GameLog.LogDebug("Local Manifest", localAssetPackages.Count.ToString());
             GameLog.LogDebug("Remote Manifest", ZString.Join("\n", remoteAssetPackages));
 
+            int total = 1 + remoteAssetPackages.Count(assetPackage => !localAssetPackages.Contains(assetPackage));
+            workflow.OnProgress(this, (int)(100f / total));
+
             int count = 1;
             foreach (string name in from assetPackage in remoteAssetPackages where !localAssetPackages.Contains(assetPackage) select assetPackage[..assetPackage.IndexOf('|')])
             {
-                ++count;
                 var request = await UnityWebRequest.Get(AppConst.RemoteAssetsPath + name).SendWebRequest();
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     await File.WriteAllBytesAsync(AppConst.PersistentDataPath + name, request.downloadHandler.data);
+                    ++count;
+                    workflow.OnProgress(this, (int)(100f * count / total));
+                }
+                else
+                {
+                    GameLog.LogError($"Download {name}", request.error);
                 }
             }
 
