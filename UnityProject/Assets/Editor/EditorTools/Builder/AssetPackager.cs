@@ -47,8 +47,8 @@ public class AssetPackager
         // 代码打包
         HybridCLRHelper.BuildAssetBundleByTarget(EditorUserBuildSettings.activeBuildTarget);
 
-        // 生成文件索引
-        BuildFileIndex();
+        // 资源清单
+        BuildManifest();
 
         // 刷新
         AssetDatabase.Refresh();
@@ -70,7 +70,7 @@ public class AssetPackager
         File.WriteAllBytes(targetPath, bytes);
     }
 
-    private static void BuildFileIndex()
+    private static void BuildManifest()
     {
         string path = AppConst.AssetsPath + "/manifest.txt";
         if (File.Exists(path)) File.Delete(path);
@@ -84,7 +84,7 @@ public class AssetPackager
         foreach (var file in files)
         {
             if (file.EndsWith(".meta") || file.Contains(".DS_Store")) continue;
-            sw.WriteLine(file.Replace(Application.streamingAssetsPath + "/", string.Empty) + "|" + HashHelper.ComputeHash<MD5>(file));
+            sw.WriteLine(file.Replace(AppConst.StreamingAssetsPath, string.Empty) + "|" + HashHelper.ComputeHash<MD5>(file));
         }
     }
 

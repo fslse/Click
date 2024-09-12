@@ -4,12 +4,12 @@ namespace HotFix
 {
     public class App
     {
-        public static void Main()
+        public static int Main()
         {
-            if (!GameApp.Instance)
-                GameLog.LogError(GameApp.Instance.gameObject.name);
+            // todo: Startup
+            GameLog.LogWarning("启动");
 
-            // todo: do something
+            return 0;
         }
     }
 }

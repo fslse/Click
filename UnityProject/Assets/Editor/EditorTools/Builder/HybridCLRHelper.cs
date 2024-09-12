@@ -48,7 +48,7 @@ public static class HybridCLRHelper
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
             File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[BuildAssetBundles] Copy HotUpdate Dll : {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[BuildAssetBundles] Copy HotUpdate DLL : {dllPath} -> {dllBytesPath}");
         }
 
         // 生成待补充的元数据列表
@@ -82,7 +82,8 @@ public static class HybridCLRHelper
         AssetBundleBuild scripts = new AssetBundleBuild
         {
             assetBundleName = "scripts",
-            assetNames = assets.Select(ToRelativeAssetPath).ToArray()
+            assetNames = assets.Select(ToRelativeAssetPath).ToArray(),
+            addressableNames = assets.Select(s => s.Replace(tempDir + '/', "")).ToArray()
         };
         abs.Add(scripts);
 

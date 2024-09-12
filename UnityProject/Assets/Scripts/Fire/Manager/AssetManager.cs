@@ -29,7 +29,7 @@ namespace Scripts.Fire.Manager
             GameLog.LogDebug(ZString.Join('\n', abs));
         }
 
-        private async UniTask<AssetBundle> LoadAssetBundle(string abName)
+        public async UniTask<AssetBundle> LoadAssetBundle(string abName)
         {
             if (loadedAssetBundles.TryGetValue(abName, out var bundle))
                 return bundle;
@@ -62,18 +62,18 @@ namespace Scripts.Fire.Manager
 #if UNITY_EDITOR
             return AssetDatabase.LoadAssetAtPath<T>(path);
 #else
-        var bundleName = GetAssetBundleName(path);
-        AssetBundle ab = await LoadAssetBundle(bundleName);
+            var bundleName = GetAssetBundleName(path);
+            AssetBundle ab = await LoadAssetBundle(bundleName);
 
-        if (!loadedAssets.TryGetValue(path, out var asset))
-        {
-            asset = ab.LoadAsset<T>(path);
-            if (asset == null)
-                throw new Exception(path);
-            loadedAssets.Add(path, asset);
-        }
+            if (!loadedAssets.TryGetValue(path, out var asset))
+            {
+                asset = ab.LoadAsset<T>(path);
+                if (asset == null)
+                    throw new Exception(path);
+                loadedAssets.Add(path, asset);
+            }
 
-        return (asset as T)!;
+            return (asset as T)!;
 #endif
         }
 

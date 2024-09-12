@@ -24,10 +24,12 @@ MonoBehaviour:
   externalHotUpdateAssembliyDirs: []
   strippedAOTDllOutputRootDir: HybridCLRData/AssembliesPostIl2CppStrip
   patchAOTAssemblies:
+  - Fire
   - StompyRobot.SRF
   - System.Core
   - System.Runtime.CompilerServices.Unsafe
   - System.Text.Json
+  - UniTask
   - UnityEngine.AndroidJNIModule
   - UnityEngine.AssetBundleModule
   - UnityEngine.CoreModule
