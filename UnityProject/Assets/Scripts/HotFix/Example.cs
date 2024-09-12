@@ -1,10 +1,8 @@
 using System;
-using System.IO;
-using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Scripts.Fire;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
+using Scripts.Fire.UniTaskTimer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,31 +35,16 @@ namespace HotFix
             Debug.Log("Hello World!");
             tmp.text = world;
 
-            try
-            {
-                tmp.text = Directory.GetFiles(AppConst.PersistentDataPath).Length.ToString();
-                var info = ZString.CreateStringBuilder();
-                var collection = Directory.GetFiles(AppConst.PersistentDataPath);
-                foreach (var _ in collection)
-                {
-                    info.Append(_);
-                    info.Append("\n");
-                }
+            tmp1.text = "Hot Fix";
 
-                tmp1.text = info.ToString();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e.Message);
-            }
+            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), _ => { tmp1.text = "热更新"; });
+            timer.Start();
 
             Init().Forget();
         }
 
         private async UniTaskVoid Init()
         {
-            tmp1.text = "资源加载中...";
-            await AssetManager.Instance.Initialize();
             img.sprite = await AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/panel_border_brown.png");
             img1.sprite = await AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/panel_border_grey_detail.png");
         }

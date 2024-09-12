@@ -1,22 +1,18 @@
 ManifestFileVersion: 0
-CRC: 1836236098
+CRC: 2128834772
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assetpackages_common.ab
-      Dependencies:
-        Dependency_0: assetpackages_font.ab
-    Info_1:
       Name: assetpackages_font.ab
       Dependencies: {}
-    Info_2:
+    Info_1:
       Name: assetpackages_loading.ab
       Dependencies: {}
-    Info_3:
+    Info_2:
       Name: scenes.ab
       Dependencies:
-        Dependency_0: assetpackages_common.ab
+        Dependency_0: assetpackages_font.ab
         Dependency_1: assetpackages_loading.ab
-    Info_4:
+    Info_3:
       Name: assetpackages_game.ab
       Dependencies: {}
