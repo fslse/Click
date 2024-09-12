@@ -24,8 +24,6 @@ namespace Scripts.Fire.Startup
 
         private async UniTaskVoid Execute()
         {
-            long persistentDataVersion = -1;
-
             string persistentDataVersionFile = AppConst.PersistentDataPath + "/version";
 
             // 从应用程序内部资源中读取版本信息

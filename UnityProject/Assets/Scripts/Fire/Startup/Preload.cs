@@ -1,3 +1,6 @@
+using Cysharp.Threading.Tasks;
+using Scripts.Fire.Manager;
+
 namespace Scripts.Fire.Startup
 {
     public class Preload : StartupTask
@@ -9,6 +12,13 @@ namespace Scripts.Fire.Startup
         public override void Start()
         {
             base.Start();
+            Execute().Forget();
+        }
+
+        private async UniTaskVoid Execute()
+        {
+            await AssetManager.Instance.Initialize();
+            workflow.OnTaskFinished(this);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using DG.Tweening;
 using Scripts.Fire.Log;
 using Scripts.Fire.Startup;
@@ -31,6 +32,13 @@ namespace Scripts.Fire
         {
             GameLog.LogDebug("HotFixPresenter Awake");
 
+            slider.minValue = 0;
+            slider.maxValue = 1;
+
+            slider.value = 0;
+            slider.wholeNumbers = false;
+            text.text = "0.0%";
+
             model = new StartupModel();
             model.CurrentProgress.Subscribe(target =>
             {
@@ -43,11 +51,11 @@ namespace Scripts.Fire
                 {
                     slider.value = x / 100f;
                     text.text = $"{x:F1}%";
-                }, target, 0.5f);
+                }, target, 1);
 
                 tween.OnComplete(() =>
                 {
-                    if (target >= 0.999999f)
+                    if (target >= 99.99f)
                     {
                         GameLog.LogWarning("HotFixPresenter Progress Complete");
                     }

@@ -37,9 +37,9 @@ namespace Scripts.Fire
             // 构建启动流程
             var workflow = new Workflow();
             workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 20));
-            workflow.AddTask(new DownloadAssets(workflow, "DownloadRes", 30));
+            workflow.AddTask(new DownloadAssets(workflow, "DownloadAssets", 30));
             workflow.AddTask(new Preload(workflow, "Preload", 20));
-            workflow.AddTask(new LoadDLL(workflow, "LoadHotFix", 30));
+            workflow.AddTask(new LoadDLL(workflow, "LoadDLL", 30));
             workflow.StartFlow();
         }
 

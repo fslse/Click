@@ -22,7 +22,7 @@ namespace Scripts.Fire.Startup
             workflow.OnTaskStarted(this);
         }
 
-        public virtual void Skip()
+        protected virtual void Skip()
         {
             workflow.OnTaskFinished(this, true);
         }
