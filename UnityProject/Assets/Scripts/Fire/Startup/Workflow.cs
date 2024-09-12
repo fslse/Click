@@ -9,8 +9,8 @@ namespace Scripts.Fire.Startup
         private readonly List<StartupTask> tasks = new();
         private float totalPercent;
 
-        public long localVersion;
-        public long remoteVersion;
+        public long localVersion = -1;
+        public long remoteVersion = -1;
 
         public void AddTask(StartupTask task)
         {
@@ -40,6 +40,7 @@ namespace Scripts.Fire.Startup
         {
             GameLog.LogDebug($">>> Progress: {totalPercent}%");
             GameLog.LogDebug($">>> Start: {task.taskName}");
+            OnProgress(task, 0);
         }
 
         public void OnTaskFinished(StartupTask task, bool skip = false)

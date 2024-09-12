@@ -4,8 +4,8 @@ namespace Scripts.Fire
 {
     public static class AppConst
     {
-        private const string HTTP_SERVER_TEST = "";
-        private const string HTTP_SERVER_RELEASE = "";
+        private const string HTTP_SERVER_TEST = "http://192.168.110.35:378";
+        private const string HTTP_SERVER_RELEASE = "http://192.168.110.35:378";
 
         public const string HTTP_SERVER_IP_DEV = HTTP_SERVER_TEST;
         public const string HTTP_SERVER_IP_RELEASE = HTTP_SERVER_RELEASE;
@@ -27,6 +27,8 @@ namespace Scripts.Fire
         public static readonly string StreamingAssetsPath = Application.streamingAssetsPath + "/" + AssetsDir + "/";
         public static readonly string PersistentDataPath = Application.persistentDataPath + "/" + AssetsDir + "/";
 
+        // 远程资源路径
+        public static readonly string RemoteAssetsPath = HTTP_SERVER_IP + "/SharedFiles/" + AssetsDir + "/";
 
         // 是否开启热更新
         public const bool HotUpdate = true;

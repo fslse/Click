@@ -32,15 +32,4 @@ namespace Scripts.Fire.Startup
     {
         public float Value { get; set; }
     }
-
-    public sealed class StartupModel
-    {
-        public ReactiveProperty<float> CurrentProgress { get; }
-
-        public StartupModel()
-        {
-            CurrentProgress = new ReactiveProperty<float>(0.0f);
-            MessageBroker.Default.Receive<StartupProgressMessage>().Subscribe(progress => { CurrentProgress.Value = progress.Value; });
-        }
-    }
 }

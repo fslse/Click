@@ -1,44 +1,58 @@
-using System;
-using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Fire.Log;
-using Scripts.Fire.UniTaskTimer;
+using Scripts.Fire.Startup;
+using TMPro;
+using UniRx;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public sealed class StartupModel
+{
+    public ReactiveProperty<float> CurrentProgress { get; }
+
+    public StartupModel()
+    {
+        CurrentProgress = new ReactiveProperty<float>(0.0f);
+        MessageBroker.Default.Receive<StartupProgressMessage>().Subscribe(progress => { CurrentProgress.Value = progress.Value; });
+    }
+}
 
 namespace Scripts.Fire
 {
     public class HotFixPresenter : MonoBehaviour
     {
-        private void Start()
+        private StartupModel model;
+        private Tweener tween;
+
+        [SerializeField] private Slider slider;
+        [SerializeField] private TMP_Text text;
+
+        private void Awake()
         {
-            // 
-            GameLog.LogDebug("HotFixPresenter Start");
+            GameLog.LogDebug("HotFixPresenter Awake");
 
-            StartGame().Forget();
-        }
+            model = new StartupModel();
+            model.CurrentProgress.Subscribe(target =>
+            {
+                GameLog.LogDebug($"HotFixPresenter Progress: {target}");
 
-        private async UniTaskVoid StartGame()
-        {
-            // 计时器测试
-            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
-                _ =>
+                if (target <= slider.value) return;
+
+                tween?.Kill();
+                tween = DOTween.To(() => slider.value, x =>
                 {
-                    GameLog.LogDebug("Timer");
-                    SceneManager.LoadSceneAsync("Scenes/Game");
-                });
-            timer.Start();
+                    slider.value = x / 100f;
+                    text.text = $"{x:F1}%";
+                }, target, 0.5f);
 
-            await UniTask.Delay(1000);
-
-            timer.Dispose();
-
-            var realTimer = new RealTimer(TimeSpan.FromSeconds(2), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
-                _ =>
+                tween.OnComplete(() =>
                 {
-                    GameLog.LogDebug("RealTimer");
-                    SceneManager.LoadSceneAsync("Scenes/Game");
+                    if (target >= 0.999999f)
+                    {
+                        GameLog.LogWarning("HotFixPresenter Progress Complete");
+                    }
                 });
-            realTimer.Start();
+            });
         }
     }
 }
