@@ -11,7 +11,7 @@ using UnityEngine;
 
 public static class HybridCLRHelper
 {
-    private static string HybridCLRBuildCacheDir => Application.dataPath + "/HybridCLRBuildCache";
+    private static string HybridCLRBuildCacheDir => $"{Application.dataPath}/HybridCLRBuildCache";
 
     private static string AssetBundleOutputDir => $"{HybridCLRBuildCacheDir}/AssetBundleOutput";
 
@@ -19,7 +19,7 @@ public static class HybridCLRHelper
 
     public static void BuildAssetBundleByTarget(BuildTarget target)
     {
-        BuildAssetBundles(GetAssetBundleTempDirByTarget(target), GetAssetBundleOutputDirByTarget(target), target);
+        BuildAssetBundles(GetTempDirByTarget(target), GetOutputDirByTarget(target), target);
     }
 
     /// <summary>
@@ -104,12 +104,12 @@ public static class HybridCLRHelper
         return str[str.IndexOf("Assets/", StringComparison.Ordinal)..];
     }
 
-    private static string GetAssetBundleOutputDirByTarget(BuildTarget target)
+    private static string GetOutputDirByTarget(BuildTarget target)
     {
         return $"{AssetBundleOutputDir}/{target}";
     }
 
-    private static string GetAssetBundleTempDirByTarget(BuildTarget target)
+    private static string GetTempDirByTarget(BuildTarget target)
     {
         return $"{AssetBundleSourceDataTempDir}/{target}";
     }
