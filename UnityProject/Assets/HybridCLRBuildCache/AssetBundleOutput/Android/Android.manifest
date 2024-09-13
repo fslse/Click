@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2377886109
+CRC: 4061610478
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: scripts
+      Name: scripts.ab
       Dependencies: {}

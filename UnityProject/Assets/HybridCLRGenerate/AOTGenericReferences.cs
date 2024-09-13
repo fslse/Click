@@ -25,7 +25,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 
 	// {{ AOT generic types
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<HotFix.App.<Startup>d__1>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<HotFix.Example.<Init>d__5>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<HotFix.App.<Startup>d__1>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<HotFix.Example.<Init>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.IStateMachineRunnerPromise<object>
 	// Cysharp.Threading.Tasks.ITaskPoolNode<object>
@@ -738,8 +740,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	public void RefMethods()
 	{
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Scripts.Fire.Manager.AssetManager.<LoadAsset>d__5<object>>(Scripts.Fire.Manager.AssetManager.<LoadAsset>d__5<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,HotFix.Example.<Init>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter&,HotFix.Example.<Init>d__5&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,HotFix.App.<Startup>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,HotFix.App.<Startup>d__1&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,HotFix.Example.<Init>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,HotFix.Example.<Init>d__5&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<HotFix.App.<Startup>d__1>(HotFix.App.<Startup>d__1&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<HotFix.Example.<Init>d__5>(HotFix.Example.<Init>d__5&)
 		// Cysharp.Threading.Tasks.UniTask<object> Scripts.Fire.Manager.AssetManager.LoadAsset<object>(string)
 		// object System.Activator.CreateInstance<object>()

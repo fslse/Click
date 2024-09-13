@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
 using Scripts.Fire;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 /// <summary>
 /// 资源打包
@@ -10,7 +10,7 @@ using UnityEditor;
 public static class AssetBundleBuilder
 {
     // AssetBundle 自定义扩展名
-    private const string extension = "ab";
+    private const string variant = "ab";
 
     // 资源目录
     private const string sourceDirectory = "Assets/AssetPackages/";
@@ -66,12 +66,12 @@ public static class AssetBundleBuilder
 
             count += 1;
 
-            asset.SetAssetBundleNameAndVariant(assetBundleName, extension);
+            asset.SetAssetBundleNameAndVariant(assetBundleName, variant);
             asset.SaveAndReimport();
         }
 
         AssetDatabase.Refresh();
-        Debug.Log("Assets number: " + count);
+        Debug.LogWarning($"Assets Number: {count}");
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public static class AssetBundleBuilder
     /// <param name="buildTarget"></param>
     public static void BuildAssetBundles(BuildTarget buildTarget)
     {
-        Debug.LogWarning("Build AssetBundles for " + buildTarget + " in " + destinationDirectory);
+        Debug.LogWarning($"Build AssetBundles for {buildTarget} in {destinationDirectory}");
         if (!Directory.Exists(destinationDirectory))
         {
             Directory.CreateDirectory(destinationDirectory);
@@ -91,7 +91,7 @@ public static class AssetBundleBuilder
         {
             foreach (string assetBundleName in manifest.GetAllAssetBundles())
             {
-                Debug.Log("AssetBundle: " + Path.Combine(destinationDirectory, assetBundleName));
+                Debug.Log($"AssetBundle: {Path.Combine(destinationDirectory, assetBundleName)}");
                 // todo: 加密
             }
         }
@@ -138,6 +138,6 @@ public static class AssetBundleBuilder
         }
 
         AssetDatabase.Refresh();
-        Debug.LogWarning("Remove AssetBundleName: " + length);
+        Debug.LogWarning($"Remove AssetBundleName: {length}");
     }
 }

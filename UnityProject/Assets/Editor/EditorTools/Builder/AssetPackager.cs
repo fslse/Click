@@ -11,28 +11,18 @@ using Debug = UnityEngine.Debug;
 
 public class AssetPackager
 {
-    private static DateTime timeStamp;
-
     [MenuItem("Builder/AssetBundle/Build AssetBundle", false, 101)]
     private static void BuildAssetBundle()
     {
-#if UNITY_ANDROID
-        Debug.LogWarning("Build AssetBundle for Android");
-        BuildAssetBundle(BuildTarget.Android);
-#elif UNITY_IOS
-        Debug.LogWarning("Build AssetBundle for IOS");
-        BuildAssetBundle(BuildTarget.iOS);
-#elif UNITY_STANDALONE_WIN
-        Debug.LogWarning("Build AssetBundle for Windows");
-        BuildAssetBundle(BuildTarget.StandaloneWindows64);
-#endif
+        Debug.LogWarning($"Build AssetBundle for {EditorUserBuildSettings.activeBuildTarget}");
+        BuildAssetBundle(EditorUserBuildSettings.activeBuildTarget);
     }
 
     private static void BuildAssetBundle(BuildTarget target)
     {
-        timeStamp = DateTime.Now;
+        DateTime timeStamp = DateTime.Now;
 
-        // 清空StreamingAssets目录
+        // 清空目录
         if (Directory.Exists(AppConst.AssetsPath))
             Directory.Delete(AppConst.AssetsPath, true);
         Directory.CreateDirectory(AppConst.AssetsPath);
@@ -53,7 +43,7 @@ public class AssetPackager
         // 刷新
         AssetDatabase.Refresh();
 
-        Debug.LogWarning("Success && " + "Time: " + (DateTime.Now - timeStamp).TotalSeconds);
+        Debug.LogWarning($"Success && Time: {(DateTime.Now - timeStamp).TotalSeconds}");
     }
 
     private static void BuildVersionFile()

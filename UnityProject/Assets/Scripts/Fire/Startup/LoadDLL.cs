@@ -38,7 +38,7 @@ namespace Scripts.Fire.Startup
             mainAssembly = AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == "Assembly-CSharp");
 #else
             // / 实机
-            var ab = await AssetManager.Instance.LoadAssetBundle("scripts");
+            var ab = await AssetManager.Instance.LoadAssetBundle("scripts.ab");
             GameLog.LogDebug("DLL AB", ZString.Join("\n", ab.GetAllAssetNames()));
 
             var dllBytes = ab.LoadAsset<TextAsset>("Assembly-CSharp.dll.bytes").bytes;
@@ -57,7 +57,7 @@ namespace Scripts.Fire.Startup
                     }
                     catch (Exception e)
                     {
-                        GameLog.LogError("Load AOT DLL", $"{assembly.Replace("dll", "bytes")}\n{e}");
+                        GameLog.LogError("Load AOT DLL", $"{assembly.Replace("dll", "bytes")}\n{e.Message}");
                         continue;
                     }
 

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
   <assembly fullname="Fire">
-    <type fullname="Scripts.Fire.AppConst" preserve="all" />
     <type fullname="Scripts.Fire.Log.GameLog" preserve="all" />
     <type fullname="Scripts.Fire.Log.GameLog/Log" preserve="all" />
     <type fullname="Scripts.Fire.Manager.AssetManager" preserve="all" />
     <type fullname="Scripts.Fire.Singleton.MonoSingleton`1" preserve="all" />
+    <type fullname="Scripts.Fire.UniTaskTimer.Timer" preserve="all" />
   </assembly>
   <assembly fullname="Microsoft.Extensions.Logging.Abstractions">
     <type fullname="Microsoft.Extensions.Logging.ILogger" preserve="all" />
@@ -48,8 +48,8 @@
   </assembly>
   <assembly fullname="UniTask">
     <type fullname="Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder" preserve="all" />
-    <type fullname="Cysharp.Threading.Tasks.UniTask" preserve="all" />
-    <type fullname="Cysharp.Threading.Tasks.UniTask/Awaiter" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.PlayerLoopTiming" preserve="all" />
+    <type fullname="Cysharp.Threading.Tasks.UniTaskCancellationExtensions" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTaskVoid" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask`1" preserve="all" />
     <type fullname="Cysharp.Threading.Tasks.UniTask`1/Awaiter" preserve="all" />
@@ -225,10 +225,6 @@
     <type fullname="ZLogger.ZLoggerExtensions" preserve="all" />
     <type fullname="ZLogger.ZLoggerInformationInterpolatedStringHandler" preserve="all" />
   </assembly>
-  <assembly fullname="ZString">
-    <type fullname="Cysharp.Text.Utf16ValueStringBuilder" preserve="all" />
-    <type fullname="Cysharp.Text.ZString" preserve="all" />
-  </assembly>
   <assembly fullname="mscorlib">
     <type fullname="System.Action" preserve="all" />
     <type fullname="System.Action`1" preserve="all" />
@@ -333,6 +329,7 @@
     <type fullname="System.StringSplitOptions" preserve="all" />
     <type fullname="System.Text.Encoding" preserve="all" />
     <type fullname="System.Text.StringBuilder" preserve="all" />
+    <type fullname="System.Threading.CancellationToken" preserve="all" />
     <type fullname="System.Threading.Interlocked" preserve="all" />
     <type fullname="System.Threading.Thread" preserve="all" />
     <type fullname="System.TimeSpan" preserve="all" />

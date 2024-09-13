@@ -15,9 +15,6 @@ public static class BuildPlayer
     private const string versionFlag = VERSION_RELEASE;
 #endif
 
-    private static readonly string PACKAGE_PATH = string.Format("Build/" + Application.productName + "_{0}_{1}_v{2}",
-        DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"), versionFlag, Application.version);
-
     [MenuItem("Builder/切换版本/开发环境", false, 1)]
     private static void ChangeToDev()
     {
@@ -40,24 +37,24 @@ public static class BuildPlayer
     private static void ChangeBuildVersionForPlatform(string version, BuildTargetGroup platform)
     {
         string macro = PlayerSettings.GetScriptingDefineSymbolsForGroup(platform);
-        Debug.Log("platform: " + platform + "\nmacro_old: " + macro);
-        string old_version = string.Empty;
+        Debug.Log($"platform: {platform}\nold macro: {macro}");
+        string oldVersion = string.Empty;
         if (macro.Contains(VERSION_DEV))
         {
-            old_version = VERSION_DEV;
+            oldVersion = VERSION_DEV;
         }
         else if (macro.Contains(VERSION_RELEASE))
         {
-            old_version = VERSION_RELEASE;
+            oldVersion = VERSION_RELEASE;
         }
 
-        if (!string.IsNullOrEmpty(old_version))
-            macro = macro.Replace(old_version, version);
+        if (!string.IsNullOrEmpty(oldVersion))
+            macro = macro.Replace(oldVersion, version);
         else
             macro = macro + ";" + version;
         PlayerSettings.SetScriptingDefineSymbolsForGroup(platform, macro);
-        Debug.Log("platform: " + platform + "\nmacro_new: " + macro);
-        Debug.Log("platform: " + platform + "\nversion: " + old_version + " > " + version);
+        Debug.Log($"platform: {platform}\nnew macro: {macro}");
+        Debug.Log($"platform: {platform}\nversion: {oldVersion} -> {version}");
     }
 
 
@@ -87,22 +84,25 @@ public static class BuildPlayer
 
     private static void BuildAndroid(bool empty = true, bool buildAppBundle = false)
     {
+        string PACKAGE_PATH =
+            string.Format("Build/" + Application.productName + "_{0}_{1}_v{2}",
+                DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"), versionFlag, Application.version);
+
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
         EditorUserBuildSettings.buildAppBundle = buildAppBundle;
 
         var tempFolder = Environment.CurrentDirectory + "/StreamingAssets";
-        var streamingAssetsFolder = Application.dataPath + "/StreamingAssets";
 
         if (empty)
         {
             if (Directory.Exists(tempFolder)) Directory.Delete(tempFolder, true);
-            MoveStreamingAssets(streamingAssetsFolder, tempFolder);
+            MoveStreamingAssets(Application.streamingAssetsPath, tempFolder);
 
             BuildPipeline.BuildPlayer(GetScenePaths(),
                 PACKAGE_PATH + (buildAppBundle ? "_Empty.aab" : "_Empty.apk"),
                 BuildTarget.Android, BuildOptions.ShowBuiltPlayer);
 
-            MoveStreamingAssets(tempFolder, streamingAssetsFolder);
+            MoveStreamingAssets(tempFolder, Application.streamingAssetsPath);
             if (Directory.Exists(tempFolder)) Directory.Delete(tempFolder, true);
         }
         else
@@ -135,8 +135,8 @@ public static class BuildPlayer
 
     private class Folders
     {
-        public string Source { get; private set; }
-        public string Target { get; private set; }
+        public string Source { get; }
+        public string Target { get; }
 
         public Folders(string source, string target)
         {

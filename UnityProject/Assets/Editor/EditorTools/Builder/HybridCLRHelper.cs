@@ -19,7 +19,7 @@ public static class HybridCLRHelper
 
     public static void BuildAssetBundleByTarget(BuildTarget target)
     {
-        BuildAssetBundles(GetTempDirByTarget(target), GetOutputDirByTarget(target), target);
+        BuildAssetBundles($"{AssetBundleSourceDataTempDir}/{target}", $"{AssetBundleOutputDir}/{target}", target);
     }
 
     /// <summary>
@@ -48,13 +48,14 @@ public static class HybridCLRHelper
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
             File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[BuildAssetBundles] Copy HotUpdate DLL : {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[HybridCLRHelper] Copy HotUpdate DLL : {dllPath} -> {dllBytesPath}");
         }
 
         // 生成待补充的元数据列表
         // AOTReferenceGeneratorCommand.CompileAndGenerateAOTGenericReference();
         // 将 AOT Assembly 加入元数据列表 
         HybridCLRSettings.Instance.patchAOTAssemblies = AOTGenericReferences.PatchedAOTAssemblyList.Select(aotAssembly => aotAssembly[..^4]).ToArray();
+        HybridCLRSettings.Save();
 
         // 裁减后AOT dll输出根目录
         // "HybridCLRData/AssembliesPostIl2CppStrip/{target}"
@@ -73,7 +74,7 @@ public static class HybridCLRHelper
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
             File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[BuildAssetBundles] Copy AOT DLL : {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[HybridCLRHelper] Copy AOT DLL : {dllPath} -> {dllBytesPath}");
         }
 
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
@@ -82,8 +83,9 @@ public static class HybridCLRHelper
         AssetBundleBuild scripts = new AssetBundleBuild
         {
             assetBundleName = "scripts",
-            assetNames = assets.Select(ToRelativeAssetPath).ToArray(),
-            addressableNames = assets.Select(s => s.Replace(tempDir + '/', "")).ToArray()
+            assetNames = assets.Select(ToRelativePath).ToArray(),
+            addressableNames = assets.Select(s => s.Replace(tempDir + '/', "")).ToArray(),
+            assetBundleVariant = "ab"
         };
         abs.Add(scripts);
 
@@ -94,23 +96,12 @@ public static class HybridCLRHelper
             Directory.CreateDirectory(Application.streamingAssetsPath);
         foreach (var ab in abs) // 复制打包后的DLL到StreamingAssets文件夹
         {
-            AssetDatabase.CopyAsset(ToRelativeAssetPath($"{outputDir}/{ab.assetBundleName}"),
-                ToRelativeAssetPath($"{AppConst.AssetsPath}/{ab.assetBundleName}"));
+            AssetDatabase.CopyAsset(ToRelativePath($"{outputDir}/{ab.assetBundleName}.ab"), ToRelativePath($"{AppConst.AssetsPath}/{ab.assetBundleName}.ab"));
         }
     }
 
-    private static string ToRelativeAssetPath(string str)
+    private static string ToRelativePath(string str)
     {
         return str[str.IndexOf("Assets/", StringComparison.Ordinal)..];
-    }
-
-    private static string GetOutputDirByTarget(BuildTarget target)
-    {
-        return $"{AssetBundleOutputDir}/{target}";
-    }
-
-    private static string GetTempDirByTarget(BuildTarget target)
-    {
-        return $"{AssetBundleSourceDataTempDir}/{target}";
     }
 }

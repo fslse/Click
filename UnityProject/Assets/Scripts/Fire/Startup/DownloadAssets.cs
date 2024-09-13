@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Cysharp.Text;
@@ -28,10 +29,17 @@ namespace Scripts.Fire.Startup
                 localManifest = await File.ReadAllTextAsync(AppConst.PersistentDataPath + "manifest.txt");
             }
 
-            var remoteManifest = (await UnityWebRequest.Get(AppConst.RemoteAssetsPath + "manifest.txt").SendWebRequest()).downloadHandler.text;
+            var remoteManifest = string.Empty;
+            try
+            {
+                remoteManifest = (await UnityWebRequest.Get(AppConst.RemoteAssetsPath + "manifest.txt").SendWebRequest()).downloadHandler.text;
+            }
+            catch (Exception e)
+            {
+                GameLog.LogError("Download Manifest", e.Message);
+            }
 
-
-            if (localManifest == remoteManifest)
+            if (string.IsNullOrEmpty(remoteManifest) || localManifest == remoteManifest)
             {
                 Skip();
                 return;
@@ -64,7 +72,7 @@ namespace Scripts.Fire.Startup
 
             await File.WriteAllTextAsync(AppConst.PersistentDataPath + "manifest.txt", remoteManifest);
 
-            GameLog.LogDebug("Download Assets Num", count.ToString());
+            GameLog.LogDebug("Download Assets Number", count.ToString());
             workflow.OnTaskFinished(this);
         }
     }
