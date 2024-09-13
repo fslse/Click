@@ -50,9 +50,7 @@ namespace Scripts.Fire.Manager
             string[] dependencies = abManifest.GetAllDependencies(abName);
             foreach (string dependency in dependencies)
                 if (!loadedAssetBundles.ContainsKey(dependency))
-                {
-                    loadedAssetBundles.Add(dependency, await LoadAssetBundle(dependency));
-                }
+                    await LoadAssetBundle(dependency);
 
             return ab;
         }

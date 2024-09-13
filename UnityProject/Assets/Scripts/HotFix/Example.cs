@@ -37,7 +37,7 @@ namespace HotFix
 
             tmp1.text = "Hot Fix";
 
-            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), _ => { tmp1.text = "热更新"; });
+            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), _ => { tmp1.text = "Success"; });
             timer.Start();
 
             Init().Forget();
