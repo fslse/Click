@@ -37,7 +37,7 @@ namespace Scripts.Fire.Startup
             var dllBytes = ab.LoadAsset<TextAsset>("Assembly-CSharp.dll.bytes").bytes;
             mainAssembly = System.Reflection.Assembly.Load(dllBytes);
 
-            // 为 AOT DLL 补充元数据
+            // 为 AOT Assembly 补充元数据
             foreach (var assembly in AOTGenericReferences.PatchedAOTAssemblyList)
             {
                 try
