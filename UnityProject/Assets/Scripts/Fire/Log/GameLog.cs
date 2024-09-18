@@ -56,7 +56,7 @@ namespace Scripts.Fire.Log
 
         public static void LogDebug(string key, string value)
         {
-            Logger.ZLogDebug($"[GameLog] {key} : {value}");
+            Logger.ZLogDebug($"[GameLog] {key}: {value}");
         }
 
         public static void LogWarning(string message)
@@ -66,7 +66,7 @@ namespace Scripts.Fire.Log
 
         public static void LogWarning(string key, string value)
         {
-            Logger.ZLogWarning($"[GameLog] {key} : {value}");
+            Logger.ZLogWarning($"[GameLog] {key}: {value}");
         }
 
         public static void LogError(string message)
@@ -76,7 +76,7 @@ namespace Scripts.Fire.Log
 
         public static void LogError(string key, string value)
         {
-            Logger.ZLogError($"[GameLog] {key} : {value}");
+            Logger.ZLogError($"[GameLog] {key}: {value}");
         }
 
         public static void HandleLog(string logString, string stackTrace, LogType type)

@@ -27,7 +27,7 @@ namespace Scripts.Fire.Startup
         {
 #if UNITY_EDITOR // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。直接查找获得HotUpdate程序集
             mainAssembly = AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == "Assembly-CSharp");
-//#else
+#else
             // / 实机
             var ab = await AssetManager.Instance.LoadAssetBundle("scripts.ab");
             GameLog.LogWarning("DLL AB\n", ZString.Join("\n", ab.GetAllAssetNames()));
@@ -53,7 +53,7 @@ namespace Scripts.Fire.Startup
                 // HomologousImageMode.SuperSet: This mode relaxes the requirements for AOT dll, you can use either the cut AOT dll or the original AOT dll.
                 // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
                 LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, HomologousImageMode.SuperSet);
-                GameLog.LogDebug($"[LoadMetadataForAOTAssembly {assembly}] ErrorCode : {errorCode}");
+                GameLog.LogDebug($"[LoadMetadataForAOTAssembly {assembly}] ErrorCode: {errorCode}");
             }
 #endif
 
