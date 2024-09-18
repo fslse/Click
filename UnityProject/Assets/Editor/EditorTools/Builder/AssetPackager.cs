@@ -73,7 +73,7 @@ public class AssetPackager
         using StreamWriter sw = new StreamWriter(fs);
         foreach (var file in files)
         {
-            if (file.EndsWith(".meta") || file.Contains(".DS_Store")) continue;
+            if (file.EndsWith(".meta") || file.Contains(".DS_Store") || file.Contains("manifest")) continue;
             sw.WriteLine(file.Replace(AppConst.StreamingAssetsPath, string.Empty) + "|" + HashHelper.ComputeHash<MD5>(file));
         }
     }
