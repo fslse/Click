@@ -26,7 +26,7 @@ namespace Scripts.Fire.Manager
             AssetBundle ab = await LoadAssetBundle(AppConst.AssetsDir);
             abManifest = ab.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
             string[] abs = abManifest.GetAllAssetBundles();
-            GameLog.LogDebug(ZString.Join('\n', abs));
+            GameLog.LogDebug($"AssetManager.Instance.Initialize()\n{ZString.Join('\n', abs)}");
         }
 
         public async UniTask<AssetBundle> LoadAssetBundle(string abName)

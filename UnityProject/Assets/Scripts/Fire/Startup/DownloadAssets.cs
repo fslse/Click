@@ -48,7 +48,7 @@ namespace Scripts.Fire.Startup
             var localAssetPackages = localManifest.Replace(" ", "").Split('\n').ToHashSet();
             var remoteAssetPackages = remoteManifest.Replace(" ", "").Split('\n').ToList();
 
-            GameLog.LogDebug($"Local Manifest\n{ZString.Join("\n", localAssetPackages)}");
+            GameLog.LogDebug($"Local Manifest\n{ZString.Join("\n", localAssetPackages.ToArray())}");
             GameLog.LogDebug($"Remote Manifest\n{ZString.Join("\n", remoteAssetPackages)}");
 
             int total = 1 + remoteAssetPackages.Count(assetPackage => !localAssetPackages.Contains(assetPackage));

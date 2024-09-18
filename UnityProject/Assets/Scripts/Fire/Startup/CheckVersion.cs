@@ -24,10 +24,10 @@ namespace Scripts.Fire.Startup
 
         private async UniTaskVoid Execute()
         {
-            string persistentDataVersionFile = AppConst.PersistentDataPath + "/version";
+            string persistentDataVersionFile = AppConst.PersistentDataPath + "version";
 
             // 从应用程序内部资源中读取版本信息
-            GetVersion(AppConst.StreamingAssetsPath + "/version", ref workflow.localVersion);
+            GetVersion(AppConst.StreamingAssetsPath + "version", ref workflow.localVersion);
 
             try
             {
@@ -70,7 +70,7 @@ namespace Scripts.Fire.Startup
                     version += int.Parse(obj.GetField("ResVersion").ToString());
                 }
                 else
-                    GameLog.LogWarning(path, "File not found");
+                    GameLog.LogWarning("File not found", path);
             }
         }
     }

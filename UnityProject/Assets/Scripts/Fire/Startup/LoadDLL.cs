@@ -30,7 +30,7 @@ namespace Scripts.Fire.Startup
 #else
             // / 实机
             var ab = await AssetManager.Instance.LoadAssetBundle("scripts.ab");
-            GameLog.LogWarning("DLL AB\n", ZString.Join("\n", ab.GetAllAssetNames()));
+            GameLog.LogWarning($"DLL AB\n{ZString.Join("\n", ab.GetAllAssetNames())}");
 
             // 加载热更新dll
             // 如果有多个热更新dll，按照依赖顺序加载，先加载被依赖的assembly
@@ -53,15 +53,16 @@ namespace Scripts.Fire.Startup
                 // HomologousImageMode.SuperSet: This mode relaxes the requirements for AOT dll, you can use either the cut AOT dll or the original AOT dll.
                 // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
                 LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, HomologousImageMode.SuperSet);
-                GameLog.LogDebug($"[LoadMetadataForAOTAssembly {assembly}] ErrorCode: {errorCode}");
+                GameLog.LogDebug($"Load metadata for {assembly}: {errorCode}");
             }
 #endif
+
+            workflow.OnTaskFinished(this);
 
             // 热更新程序集入口
             try
             {
                 mainAssembly!.GetType("HotFix.App")!.GetMethod("Main")!.Invoke(null, null);
-                workflow.OnTaskFinished(this);
             }
             catch (Exception e)
             {
