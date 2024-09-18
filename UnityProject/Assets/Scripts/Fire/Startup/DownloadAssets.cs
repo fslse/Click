@@ -36,7 +36,7 @@ namespace Scripts.Fire.Startup
             }
             catch (Exception e)
             {
-                GameLog.LogError("Download Manifest", e.Message);
+                GameLog.LogError("Failed to download manifest.txt", e.Message);
             }
 
             if (string.IsNullOrEmpty(remoteManifest) || localManifest == remoteManifest)
@@ -48,8 +48,8 @@ namespace Scripts.Fire.Startup
             var localAssetPackages = localManifest.Replace(" ", "").Split('\n').ToHashSet();
             var remoteAssetPackages = remoteManifest.Replace(" ", "").Split('\n').ToList();
 
-            GameLog.LogDebug("Local Manifest", localAssetPackages.Count.ToString());
-            GameLog.LogDebug("Remote Manifest", ZString.Join("\n", remoteAssetPackages));
+            GameLog.LogDebug($"Local Manifest\n{ZString.Join("\n", localAssetPackages)}");
+            GameLog.LogDebug($"Remote Manifest\n{ZString.Join("\n", remoteAssetPackages)}");
 
             int total = 1 + remoteAssetPackages.Count(assetPackage => !localAssetPackages.Contains(assetPackage));
             workflow.OnProgress(this, (int)(100f / total));
@@ -57,7 +57,13 @@ namespace Scripts.Fire.Startup
             int count = 1;
             foreach (string name in from assetPackage in remoteAssetPackages where !localAssetPackages.Contains(assetPackage) select assetPackage[..assetPackage.IndexOf('|')])
             {
-                var request = await UnityWebRequest.Get(AppConst.RemoteAssetsPath + name).SendWebRequest();
+                int _ = count;
+                var request = await UnityWebRequest.Get(AppConst.RemoteAssetsPath + name).SendWebRequest().ToUniTask(Progress.Create<float>(x =>
+                {
+                    // 下载进度
+                    workflow.OnProgress(this, (int)(100f * _ / total + 100f * x / total));
+                }));
+
                 if (request.result == UnityWebRequest.Result.Success)
                 {
                     await File.WriteAllBytesAsync(AppConst.PersistentDataPath + name, request.downloadHandler.data);
@@ -66,13 +72,13 @@ namespace Scripts.Fire.Startup
                 }
                 else
                 {
-                    GameLog.LogError($"Download {name}", request.error);
+                    GameLog.LogError($"Failed to download {name}", request.error);
                 }
             }
 
             await File.WriteAllTextAsync(AppConst.PersistentDataPath + "manifest.txt", remoteManifest);
 
-            GameLog.LogDebug("Download Assets Number", count.ToString());
+            GameLog.LogDebug("Number of downloaded assets", count.ToString());
             workflow.OnTaskFinished(this);
         }
     }
