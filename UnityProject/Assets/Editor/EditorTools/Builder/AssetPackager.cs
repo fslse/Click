@@ -48,7 +48,7 @@ public class AssetPackager
 
     private static void BuildVersionFile()
     {
-        string targetPath = AppConst.AssetsPath + "/version";
+        string targetPath = AppConst.AssetsPath + "version";
         if (File.Exists(targetPath))
         {
             File.Delete(targetPath);
@@ -62,7 +62,7 @@ public class AssetPackager
 
     private static void BuildManifest()
     {
-        string path = AppConst.AssetsPath + "/manifest.txt";
+        string path = AppConst.AssetsPath + "manifest.txt";
         if (File.Exists(path)) File.Delete(path);
 
         string[] files = Directory.GetFiles(Application.streamingAssetsPath, "*.*", SearchOption.AllDirectories);

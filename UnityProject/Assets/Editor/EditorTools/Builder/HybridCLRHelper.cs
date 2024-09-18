@@ -48,7 +48,7 @@ public static class HybridCLRHelper
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
             File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[HybridCLRHelper] Copy HotUpdate DLL : {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[HybridCLRHelper] Copy HotUpdate DLL: {dllPath} -> {dllBytesPath}");
         }
 
         // 生成待补充的元数据列表
@@ -66,7 +66,7 @@ public static class HybridCLRHelper
             string dllPath = $"{aotDllDir}/{dll}.dll";
             if (!File.Exists(dllPath))
             {
-                Debug.LogError($"AOT DLL : {dllPath} 缺失");
+                Debug.LogError($"AOT DLL: {dllPath} 缺失");
                 Debug.LogError("打包过程生成的裁剪后的AOT dll可以用于补充元数据 || 使用HybridCLR/Generate/AotDlls命令也可以立即生成裁剪后的AOT dll");
                 continue;
             }
@@ -74,7 +74,7 @@ public static class HybridCLRHelper
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
             File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[HybridCLRHelper] Copy AOT DLL : {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[HybridCLRHelper] Copy AOT DLL: {dllPath} -> {dllBytesPath}");
         }
 
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
