@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HybridCLR.Editor;
+using HybridCLR.Editor.AOT;
 using HybridCLR.Editor.Commands;
 using HybridCLR.Editor.Settings;
 using Scripts.Fire;
@@ -37,11 +38,13 @@ public static class HybridCLRHelper
         Directory.CreateDirectory(outputDir);
         Directory.CreateDirectory(tempDir);
 
-        // 编译DLL
+        // 编译热更新dll
         CompileDllCommand.CompileDll(target);
 
         List<string> assets = new List<string>();
-        string hotUpdateDllsDir = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target); // DLL路径
+        // 热更新dll输出目录
+        // "HybridCLRData/HotUpdateDlls/{target}"
+        string hotUpdateDllsDir = SettingsUtil.GetHotUpdateDllsOutputDirByTarget(target);
         foreach (var dll in SettingsUtil.HotUpdateAssemblyFilesExcludePreserved) // 遍历热更新dll列表
         {
             string dllPath = $"{hotUpdateDllsDir}/{dll}";
@@ -51,16 +54,17 @@ public static class HybridCLRHelper
             Debug.Log($"[HybridCLRHelper] Copy HotUpdate DLL: {dllPath} -> {dllBytesPath}");
         }
 
-        // 生成待补充的元数据列表
+        // 生成待补充元数据列表
         // AOTReferenceGeneratorCommand.CompileAndGenerateAOTGenericReference();
-        // 将 AOT Assembly 加入元数据列表 
+
+        // 将 AOT Assembly 加入HybridCLR的补充元数据列表 
         HybridCLRSettings.Instance.patchAOTAssemblies = AOTGenericReferences.PatchedAOTAssemblyList.Select(aotAssembly => aotAssembly[..^4]).ToArray();
         HybridCLRSettings.Save();
 
-        // 裁减后AOT dll输出根目录
+        // 裁减后 AOT dll 输出目录
         // "HybridCLRData/AssembliesPostIl2CppStrip/{target}"
         string aotDllDir = SettingsUtil.GetAssembliesPostIl2CppStripDir(target);
-        // 补充元数据AOT dlls
+        string aotDllDir2 = $"{SettingsUtil.HybridCLRDataDir}/StrippedAOTAssembly2/{target}";
         foreach (var dll in SettingsUtil.AOTAssemblyNames)
         {
             string dllPath = $"{aotDllDir}/{dll}.dll";
@@ -71,10 +75,14 @@ public static class HybridCLRHelper
                 continue;
             }
 
+            // 进一步剔除AOT dll中非泛型函数元数据，输出到StrippedAOTAssembly2目录下
+            string dllPath2 = $"{aotDllDir2}/{dll}.dll";
+            AOTAssemblyMetadataStripper.Strip(dllPath, dllPath2);
+
             string dllBytesPath = $"{tempDir}/{dll}.bytes";
-            File.Copy(dllPath, dllBytesPath, true); // 复制dll到临时目录
+            File.Copy(dllPath2, dllBytesPath, true); // 复制dll到临时目录
             assets.Add(dllBytesPath);
-            Debug.Log($"[HybridCLRHelper] Copy AOT DLL: {dllPath} -> {dllBytesPath}");
+            Debug.Log($"[HybridCLRHelper] Copy AOT DLL: {dllPath2} -> {dllBytesPath}");
         }
 
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
