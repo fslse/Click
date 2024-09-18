@@ -58,7 +58,9 @@ namespace Scripts.Fire.Startup
             foreach (string name in from assetPackage in remoteAssetPackages where !localAssetPackages.Contains(assetPackage) select assetPackage[..assetPackage.IndexOf('|')])
             {
                 int _ = count;
-                var request = await UnityWebRequest.Get(AppConst.RemoteAssetsPath + name).SendWebRequest().ToUniTask(Progress.Create<float>(x =>
+                UnityWebRequest request = new UnityWebRequest(AppConst.RemoteAssetsPath + name, "Get");
+                request.downloadHandler = new DownloadHandlerFile(AppConst.PersistentDataPath + name);
+                await request.SendWebRequest().ToUniTask(Progress.Create<float>(x =>
                 {
                     // 下载进度
                     workflow.OnProgress(this, (int)(100f * _ / total + 100f * x / total));
@@ -66,7 +68,7 @@ namespace Scripts.Fire.Startup
 
                 if (request.result == UnityWebRequest.Result.Success)
                 {
-                    await File.WriteAllBytesAsync(AppConst.PersistentDataPath + name, request.downloadHandler.data);
+                    // await File.WriteAllBytesAsync(AppConst.PersistentDataPath + name, request.downloadHandler.data);
                     ++count;
                     workflow.OnProgress(this, (int)(100f * count / total));
                 }
