@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,29 +23,8 @@ namespace Scripts.Fire.Startup
 
         private async UniTaskVoid Execute()
         {
-            string persistentDataVersionFile = AppConst.PersistentDataPath + "version";
-
-            // 从应用程序内部资源中读取版本信息
-            GetVersion(AppConst.StreamingAssetsPath + "version", ref workflow.localVersion);
-
-            try
-            {
-                if (File.Exists(persistentDataVersionFile))
-                    File.Delete(persistentDataVersionFile);
-
-                using UnityWebRequest request = UnityWebRequest.Get(AppConst.RemoteAssetsPath + "version");
-                request.downloadHandler = new DownloadHandlerFile(persistentDataVersionFile);
-                await request.SendWebRequest();
-                if (request.result == UnityWebRequest.Result.Success)
-                {
-                    GameLog.LogDebug("Download VersionFile", "Success");
-                    GetVersion(persistentDataVersionFile, ref workflow.remoteVersion);
-                }
-            }
-            catch (Exception e)
-            {
-                GameLog.LogError("Download VersionFile", e.Message);
-            }
+            workflow.localVersion = await GetVersion(AppConst.StreamingAssetsPath + "version");
+            workflow.remoteVersion = await GetVersion(AppConst.RemoteAssetsPath + "version");
 
             if (workflow.localVersion > workflow.remoteVersion && Directory.Exists(AppConst.PersistentDataPath))
             {
@@ -59,18 +37,23 @@ namespace Scripts.Fire.Startup
             workflow.OnTaskFinished(this);
             return;
 
-            void GetVersion(string path, ref long version)
+            async UniTask<long> GetVersion(string url)
             {
-                if (File.Exists(path))
+                try
                 {
-                    var obj = JSONObject.Create(Encoding.UTF8.GetString(AESEncrypt.Decrypt(File.ReadAllBytes(path))));
-                    GameLog.LogDebug(path, obj.GetField("AppVersion").ToString());
-
-                    version = obj.GetField("AppVersion").stringValue.Split('.').Aggregate(0L, (res, s) => (res + int.Parse(s)) * 1000);
+                    using var request = UnityWebRequest.Get(url);
+                    await request.SendWebRequest();
+                    var obj = JSONObject.Create(Encoding.UTF8.GetString(AESEncrypt.Decrypt(request.downloadHandler.data)));
+                    GameLog.LogDebug(url, obj.GetField("AppVersion").ToString());
+                    long version = obj.GetField("AppVersion").stringValue.Split('.').Aggregate(0L, (res, s) => (res + int.Parse(s)) * 1000);
                     version += int.Parse(obj.GetField("ResVersion").ToString());
+                    return version;
                 }
-                else
-                    GameLog.LogWarning("File not found", path);
+                catch
+                {
+                    GameLog.LogWarning($"Failed to get version from {url}");
+                    return -1;
+                }
             }
         }
     }
