@@ -29,12 +29,12 @@ namespace Scripts.Fire.Startup
             mainAssembly = AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == "Assembly-CSharp");
 #else
             // / 实机
-            var ab = await AssetManager.Instance.LoadAssetBundle("scripts.ab");
+            var ab = await AssetManager.Instance.LoadAssetBundleAsync("scripts.ab");
             GameLog.LogWarning($"DLL AB\n{ZString.Join("\n", ab.GetAllAssetNames())}");
 
             // 加载热更新dll
             // 如果有多个热更新dll，按照依赖顺序加载，先加载被依赖的assembly
-            var dllBytes = ab.LoadAsset<TextAsset>("Assembly-CSharp.dll.bytes").bytes;
+            var dllBytes = (await ab.LoadAssetAsync<TextAsset>("Assembly-CSharp.dll.bytes") as TextAsset)!.bytes;
             mainAssembly = System.Reflection.Assembly.Load(dllBytes);
 
             // 为 AOT Assembly 补充元数据

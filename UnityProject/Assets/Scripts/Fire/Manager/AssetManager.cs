@@ -34,7 +34,7 @@ namespace Scripts.Fire.Manager
         /// </summary>
         /// <param name="abName"></param>
         /// <returns></returns>
-        private async UniTask<AssetBundle> LoadAssetBundleAsync(string abName)
+        public async UniTask<AssetBundle> LoadAssetBundleAsync(string abName)
         {
             if (loadedAssetBundles.TryGetValue(abName, out var bundle))
                 return bundle;
@@ -65,7 +65,7 @@ namespace Scripts.Fire.Manager
         /// </summary>
         /// <param name="abName"></param>
         /// <returns></returns>
-        private AssetBundle LoadAssetBundle(string abName)
+        public AssetBundle LoadAssetBundle(string abName)
         {
             if (loadedAssetBundles.TryGetValue(abName, out var bundle))
                 return bundle;
