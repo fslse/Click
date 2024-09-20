@@ -1,0 +1,376 @@
+[
+  {
+    "id": 1001,
+    "prizeItems": [
+      {
+        "cash": 4.99,
+        "num": 2
+      },
+      {
+        "cash": 6.99,
+        "num": 2
+      },
+      {
+        "cash": 9.99,
+        "num": 1
+      },
+      {
+        "cash": 19.99,
+        "num": 1
+      },
+      {
+        "cash": 25.99,
+        "num": 1
+      },
+      {
+        "cash": 49.99,
+        "num": 1
+      },
+      {
+        "cash": 99.99,
+        "num": 1
+      }
+    ],
+    "prizes": [
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 2
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 1
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 1
+          },
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 2
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 19.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 25.99,
+            "num": 1
+          }
+        ],
+        "weight": 5
+      }
+    ],
+    "extraPrizes": [
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 2
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 1
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 1
+          },
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 2
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 19.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 25.99,
+            "num": 1
+          }
+        ],
+        "weight": 5
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "prizeItems": [
+      {
+        "cash": 4.99,
+        "num": 2
+      },
+      {
+        "cash": 6.99,
+        "num": 2
+      },
+      {
+        "cash": 9.99,
+        "num": 2
+      },
+      {
+        "cash": 15.99,
+        "num": 2
+      },
+      {
+        "cash": 25.99,
+        "num": 1
+      },
+      {
+        "cash": 49.99,
+        "num": 1
+      },
+      {
+        "cash": 99.99,
+        "num": 1
+      }
+    ],
+    "prizes": [
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 2
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 1
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 1
+          },
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 2
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 19.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 25.99,
+            "num": 1
+          }
+        ],
+        "weight": 1
+      }
+    ],
+    "extraPrizes": [
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 2
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 4.99,
+            "num": 1
+          },
+          {
+            "cash": 6.99,
+            "num": 1
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 1
+          },
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 6.99,
+            "num": 2
+          }
+        ],
+        "weight": 15
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 9.99,
+            "num": 1
+          }
+        ],
+        "weight": 20
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 19.99,
+            "num": 1
+          }
+        ],
+        "weight": 10
+      },
+      {
+        "prizeItems": [
+          {
+            "cash": 25.99,
+            "num": 1
+          }
+        ],
+        "weight": 5
+      }
+    ]
+  }
+]
