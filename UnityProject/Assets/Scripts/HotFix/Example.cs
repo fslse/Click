@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Google.Protobuf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProtoTest;
@@ -93,6 +94,13 @@ namespace HotFix
                 Request = request,
                 Response = response
             };
+
+            var bytes = message.ToByteArray();
+            var msg = TestMessage.Parser.ParseFrom(bytes);
+
+            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
+                _ => { tmp.text = msg.Response.Power.ToString(); });
+            timer.Start();
         }
     }
 }
