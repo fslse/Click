@@ -3,6 +3,7 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoTest;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.UniTaskTimer;
@@ -45,6 +46,9 @@ namespace HotFix
             timer.Start();
 
             Init().Forget();
+
+            var realTimer = new RealTimer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), Test);
+            realTimer.Start();
         }
 
         private async UniTaskVoid Init()
@@ -58,6 +62,37 @@ namespace HotFix
 
             await UniTask.Delay(TimeSpan.FromSeconds(5));
             tmp1.text = ZString.Join("\n", tables.TbScratchCardReward.Get(1001).Prizes[1].PrizeItems[0].Cash);
+        }
+
+        private void Test(object state)
+        {
+            TestEnum testEnum = TestEnum.Unknown;
+            TestMessage.Types.TestMessage1.Types.TestEnum1 testEnum1 = TestMessage.Types.TestMessage1.Types.TestEnum1.Begin;
+            TestRequest request = new TestRequest
+            {
+                Id = 1,
+                Name = "Test",
+                Array = { "1", "2", "3", "4" },
+                Map = { { "1", 1 }, { "2", 2 } }
+            };
+
+            request.Array.Add("5");
+            request.Map.Add("3", 3);
+
+            if (request.HasId)
+            {
+                tmp.text = "success";
+            }
+
+            TestResponse response = new TestResponse
+            {
+                Power = 100
+            };
+            TestMessage message = new TestMessage
+            {
+                Request = request,
+                Response = response
+            };
         }
     }
 }
