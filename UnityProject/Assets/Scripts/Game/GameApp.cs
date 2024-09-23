@@ -2,7 +2,7 @@ using System;
 using Scripts.Fire.Log;
 using Scripts.Fire.Singleton;
 
-namespace HotFix
+namespace Game
 {
     public class GameApp : MonoSingleton<GameApp>
     {

@@ -25,16 +25,20 @@ MonoBehaviour:
   strippedAOTDllOutputRootDir: HybridCLRData/AssembliesPostIl2CppStrip
   patchAOTAssemblies:
   - Fire
+  - Google.Protobuf
+  - Luban.Runtime
   - StompyRobot.SRF
   - System.Core
   - System.Runtime.CompilerServices.Unsafe
   - System.Text.Json
+  - System
   - UniTask
   - UnityEngine.AndroidJNIModule
   - UnityEngine.AssetBundleModule
   - UnityEngine.CoreModule
   - Utf8StringInterpolation
   - ZLogger
+  - ZString
   - mscorlib
   outputLinkFile: HybridCLRGenerate/link.xml
   outputAOTGenericReferenceFile: HybridCLRGenerate/AOTGenericReferences.cs

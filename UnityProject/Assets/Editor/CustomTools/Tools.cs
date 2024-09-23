@@ -16,7 +16,7 @@ public static class Tools
                                       $"-c cs-newtonsoft-json " +
                                       $"-d json " +
                                       $"--conf {Application.dataPath}/AssetPackages/Config/DataTables/config.json " +
-                                      $"-x outputCodeDir={Application.dataPath}/Scripts/HotFix/Config " +
+                                      $"-x outputCodeDir={Application.dataPath}/Scripts/Game/Config " +
                                       $"-x outputDataDir={Application.dataPath}/AssetPackages/Config/Json";
 
         process.StartInfo.UseShellExecute = false;
@@ -45,7 +45,7 @@ public static class Tools
     [MenuItem("Tools/Customer Tools/Protocol Buffers", false, -888888)]
     private static void Gen1()
     {
-        string path = $"{Application.dataPath}/Scripts/HotFix/Protocol";
+        string path = $"{Application.dataPath}/Scripts/Game/Protocol";
         DirectoryInfo dir = Directory.CreateDirectory(path);
         FileInfo[] files = dir.GetFiles();
         foreach (var file in files)

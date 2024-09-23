@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1426087630
+CRC: 3956933558
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -12,6 +12,15 @@ AssetBundleManifest:
       Name: assetpackages_loading.ab
       Dependencies: {}
     Info_3:
+      Name: assetpackages_config_datatables.ab
+      Dependencies: {}
+    Info_4:
+      Name: assetpackages_config_json.ab
+      Dependencies: {}
+    Info_5:
+      Name: assetpackages_config_datatables_defines.ab
+      Dependencies: {}
+    Info_6:
       Name: scenes.ab
       Dependencies:
         Dependency_0: assetpackages_font.ab

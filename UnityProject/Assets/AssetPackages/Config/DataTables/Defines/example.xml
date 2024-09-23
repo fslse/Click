@@ -1,0 +1,63 @@
+<module name="">
+    <bean name="vector2" valueType="1" sep=",">
+        <var name="x" type="float"/>
+        <var name="y" type="float"/>
+    </bean>
+    <bean name="vector3" valueType="1" sep=",">
+        <var name="x" type="float"/>
+        <var name="y" type="float"/>
+        <var name="z" type="float"/>
+    </bean>
+    <bean name="vector4" valueType="1" sep=",">
+        <var name="x" type="float"/>
+        <var name="y" type="float"/>
+        <var name="z" type="float"/>
+        <var name="w" type="float"/>
+    </bean>
+
+    <bean name="Type1">
+        <var name="a" type="int"/>
+        <var name="b" type="string"/>
+        <var name="c" type="bool"/>
+    </bean>
+
+    <bean name="Type2">
+        <var name="a" type="int"/>
+        <var name="b" type="bool"/>
+        <var name="c" type="Type1"/>
+    </bean>
+
+    <bean name="Vec3" sep=",">
+        <var name="x" type="float"/>
+        <var name="y" type="float"/>
+        <var name="z" type="float"/>
+    </bean>
+
+    <bean name="Type3">
+        <var name="a" type="int"/>
+        <var name="b" type="bool"/>
+        <var name="c" type="Type1#sep=,"/>
+    </bean>
+
+    <bean name="Type4">
+        <var name="a" type="string"/>
+        <var name="c" type="Vec3"/>
+    </bean>
+
+    <bean name="Title0">
+        <var name="a" type="int"/>
+        <var name="b" type="bool"/>
+        <var name="c" type="Title1"/>
+    </bean>
+
+    <bean name="Title1">
+        <var name="a" type="int"/>
+        <var name="b" type="string"/>
+        <var name="c" type="Title2"/>
+    </bean>
+
+    <bean name="Title2">
+        <var name="a" type="int"/>
+        <var name="b" type="int"/>
+    </bean>
+</module>

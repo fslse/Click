@@ -9,7 +9,7 @@ using UnityEditor.SceneManagement;
 
 #endif
 
-namespace HotFix
+namespace Game
 {
     public class App
     {

@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ZLogger;
 
-namespace HotFix
+namespace Game
 {
     public class Example : MonoBehaviour
     {

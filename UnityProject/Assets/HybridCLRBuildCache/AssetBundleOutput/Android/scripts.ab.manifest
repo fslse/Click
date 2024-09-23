@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 461439360
+CRC: 94458512
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fe7f2ae6137b74b248da152a18340224
+    Hash: ac66f1a507cbca1e07a97c17dbdab2be
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: fe7f2ae6137b74b248da152a18340224
+    Hash: ac66f1a507cbca1e07a97c17dbdab2be
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -23,10 +23,14 @@ Assets:
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/System.Core.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.AndroidJNIModule.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/mscorlib.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Luban.Runtime.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Google.Protobuf.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/System.Runtime.CompilerServices.Unsafe.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Utf8StringInterpolation.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/System.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/Assembly-CSharp.dll.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UnityEngine.CoreModule.bytes
+- Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/ZString.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/ZLogger.bytes
 - Assets/HybridCLRBuildCache/AssetBundleSourceData/Android/UniTask.bytes
 Dependencies: []
