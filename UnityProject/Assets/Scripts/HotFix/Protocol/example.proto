@@ -1,0 +1,45 @@
+syntax = "proto3"; // 指定proto版本
+
+package ProtoTest; // 指定命名空间
+
+enum TestEnum {
+    UNKNOWN = 0; // 第一个必须是0
+    START = 1;
+    PAUSE = 2;
+    STOP = 4;
+    RESTART = 8;
+    Test = -1;
+    Test1 = 9;
+}
+
+message TestRequest {
+    optional uint32 id = 1;
+    string name = 2;
+
+    // Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.
+    sint64 value = 3; // 可能有负数 使用sint32
+
+    // 无符号
+    fixed32 v1 = 4; // Always four bytes. More efficient than uint32 if values are often greater than 2^28.
+    fixed64 v2 = 5; // Always eight bytes. More efficient than uint64 if values are often greater than 2^56.
+
+    // 有符号
+    sfixed32 v3 = 6; // Always four bytes.
+    sfixed64 v4 = 7; // Always eight bytes.
+
+    // 浮点数
+    float coin = 8;
+    double money = 9;
+
+    bool flag = 10;
+    bytes test = 11; // C# - ByteString
+
+    repeated string array = 12; // 数组
+    map<string, sint64> map = 13; // 字典
+
+    TestEnum testEnum = 14;
+}
+
+message TestResponse {
+    uint32 power = 1;
+}
