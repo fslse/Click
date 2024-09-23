@@ -95,7 +95,16 @@ namespace HotFix
                 Response = response
             };
 
+            GameLog.LogDebug(BitConverter.IsLittleEndian.ToString()); // 判断大小端
+
             var bytes = message.ToByteArray();
+
+            if (BitConverter.IsLittleEndian) // 小端转大端
+            {
+                Array.Reverse(bytes);
+            }
+
+            Array.Reverse(bytes); // 大端转小端
             var msg = TestMessage.Parser.ParseFrom(bytes);
 
             var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
