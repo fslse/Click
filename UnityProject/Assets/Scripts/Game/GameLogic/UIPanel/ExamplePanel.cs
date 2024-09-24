@@ -1,21 +1,22 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Framework.TimerModule;
+using Framework.UIModule;
 using Google.Protobuf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProtoTest;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
-using Scripts.Fire.UniTaskTimer;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ZLogger;
 
-namespace Game
+namespace Game.GameLogic.UIPanel
 {
-    public class Example : MonoBehaviour
+    public class ExamplePanel : UIPanelBase
     {
         [SerializeField] private TMP_Text tmp;
         [SerializeField] private TMP_Text tmp1;
@@ -25,6 +26,8 @@ namespace Game
 
         private void Start()
         {
+            GameLog.LogDebug($"{name} Start");
+
             GameLog.LogDebug("1");
             GameLog.LogDebug("2", "3");
 
