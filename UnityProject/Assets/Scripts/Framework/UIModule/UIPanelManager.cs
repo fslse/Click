@@ -24,11 +24,13 @@ namespace Framework.UIModule
         private Transform message;
         private Transform system;
         private Transform recycle;
-        private Transform[] layers;
+        private readonly Transform[] layers;
 
-        private ReactiveCollection<string> panelNames = new();
-        private Dictionary<string, object> panelParams = new();
-        private Dictionary<string, UIPanelBase> panelDict = new();
+        private readonly ReactiveCollection<string> panelNames = new(); // 待显示的Panel队列 仅用于Normal层 
+        private Dictionary<string, object> panelParams = new(); // 对应的参数
+
+        // Panel字典 针对所有层级
+        private readonly Dictionary<string, UIPanelBase> panelDict = new();
 
         // 构造函数
         private UIPanelManager()
@@ -66,6 +68,23 @@ namespace Framework.UIModule
 
         public UIPanelBase MainPanel { get; private set; }
 
+        public async UniTask<UIPanelBase> ShowPanel(string panelName, UIPanelLayer layer, object udata = null, Action<UIPanelBase> action = null)
+        {
+            if (layer == UIPanelLayer.Normal)
+            {
+                panelNames.Add(panelName);
+                panelParams[panelName] = udata;
+                if (panelNames.Count > 1)
+                    return null;
+            }
+
+            UIPanelBase uiPanelBase = await GetPanel(panelName, layer, action);
+            if (!uiPanelBase.gameObject.activeSelf)
+                uiPanelBase.Init(udata);
+            return uiPanelBase;
+        }
+
+
         public async UniTask<UIPanelBase> GetPanel(string panelName, UIPanelLayer layer, Action<UIPanelBase> action = null)
         {
             // 字典中不存在
@@ -80,12 +99,18 @@ namespace Framework.UIModule
                 panel.SetActive(false);
                 GameLog.LogDebug("UIPanelManager", $"{panelName} instantiated.");
                 uiPanelBase = panel.GetComponent<UIPanelBase>();
+                uiPanelBase.PanelLayer = layer;
+                panelDict.Add(panelName, uiPanelBase);
             }
             else
                 uiPanelBase.gameObject.transform.SetParent(layers[(int)layer], false);
 
             action?.Invoke(uiPanelBase);
             return uiPanelBase;
+        }
+
+        public void RecyclePanel(UIPanelBase uiPanelBase)
+        {
         }
     }
 }

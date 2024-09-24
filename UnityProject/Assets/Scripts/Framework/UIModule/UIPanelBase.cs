@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+using System.Diagnostics;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,7 @@ namespace Framework.UIModule
 {
     public abstract class UIPanelBase : MonoBehaviour
     {
-        public UIPanelLayer panelLayer;
+        public UIPanelLayer PanelLayer { get; set; }
         public string PanelName => name;
 
         protected CanvasGroup canvasGroup;
@@ -36,30 +36,54 @@ namespace Framework.UIModule
             }
         }
 
-        protected virtual void OnEnable()
-        {
-            OnEnableAsync().Forget();
-        }
+        #region 禁用部分生命周期函数
 
-        protected virtual async UniTaskVoid OnEnableAsync()
+        [Conditional("VERSION_DEV")]
+        private void OnEnable()
         {
-            await UniTask.NextFrame();
             GameLog.LogDebug($"{name} OnEnable");
-            canvasGroup.blocksRaycasts = true;
         }
 
-        protected virtual void OnDisable()
+        [Conditional("VERSION_DEV")]
+        private void Start()
         {
-            OnDisableAsync().Forget();
+            GameLog.LogDebug($"{name} Start");
         }
 
-        protected virtual async UniTaskVoid OnDisableAsync()
+        [Conditional("VERSION_DEV")]
+        private void OnDisable()
+        {
+            GameLog.LogDebug($"{name} OnDisable");
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public virtual void Init(object udata)
         {
             canvasGroup.blocksRaycasts = false;
+            gameObject.SetActive(true);
+
+            GameLog.LogDebug($"{name} Init");
+            // todo: 进入动画 回调OnStart
+
+            // 子类重写 初始化
+        }
+
+        /// <summary>
+        /// 动画结束后调用
+        /// </summary>
+        protected virtual void OnStart()
+        {
+            canvasGroup.blocksRaycasts = true;
         }
 
         protected virtual void OnClose()
         {
+            // todo: 退出动画 回调回收
+            UIPanelManager.Instance.RecyclePanel(this);
         }
     }
 
