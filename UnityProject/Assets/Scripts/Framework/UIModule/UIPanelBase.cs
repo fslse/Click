@@ -1,21 +1,161 @@
-using System.Diagnostics;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Framework.UIModule
 {
-    public abstract class UIPanelBase : MonoBehaviour
+    public abstract class UIPanelBehaviour : MonoBehaviour
     {
-        public UIPanelLayer PanelLayer { get; set; }
-        public string PanelName => name;
+        [Header("Base")] // / 
+        [SerializeField]
+        protected RectTransform rectTransform;
 
-        protected CanvasGroup canvasGroup;
-        protected Button closeButton;
+        [SerializeField] protected CanvasGroup canvasGroup;
+
+        protected enum AnimationType
+        {
+            None,
+            Fade,
+            Zoom,
+            Animator
+        }
+
+        [Header("Animation Settings")] // / 
+        [SerializeField]
+        protected Animator animator;
+
+        [SerializeField] protected AnimationType animationType = AnimationType.Fade;
+        [SerializeField] protected AnimationCurve animationCurve;
+        [SerializeField] protected float animationDuration = 0.25f;
 
         protected virtual void Awake()
         {
             GameLog.LogDebug($"{name} Awake");
+
+            rectTransform = transform as RectTransform;
+
+            canvasGroup = GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
+
+            animator = GetComponent<Animator>();
+        }
+
+        protected void Show()
+        {
+            switch (animationType)
+            {
+                case AnimationType.Fade:
+                    DisableAnimator();
+                    canvasGroup.alpha = 0;
+                    if (animationCurve.length == 0)
+                        canvasGroup.DOFade(1, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 1);
+                    else
+                        canvasGroup.DOFade(1, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 1);
+                    break;
+                case AnimationType.Zoom:
+                    DisableAnimator();
+                    rectTransform.localScale = Vector3.zero;
+                    if (animationCurve.length == 0)
+                        rectTransform.DOScale(Vector3.one, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 2);
+                    else
+                        rectTransform.DOScale(Vector3.one, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 2);
+                    break;
+                case AnimationType.Animator:
+                    EnableAnimator();
+                    break;
+                case AnimationType.None:
+                default:
+                    DisableAnimator();
+                    break;
+            }
+        }
+
+        private void EnableAnimator()
+        {
+            if (animator)
+                animator.enabled = true;
+        }
+
+        private void DisableAnimator()
+        {
+            if (animator)
+                animator.enabled = false;
+        }
+
+        protected async UniTask Hide(TweenCallback tweenCallback = null)
+        {
+            canvasGroup.blocksRaycasts = false;
+            switch (animationType)
+            {
+                case AnimationType.Fade when animationCurve.length == 0:
+                    canvasGroup.DOFade(0, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 3).OnComplete(tweenCallback);
+                    break;
+                case AnimationType.Fade:
+                    canvasGroup.DOFade(0, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 3).OnComplete(tweenCallback);
+                    break;
+                case AnimationType.Zoom when animationCurve.length == 0:
+                    rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 4).OnComplete(tweenCallback);
+                    break;
+                case AnimationType.Zoom:
+                    rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 4).OnComplete(tweenCallback);
+                    break;
+                case AnimationType.Animator:
+                    animator.Play("popup_close");
+                    await UniTask.WaitUntil(() =>
+                    {
+                        var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                        if (stateInfo.IsName("Base Layer.popup_close") == false)
+                            return true;
+                        return stateInfo.IsName("Base Layer.popup_close") && stateInfo.normalizedTime >= 0.999f;
+                    });
+                    tweenCallback?.Invoke();
+                    break;
+                case AnimationType.None:
+                default:
+                    tweenCallback?.Invoke();
+                    break;
+            }
+        }
+
+#if VERSION_DEV
+        private void OnEnable()
+        {
+            GameLog.LogDebug($"{name} OnEnable {Time.frameCount}");
+        }
+
+        private void Start()
+        {
+            GameLog.LogDebug($"{name} Start {Time.frameCount}");
+        }
+
+        private void OnDisable()
+        {
+            GameLog.LogDebug($"{name} OnDisable {Time.frameCount}");
+        }
+#endif
+    }
+
+    /// <summary>
+    /// UIPanel基类 不建议使用 OnEnable、Start、OnDisable
+    /// 初始化工作放在 Awake、Init
+    /// 游戏逻辑从 OnStart 开始
+    /// </summary>
+    public abstract class UIPanelBase : UIPanelBehaviour
+    {
+        public UIPanelLayer PanelLayer { get; set; }
+        public string PanelName => name;
+
+        [Header("UIBehaviour")] [SerializeField]
+        private Button closeButton;
+
+        protected override void Awake()
+        {
+            base.Awake();
 
             foreach (var button in GetComponentsInChildren<Button>())
             {
@@ -23,70 +163,64 @@ namespace Framework.UIModule
                     closeButton = button.GetComponent<Button>();
             }
 
-            canvasGroup = GetComponent<CanvasGroup>();
-
             if (closeButton != null)
             {
                 closeButton.onClick.AddListener(OnClose);
             }
+        }
 
-            if (canvasGroup == null)
+        public async UniTaskVoid OnEnter(object udata)
+        {
+            GameLog.LogDebug($"{name} OnEnter {Time.frameCount}");
+            canvasGroup.blocksRaycasts = false;
+            gameObject.SetActive(true);
+            Show();
+            Init(udata);
+
+            // 等待动画结束
+            switch (animationType)
             {
-                canvasGroup = gameObject.AddComponent<CanvasGroup>();
+                case AnimationType.Fade:
+                    await UniTask.WaitUntil(() => DOTween.IsTweening(int.MaxValue - 1) == false);
+                    break;
+                case AnimationType.Zoom:
+                    await UniTask.WaitUntil(() => DOTween.IsTweening(int.MaxValue - 2) == false);
+                    break;
+                case AnimationType.Animator:
+                    await UniTask.WaitUntil(() =>
+                    {
+                        var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                        if (stateInfo.IsName("Base Layer.popup_open") == false)
+                            return true;
+                        return stateInfo.IsName("Base Layer.popup_open") && stateInfo.normalizedTime >= 0.999f;
+                    });
+                    break;
+                case AnimationType.None:
+                default:
+                    break;
             }
+
+            canvasGroup.blocksRaycasts = true;
+            OnStart();
         }
-
-        #region 禁用部分生命周期函数
-
-        [Conditional("VERSION_DEV")]
-        private void OnEnable()
-        {
-            GameLog.LogDebug($"{name} OnEnable");
-        }
-
-        [Conditional("VERSION_DEV")]
-        private void Start()
-        {
-            GameLog.LogDebug($"{name} Start");
-        }
-
-        [Conditional("VERSION_DEV")]
-        private void OnDisable()
-        {
-            GameLog.LogDebug($"{name} OnDisable");
-        }
-
-        #endregion
 
         /// <summary>
         /// 初始化
         /// </summary>
-        public virtual void Init(object udata)
-        {
-            canvasGroup.blocksRaycasts = false;
-            gameObject.SetActive(true);
-
-            GameLog.LogDebug($"{name} Init");
-            // todo: 进入动画 回调OnStart
-
-            // 子类重写 初始化
-        }
+        protected abstract void Init(object udata);
 
         /// <summary>
         /// 动画结束后调用
         /// </summary>
         protected virtual void OnStart()
         {
-            canvasGroup.blocksRaycasts = true;
         }
 
         protected virtual void OnClose()
         {
-            // todo: 退出动画 回调回收
-            UIPanelManager.Instance.RecyclePanel(this);
+            Hide(() => UIPanelManager.Instance.RecyclePanel(this)).Forget();
         }
     }
-
 
     public enum UIPanelLayer
     {

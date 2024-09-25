@@ -24,48 +24,35 @@ namespace Game.GameLogic.UIPanel
         [SerializeField] private Image img;
         [SerializeField] private Image img1;
 
-        private void Start()
+        protected override void Init(object udata)
         {
-            GameLog.LogDebug($"{name} Start");
-
-            GameLog.LogDebug("1");
-            GameLog.LogDebug("2", "3");
-
-            GameLog.LogWarning("1");
-            GameLog.LogWarning("2", "3");
-
-            GameLog.LogError("1");
-            GameLog.LogError("2", "3");
-
-            const string world = "World";
-            GameLog.Logger.ZLogInformation($"Hello {world}!");
-
-            Debug.Log("Hello World!");
-            tmp.text = world;
-
-            tmp1.text = "Hot Fix";
-
-
-            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), _ => { tmp1.text = "Success"; });
-            timer.Start();
-
-            Init().Forget();
-
-            var realTimer = new RealTimer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), Test);
-            realTimer.Start();
+            InitAsync(udata).Forget();
         }
 
-        private async UniTaskVoid Init()
+        private async UniTaskVoid InitAsync(object udata)
         {
-            img.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/Game/panel_border_brown.png");
-            img1.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/Game/panel_border_grey_detail.png");
-
+            img.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/Game/UIPanel/ExamplePanel/panel_border_brown.png");
+            img1.sprite = AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/UIPanel/ExamplePanel/panel_border_grey_detail.png");
 
             const string gameConfDir = "Assets/AssetPackages/Config/Json";
             var tables = new cfg.Tables(file => JsonConvert.DeserializeObject(AssetManager.Instance.LoadAsset<TextAsset>($"{gameConfDir}/{file}.json").text) as JArray);
 
             await UniTask.Delay(TimeSpan.FromSeconds(5));
             tmp1.text = ZString.Join("\n", tables.TbScratchCardReward.Get(1001).Prizes[1].PrizeItems[0].Cash);
+        }
+
+        protected override void OnStart()
+        {
+            GameLog.Logger.ZLogInformation($"Hello World!");
+
+            tmp.text = rectTransform.position.ToString();
+            tmp1.text = PanelLayer.ToString();
+
+            var timer = new Timer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), _ => { tmp1.text = "Success"; });
+            timer.Start();
+
+            var realTimer = new RealTimer(TimeSpan.FromSeconds(3), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(), Test);
+            realTimer.Start();
         }
 
         private void Test(object state)

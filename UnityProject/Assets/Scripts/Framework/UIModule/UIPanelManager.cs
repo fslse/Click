@@ -11,41 +11,38 @@ using Object = UnityEngine.Object;
 
 namespace Framework.UIModule
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class UIPanelManager : Singleton<UIPanelManager>
     {
-        private GameObject uiRoot;
-        private Camera uiCamera;
-        private Canvas uiCanvas;
-
         // 层级节点
-        private Transform mainGame;
-        private Transform miniGame;
-        private Transform normal;
-        private Transform message;
-        private Transform system;
-        private Transform recycle;
         private readonly Transform[] layers;
 
         private readonly ReactiveCollection<string> panelNames = new(); // 待显示的Panel队列 仅用于Normal层 
-        private Dictionary<string, object> panelParams = new(); // 对应的参数
+        private readonly Dictionary<string, object> panelParams = new(); // 对应的参数
 
         // Panel字典 针对所有层级
         private readonly Dictionary<string, UIPanelBase> panelDict = new();
 
+        /// <summary>
+        /// UIPanel预制体路径
+        /// </summary>
+        private const string UIPanelPrefabsPath = "Assets/AssetPackages/Game/UIPanel";
+
+        public UIPanelBase MainPanel { get; private set; }
+
         // 构造函数
         private UIPanelManager()
         {
-            uiRoot = GameObject.Find("UIRoot");
-            uiCamera = uiRoot.transform.Find("UICamera").GetComponent<Camera>();
-            uiCanvas = uiRoot.transform.Find("UICanvas").GetComponent<Canvas>();
+            var uiRoot = GameObject.Find("UIRoot");
+            var uiCanvas = uiRoot.transform.Find("UICanvas").GetComponent<Canvas>();
 
             // /
-            mainGame = uiCanvas.transform.Find("MainGame");
-            miniGame = uiCanvas.transform.Find("MiniGame");
-            normal = uiCanvas.transform.Find("Normal");
-            message = uiCanvas.transform.Find("Message");
-            system = uiCanvas.transform.Find("System");
-            recycle = uiCanvas.transform.Find("Recycle");
+            var mainGame = uiCanvas.transform.Find("MainGame");
+            var miniGame = uiCanvas.transform.Find("MiniGame");
+            var normal = uiCanvas.transform.Find("Normal");
+            var message = uiCanvas.transform.Find("Message");
+            var system = uiCanvas.transform.Find("System");
+            var recycle = uiCanvas.transform.Find("Recycle");
 
             // 构建层级数组
             layers = new[] { mainGame, miniGame, normal, message, system, recycle };
@@ -55,20 +52,56 @@ namespace Framework.UIModule
             }
             else GameLog.LogDebug("UIPanelManager", "层级节点收集完成");
 
-            panelNames.ObserveRemove().Subscribe(async removedPanel =>
+            panelNames.ObserveRemove().Subscribe(removedPanelName => OnNext(removedPanelName).Forget());
+            return;
+
+            async UniTaskVoid OnNext(CollectionRemoveEvent<string> _)
             {
                 if (panelNames.Count <= 0)
                 {
                     return;
                 }
-            });
+
+                string panelName = panelNames[0];
+                if (string.IsNullOrEmpty(panelName))
+                    Debug.LogError("panelName is null or empty.");
+                else
+                {
+                    object udata = panelParams[panelName];
+                    await GetPanel(panelName, UIPanelLayer.Normal, uiPanelBase =>
+                    {
+                        if (uiPanelBase.gameObject.activeSelf == false)
+                            uiPanelBase.OnEnter(udata).Forget();
+                        else
+                            Debug.LogError($"{panelName} is already active.");
+                    });
+                }
+            }
         }
 
-        private const string UIPanelPrefabsPath = "Assets/AssetPackages/Game/UIPanel";
+        /// <summary>
+        /// 针对MainGame层，适用于有多个主玩法界面
+        /// </summary>
+        /// <param name="panelName"></param>
+        /// <param name="udata"></param>
+        /// <returns></returns>
+        public async UniTask<UIPanelBase> Jump2MainPanel(string panelName, object udata = null)
+        {
+            if (MainPanel)
+                RecyclePanel(MainPanel);
+            MainPanel = await GetPanel(panelName, UIPanelLayer.MainGame);
+            MainPanel.OnEnter(udata).Forget();
+            return MainPanel;
+        }
 
-        public UIPanelBase MainPanel { get; private set; }
-
-        public async UniTask<UIPanelBase> ShowPanel(string panelName, UIPanelLayer layer, object udata = null, Action<UIPanelBase> action = null)
+        /// <summary>
+        /// 通用方法，但对于Normal层的Panel做特殊处理，保证只有一个Normal层的Panel显示
+        /// </summary>
+        /// <param name="panelName"></param>
+        /// <param name="layer"></param>
+        /// <param name="udata"></param>
+        /// <returns>注意，对于Normal层的Panel，可能会返回null</returns>
+        public async UniTask<UIPanelBase> ShowPanel(string panelName, UIPanelLayer layer, object udata = null)
         {
             if (layer == UIPanelLayer.Normal)
             {
@@ -78,14 +111,28 @@ namespace Framework.UIModule
                     return null;
             }
 
-            UIPanelBase uiPanelBase = await GetPanel(panelName, layer, action);
+            UIPanelBase uiPanelBase = await GetPanel(panelName, layer);
             if (!uiPanelBase.gameObject.activeSelf)
-                uiPanelBase.Init(udata);
+                uiPanelBase.OnEnter(udata).Forget();
             return uiPanelBase;
         }
 
+        /// <summary>
+        /// 针对Normal层的Panel，立即显示，处于队列首位，这种情况下可能有多个Normal层的Panel同时显示
+        /// </summary>
+        /// <param name="panelName"></param>
+        /// <param name="udata"></param>
+        /// <returns></returns>
+        public async UniTask<UIPanelBase> ShowNormalPanel(string panelName, object udata = null)
+        {
+            panelNames.Insert(0, panelName);
+            panelParams[panelName] = udata;
+            UIPanelBase uiPanelBase = await GetPanel(panelName, UIPanelLayer.Normal);
+            uiPanelBase.OnEnter(udata).Forget();
+            return uiPanelBase;
+        }
 
-        public async UniTask<UIPanelBase> GetPanel(string panelName, UIPanelLayer layer, Action<UIPanelBase> action = null)
+        private async UniTask<UIPanelBase> GetPanel(string panelName, UIPanelLayer layer, Action<UIPanelBase> action = null)
         {
             // 字典中不存在
             if (!panelDict.TryGetValue(panelName, out var uiPanelBase))
@@ -109,8 +156,16 @@ namespace Framework.UIModule
             return uiPanelBase;
         }
 
+        /// <summary>
+        /// 回收
+        /// </summary>
+        /// <param name="uiPanelBase"></param>
         public void RecyclePanel(UIPanelBase uiPanelBase)
         {
+            uiPanelBase.gameObject.SetActive(false);
+            uiPanelBase.gameObject.transform.SetParent(layers[(int)UIPanelLayer.Recycle], false);
+            if (panelNames.Contains(uiPanelBase.PanelName))
+                panelNames.Remove(uiPanelBase.PanelName); // 删除第一个匹配项
         }
     }
 }
