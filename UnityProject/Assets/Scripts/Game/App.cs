@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
-
 #endif
 
 namespace Game
@@ -19,7 +18,8 @@ namespace Game
 
             GC.Collect();
 
-            // if (GameApp.Instance == null) ;
+            if (GameApp.Instance is null)
+                GameLog.LogError("GameApp.Instance is null");
 
 #if UNITY_EDITOR
             EditorSceneManager.LoadSceneInPlayMode("Assets/Scenes/Game.unity", new LoadSceneParameters(LoadSceneMode.Single));

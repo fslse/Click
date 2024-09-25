@@ -93,16 +93,16 @@ namespace Framework.UIModule
             switch (animationType)
             {
                 case AnimationType.Fade when animationCurve.length == 0:
-                    canvasGroup.DOFade(0, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 3).OnComplete(tweenCallback);
+                    await canvasGroup.DOFade(0, animationDuration).SetEase(Ease.Linear);
                     break;
                 case AnimationType.Fade:
-                    canvasGroup.DOFade(0, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 3).OnComplete(tweenCallback);
+                    await canvasGroup.DOFade(0, animationDuration).SetEase(animationCurve);
                     break;
                 case AnimationType.Zoom when animationCurve.length == 0:
-                    rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(Ease.Linear).SetId(int.MaxValue - 4).OnComplete(tweenCallback);
+                    await rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(Ease.Linear);
                     break;
                 case AnimationType.Zoom:
-                    rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(animationCurve).SetId(int.MaxValue - 4).OnComplete(tweenCallback);
+                    await rectTransform.DOScale(Vector3.zero, animationDuration).SetEase(animationCurve);
                     break;
                 case AnimationType.Animator:
                     animator.Play("popup_close");
@@ -113,29 +113,29 @@ namespace Framework.UIModule
                             return true;
                         return stateInfo.IsName("Base Layer.popup_close") && stateInfo.normalizedTime >= 0.999f;
                     });
-                    tweenCallback?.Invoke();
                     break;
                 case AnimationType.None:
                 default:
-                    tweenCallback?.Invoke();
                     break;
             }
+
+            tweenCallback?.Invoke();
         }
 
 #if VERSION_DEV
         private void OnEnable()
         {
-            GameLog.LogDebug($"{name} OnEnable {Time.frameCount}");
+            GameLog.LogDebug($"{name} OnEnable");
         }
 
         private void Start()
         {
-            GameLog.LogDebug($"{name} Start {Time.frameCount}");
+            GameLog.LogDebug($"{name} Start");
         }
 
         private void OnDisable()
         {
-            GameLog.LogDebug($"{name} OnDisable {Time.frameCount}");
+            GameLog.LogDebug($"{name} OnDisable");
         }
 #endif
     }

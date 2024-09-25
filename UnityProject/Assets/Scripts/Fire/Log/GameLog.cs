@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using UnityEngine;
 using ZLogger;
@@ -49,34 +50,39 @@ namespace Scripts.Fire.Log
             );
         }).CreateLogger<Log>();
 
+        [Conditional("VERSION_DEV")]
         public static void LogDebug(string message)
         {
-            Logger.ZLogDebug($"[GameLog] {message}");
+            message = message.Replace("\n", "</b></color>\n<color=white><b>");
+            Logger.ZLogDebug($"<color=white><b>[GameLog {Time.frameCount}] \u25ba - {message}</b></color>");
         }
 
+        [Conditional("VERSION_DEV")]
         public static void LogDebug(string key, string value)
         {
-            Logger.ZLogDebug($"[GameLog] {key}: {value}");
+            key = key.Replace("\n", "</b></color>\n<color=white><b>");
+            value = value.Replace("\n", "</b></color>\n<color=white><b>");
+            Logger.ZLogDebug($"<color=white><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
         public static void LogWarning(string message)
         {
-            Logger.ZLogWarning($"[GameLog] {message}");
+            Logger.ZLogWarning($"<color=yellow><b>[GameLog {Time.frameCount}] \u25ba - {message}</b></color>");
         }
 
         public static void LogWarning(string key, string value)
         {
-            Logger.ZLogWarning($"[GameLog] {key}: {value}");
+            Logger.ZLogWarning($"<color=yellow><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
         public static void LogError(string message)
         {
-            Logger.ZLogError($"[GameLog] {message}");
+            Logger.ZLogError($"<color=red><b>[GameLog {Time.frameCount}] \u25ba - {message}</b></color>");
         }
 
         public static void LogError(string key, string value)
         {
-            Logger.ZLogError($"[GameLog] {key}: {value}");
+            Logger.ZLogError($"<color=red><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
         public static void HandleLog(string logString, string stackTrace, LogType type)
