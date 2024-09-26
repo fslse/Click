@@ -62,11 +62,11 @@ namespace Scripts.Fire.Startup
             // 热更新程序集入口
             try
             {
-                mainAssembly!.GetType("Game.App")!.GetMethod("Main")!.Invoke(null, null);
+                mainAssembly!.GetType("Framework.App")!.GetMethod("Main")!.Invoke(null, null);
             }
             catch (Exception e)
             {
-                GameLog.LogError("Failed to run Game.App.Main", e.Message);
+                GameLog.LogError("Failed to run Framework.App.Main", e.Message);
             }
         }
     }

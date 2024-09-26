@@ -4,7 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Framework.TimerModule
+namespace Framework.TimeModule
 {
     public sealed class Timer : PlayerLoopTimer
     {

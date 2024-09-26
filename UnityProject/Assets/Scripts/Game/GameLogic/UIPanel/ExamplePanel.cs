@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Framework.TimerModule;
+using Framework.TimeModule;
 using Framework.UIModule;
 using Google.Protobuf;
 using Newtonsoft.Json;

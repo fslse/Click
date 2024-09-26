@@ -34,12 +34,12 @@ namespace Scripts.Fire
         {
             GameLog.LogDebug("GameManager Start");
 
-            // 构建启动流程
+            // 构建启动流程 40% + 20% + 40% 最后40%在GameApp中 
             var workflow = new Workflow();
-            workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 20));
-            workflow.AddTask(new DownloadAssets(workflow, "DownloadAssets", 30));
-            workflow.AddTask(new Preload(workflow, "Preload", 20));
-            workflow.AddTask(new LoadDLL(workflow, "LoadDLL", 30));
+            workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 5));
+            workflow.AddTask(new DownloadAssets(workflow, "DownloadAssets", 35));
+            workflow.AddTask(new Preload(workflow, "Preload", 5));
+            workflow.AddTask(new LoadDLL(workflow, "LoadDLL", 15));
             workflow.StartFlow();
         }
 

@@ -50,11 +50,11 @@ namespace Scripts.Fire
                 {
                     slider.value = x;
                     text.text = $"{x * 100:F1}%";
-                }, target, 1);
+                }, target, 0.5f);
 
                 tween.OnComplete(() =>
                 {
-                    if (target >= 99.99f)
+                    if (target >= 0.99f)
                     {
                         GameLog.LogWarning("HotFixPresenter Progress Complete");
                     }

@@ -141,9 +141,13 @@ namespace Framework.UIModule
     }
 
     /// <summary>
-    /// UIPanel基类 不建议使用 OnEnable、Start、OnDisable
-    /// 初始化工作放在 Awake、Init
-    /// 游戏逻辑从 OnStart 开始
+    /// UIPanel基类
+    /// <para></para>
+    /// --- 不建议使用 OnEnable、Start、OnDisable
+    /// <para></para>
+    /// --- 初始化工作放在 Awake、Init
+    /// <para></para>
+    /// --- 游戏逻辑从 OnStart 开始
     /// </summary>
     public abstract class UIPanelBase : UIPanelBehaviour
     {
@@ -171,7 +175,7 @@ namespace Framework.UIModule
 
         public async UniTaskVoid OnEnter(object udata)
         {
-            GameLog.LogDebug($"{name} OnEnter {Time.frameCount}");
+            GameLog.LogDebug($"{name} OnEnter");
             canvasGroup.blocksRaycasts = false;
             gameObject.SetActive(true);
             Show();
@@ -201,6 +205,7 @@ namespace Framework.UIModule
             }
 
             canvasGroup.blocksRaycasts = true;
+            GameLog.LogDebug($"{name} OnStart");
             OnStart();
         }
 
@@ -210,11 +215,9 @@ namespace Framework.UIModule
         protected abstract void Init(object udata);
 
         /// <summary>
-        /// 动画结束后调用
+        /// 初始化完成且动画结束后调用
         /// </summary>
-        protected virtual void OnStart()
-        {
-        }
+        protected abstract void OnStart();
 
         protected virtual void OnClose()
         {
@@ -225,7 +228,7 @@ namespace Framework.UIModule
     public enum UIPanelLayer
     {
         /// <summary>
-        /// Home、大厅、纯UI游戏主玩法界面等
+        /// 主玩法UI或场景的一部分
         /// </summary>
         MainGame,
 

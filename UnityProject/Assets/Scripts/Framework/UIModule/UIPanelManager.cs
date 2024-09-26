@@ -14,6 +14,10 @@ namespace Framework.UIModule
     // ReSharper disable once ClassNeverInstantiated.Global
     public class UIPanelManager : Singleton<UIPanelManager>
     {
+        public GameObject UIRoot { get; private set; }
+        public Camera UICamera { get; private set; }
+        public Canvas UICanvas { get; private set; }
+
         // 层级节点
         private readonly Transform[] layers;
 
@@ -26,23 +30,24 @@ namespace Framework.UIModule
         /// <summary>
         /// UIPanel预制体路径
         /// </summary>
-        private const string UIPanelPrefabsPath = "Assets/AssetPackages/Game/UIPanel";
+        private const string UIPanelPrefabsPath = "Assets/AssetPackages/UIPanel";
 
         public UIPanelBase MainPanel { get; private set; }
 
         // 构造函数
         private UIPanelManager()
         {
-            var uiRoot = GameObject.Find("UIRoot");
-            var uiCanvas = uiRoot.transform.Find("UICanvas").GetComponent<Canvas>();
+            UIRoot = GameObject.Find("UIRoot");
+            UICamera = UIRoot.transform.Find("UICamera").GetComponent<Camera>();
+            UICanvas = UIRoot.transform.Find("UICanvas").GetComponent<Canvas>();
 
             // /
-            var mainGame = uiCanvas.transform.Find("MainGame");
-            var miniGame = uiCanvas.transform.Find("MiniGame");
-            var normal = uiCanvas.transform.Find("Normal");
-            var message = uiCanvas.transform.Find("Message");
-            var system = uiCanvas.transform.Find("System");
-            var recycle = uiCanvas.transform.Find("Recycle");
+            var mainGame = UICanvas.transform.Find("MainGame");
+            var miniGame = UICanvas.transform.Find("MiniGame");
+            var normal = UICanvas.transform.Find("Normal");
+            var message = UICanvas.transform.Find("Message");
+            var system = UICanvas.transform.Find("System");
+            var recycle = UICanvas.transform.Find("Recycle");
 
             // 构建层级数组
             layers = new[] { mainGame, miniGame, normal, message, system, recycle };

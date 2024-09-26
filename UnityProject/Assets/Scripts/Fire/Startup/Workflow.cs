@@ -22,7 +22,7 @@ namespace Scripts.Fire.Startup
             int totalPower = tasks.Sum(task => task.power);
             foreach (var task in tasks)
             {
-                task.percent = task.power * 100f / totalPower;
+                task.percent = task.power * 100f / totalPower * 0.6f; // 基础启动流程仅占进度条的60%
             }
 
             DoNextTask();
