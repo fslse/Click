@@ -54,7 +54,7 @@ namespace Framework
                 });
             }
 
-            await UniTask.Delay(400);
+            await UniTask.Delay(480);
             GameLog.LogWarning("GC");
             GC.Collect();
             GameLog.LogWarning("切场景");

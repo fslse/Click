@@ -1,5 +1,3 @@
-using UniRx;
-
 namespace Scripts.Fire.Startup
 {
     public abstract class StartupTask

@@ -175,8 +175,10 @@ namespace Framework.UIModule
 
         public async UniTaskVoid OnEnter(object udata)
         {
-            GameLog.LogDebug($"{name} OnEnter");
+            GameLog.LogDebug($"{name} OnEnter1");
             canvasGroup.blocksRaycasts = false;
+            await UniTask.NextFrame(PlayerLoopTiming.Initialization);
+            GameLog.LogDebug($"{name} OnEnter2");
             gameObject.SetActive(true);
             Show();
             Init(udata);
