@@ -65,32 +65,41 @@ namespace Scripts.Fire.Log
             Logger.ZLogDebug($"<color=white><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
+        [Conditional("VERSION_DEV")]
         public static void LogWarning(string message)
         {
+            message = message.Replace("\n", "</b></color>\n<color=yellow><b>");
             Logger.ZLogWarning($"<color=yellow><b>[GameLog {Time.frameCount}] \u25ba - {message}</b></color>");
         }
 
+        [Conditional("VERSION_DEV")]
         public static void LogWarning(string key, string value)
         {
+            key = key.Replace("\n", "</b></color>\n<color=yellow><b>");
+            value = value.Replace("\n", "</b></color>\n<color=yellow><b>");
             Logger.ZLogWarning($"<color=yellow><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
+        [Conditional("VERSION_DEV")]
         public static void LogError(string message)
         {
+            message = message.Replace("\n", "</b></color>\n<color=red><b>");
             Logger.ZLogError($"<color=red><b>[GameLog {Time.frameCount}] \u25ba - {message}</b></color>");
         }
 
+        [Conditional("VERSION_DEV")]
         public static void LogError(string key, string value)
         {
+            key = key.Replace("\n", "</b></color>\n<color=red><b>");
+            value = value.Replace("\n", "</b></color>\n<color=red><b>");
             Logger.ZLogError($"<color=red><b>[GameLog {Time.frameCount}] \u25ba - {key}: {value}</b></color>");
         }
 
         public static void HandleLog(string logString, string stackTrace, LogType type)
         {
-#if VERSION_RELEASE
-            if (type == LogType.Log) return;
-#endif
+#if VERSION_DEV
             RuntimeLogger.ZLogTrace($"{type}\n{logString}\n{stackTrace}");
+#endif
         }
     }
 }

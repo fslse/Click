@@ -31,8 +31,8 @@ namespace Game.GameLogic.UIPanel
 
         private async UniTaskVoid InitAsync(object udata)
         {
-            img.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/Game/UIPanel/ExamplePanel/Texture/panel_border_brown.png");
-            img1.sprite = AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/Game/UIPanel/ExamplePanel/Texture/panel_border_grey_detail.png");
+            img.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/UIPanel/ExamplePanel/Texture/panel_border_brown.png");
+            img1.sprite = AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/UIPanel/ExamplePanel/Texture/panel_border_grey_detail.png");
 
             const string gameConfDir = "Assets/AssetPackages/Config/Json";
             var tables = new cfg.Tables(file => JsonConvert.DeserializeObject(AssetManager.Instance.LoadAsset<TextAsset>($"{gameConfDir}/{file}.json").text) as JArray);

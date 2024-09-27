@@ -42,7 +42,7 @@ namespace Scripts.Fire.Startup
             {
                 try
                 {
-                    dllBytes = ab.LoadAsset<TextAsset>(assembly.Replace("dll", "bytes")).bytes;
+                    dllBytes = (await ab.LoadAssetAsync<TextAsset>(assembly.Replace("dll", "bytes")) as TextAsset)!.bytes;
                 }
                 catch (Exception e)
                 {

@@ -28,23 +28,23 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// {{ AOT generic types
 	// Cysharp.Text.Utf16ValueStringBuilder.TryFormat<float>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelBehaviour.<Hide>d__11>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<GetPanel>d__25,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<ShowPanel>d__23,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<GetPanel>d__29,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.UIModule.UIPanelManager.<ShowPanel>d__27,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelBehaviour.<Hide>d__11>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<GetPanel>d__25,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<ShowPanel>d__23,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<GetPanel>d__29,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.UIModule.UIPanelManager.<ShowPanel>d__27,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.GameApp.<Init>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.UIModule.UIPanelBase.<OnEnter>d__8>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.GameApp.<Init>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.UIModule.UIPanelBase.<OnEnter>d__8>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5>
 	// Cysharp.Threading.Tasks.CompilerServices.IStateMachineRunnerPromise<object>
 	// Cysharp.Threading.Tasks.ITaskPoolNode<object>
@@ -805,25 +805,25 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// string Cysharp.Text.ZString.JoinInternal<float>(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<float>)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter,Framework.UIModule.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter&,Framework.UIModule.UIPanelBehaviour.<Hide>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.UIModule.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.UIModule.UIPanelBehaviour.<Hide>d__11&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<GetPanel>d__25>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<GetPanel>d__25&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<ShowPanel>d__23>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<ShowPanel>d__23&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<GetPanel>d__29>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<GetPanel>d__29&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<ShowPanel>d__27>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<ShowPanel>d__27&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.Start<Framework.UIModule.UIPanelBehaviour.<Hide>d__11>(Framework.UIModule.UIPanelBehaviour.<Hide>d__11&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<GetPanel>d__25>(Framework.UIModule.UIPanelManager.<GetPanel>d__25&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22>(Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__22&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24>(Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__24&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<ShowPanel>d__23>(Framework.UIModule.UIPanelManager.<ShowPanel>d__23&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<GetPanel>d__29>(Framework.UIModule.UIPanelManager.<GetPanel>d__29&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26>(Framework.UIModule.UIPanelManager.<Jump2MainPanel>d__26&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28>(Framework.UIModule.UIPanelManager.<ShowNormalPanel>d__28&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.UIModule.UIPanelManager.<ShowPanel>d__27>(Framework.UIModule.UIPanelManager.<ShowPanel>d__27&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Scripts.Fire.Manager.AssetManager.<LoadAssetAsync>d__6<object>>(Scripts.Fire.Manager.AssetManager.<LoadAssetAsync>d__6<object>&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.GameApp.<Init>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.GameApp.<Init>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.UIModule.UIPanelBase.<OnEnter>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.UIModule.UIPanelBase.<OnEnter>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.GameApp.<Init>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.GameApp.<Init>d__2&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.GameApp.<Init>d__2>(Framework.GameApp.<Init>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.UIModule.UIPanelBase.<OnEnter>d__8>(Framework.UIModule.UIPanelBase.<OnEnter>d__8&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d>(Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|21_2>d&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d>(Framework.UIModule.UIPanelManager.<<-ctor>g__OnNext|25_2>d&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5>(Game.GameLogic.UIPanel.ExamplePanel.<InitAsync>d__5&)
 		// Cysharp.Threading.Tasks.Internal.StateTuple<Cysharp.Threading.Tasks.UniTask.Awaiter<object>> Cysharp.Threading.Tasks.Internal.StateTuple.Create<Cysharp.Threading.Tasks.UniTask.Awaiter<object>>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>)
 		// System.Void Cysharp.Threading.Tasks.UniTaskExtensions.Forget<object>(Cysharp.Threading.Tasks.UniTask<object>)

@@ -107,7 +107,7 @@ namespace Scripts.Fire.Manager
 
             if (!loadedAssets.TryGetValue(path, out var asset))
             {
-                asset = await ab.LoadAssetAsync(path);
+                asset = await ab.LoadAssetAsync<T>(path);
                 if (asset == null)
                     throw new Exception(path);
                 loadedAssets.Add(path, asset);
