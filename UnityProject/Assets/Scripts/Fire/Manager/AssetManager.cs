@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Scripts.Fire.Log;
@@ -37,7 +36,7 @@ namespace Scripts.Fire.Manager
         /// <returns></returns>
         public async UniTask<AssetBundle> LoadAssetBundleAsync(string abName)
         {
-            // Warning: 在异步加载过程中发起对同一个包的新的异步加载请求
+            // Warning: 此处要避免 在异步加载过程中发起对同一个包的新的异步加载请求
             if (!loadedAssetBundles.TryAdd(abName, null)) // 已完成加载或正在加载
             {
                 await UniTask.WaitUntil(() => loadedAssetBundles[abName] != null);
