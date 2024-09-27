@@ -175,10 +175,9 @@ namespace Framework.UIModule
 
         public async UniTaskVoid OnEnter(object udata)
         {
-            GameLog.LogDebug($"{name} OnEnter1");
+            GameLog.LogDebug($"{name} OnEnter");
             canvasGroup.blocksRaycasts = false;
-            await UniTask.NextFrame(PlayerLoopTiming.Initialization);
-            GameLog.LogDebug($"{name} OnEnter2");
+            UIPanelManager.Instance.UIMask.raycastTarget = true;
             gameObject.SetActive(true);
             Show();
             Init(udata);
@@ -223,7 +222,11 @@ namespace Framework.UIModule
 
         protected virtual void OnClose()
         {
-            Hide(() => UIPanelManager.Instance.RecyclePanel(this)).Forget();
+            Hide(() =>
+            {
+                UIPanelManager.Instance.RecyclePanel(this);
+                UIPanelManager.Instance.UIMask.raycastTarget = false;
+            }).Forget();
         }
     }
 

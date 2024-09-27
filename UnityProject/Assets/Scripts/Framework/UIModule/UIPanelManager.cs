@@ -7,6 +7,7 @@ using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace Framework.UIModule
@@ -17,6 +18,7 @@ namespace Framework.UIModule
         public GameObject UIRoot { get; private set; }
         public Camera UICamera { get; private set; }
         public Canvas UICanvas { get; private set; }
+        public Image UIMask { get; set; }
 
         // 层级节点
         private readonly Transform[] layers;
@@ -40,6 +42,7 @@ namespace Framework.UIModule
             UIRoot = GameObject.Find("UIRoot");
             UICamera = UIRoot.transform.Find("UICamera").GetComponent<Camera>();
             UICanvas = UIRoot.transform.Find("UICanvas").GetComponent<Canvas>();
+            UIMask = UICanvas.transform.Find("--- UIMask ---").GetComponent<Image>();
 
             // /
             var mainGame = UICanvas.transform.Find("MainGame");
