@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Scripts.Fire.Log;
@@ -36,8 +37,12 @@ namespace Scripts.Fire.Manager
         /// <returns></returns>
         public async UniTask<AssetBundle> LoadAssetBundleAsync(string abName)
         {
-            if (loadedAssetBundles.TryGetValue(abName, out var bundle))
-                return bundle;
+            // Warning: 在异步加载过程中发起对同一个包的新的异步加载请求
+            if (!loadedAssetBundles.TryAdd(abName, null)) // 已完成加载或正在加载
+            {
+                await UniTask.WaitUntil(() => loadedAssetBundles[abName] != null);
+                return loadedAssetBundles[abName];
+            }
 
             string path = AppConst.PersistentDataPath + abName;
             if (!File.Exists(path)) // PersistentData目录不存在该包
@@ -49,7 +54,7 @@ namespace Scripts.Fire.Manager
 
             // 加载目标包
             AssetBundle ab = await AssetBundle.LoadFromFileAsync(path);
-            loadedAssetBundles.Add(abName, ab);
+            loadedAssetBundles[abName] = ab;
 
             // 加载依赖包
             string[] dependencies = abManifest.GetAllDependencies(abName);
@@ -62,13 +67,20 @@ namespace Scripts.Fire.Manager
 
         /// <summary>
         /// 同步加载AB包
+        /// <para></para>
+        /// Loading场景初始化游戏配置时使用，最好不要在其它地方使用
         /// </summary>
         /// <param name="abName"></param>
         /// <returns></returns>
         public AssetBundle LoadAssetBundle(string abName)
         {
+            // Warning: 该包可能正处于异步加载过程中
             if (loadedAssetBundles.TryGetValue(abName, out var bundle))
-                return bundle;
+            {
+                if (!bundle) // 正在异步加载
+                    GameLog.LogError("AssetManager.Instance.LoadAssetBundle", $"{abName} is loading asynchronously");
+                else return bundle;
+            }
 
             string path = AppConst.PersistentDataPath + abName;
             if (!File.Exists(path)) // PersistentData目录不存在该包
