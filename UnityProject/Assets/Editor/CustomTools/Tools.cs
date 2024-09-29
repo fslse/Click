@@ -15,7 +15,7 @@ public static class Tools
                                       $"-t client " +
                                       $"-c cs-newtonsoft-json " +
                                       $"-d json " +
-                                      $"--conf {Application.dataPath}/AssetPackages/Config/DataTables/config.json " +
+                                      $"--conf {Application.dataPath}/../Luban-Tools/DataTables/config.json " +
                                       $"-x outputCodeDir={Application.dataPath}/Scripts/Game/Config " +
                                       $"-x outputDataDir={Application.dataPath}/AssetPackages/Config/Json";
 
