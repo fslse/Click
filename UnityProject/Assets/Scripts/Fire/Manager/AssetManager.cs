@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using Scripts.Fire.Log;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
 namespace Scripts.Fire.Manager
@@ -107,10 +108,12 @@ namespace Scripts.Fire.Manager
         /// <param name="path"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async UniTask<T> LoadAssetAsync<T>(string path) where T : Object
+        public async UniTask<T> LoadAssetAsync<T>(string path, UnityAction<T> action = null) where T : Object
         {
 #if UNITY_EDITOR
-            return AssetDatabase.LoadAssetAtPath<T>(path);
+            T asset = AssetDatabase.LoadAssetAtPath<T>(path);
+            action?.Invoke(asset);
+            return asset;
 #else
             var bundleName = GetAssetBundleName(path);
             AssetBundle ab = await LoadAssetBundleAsync(bundleName);
@@ -123,6 +126,7 @@ namespace Scripts.Fire.Manager
                 loadedAssets.Add(path, asset);
             }
 
+            action?.Invoke(asset as T);
             return (asset as T)!;
 #endif
         }

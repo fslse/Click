@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
@@ -12,13 +13,13 @@ using Object = UnityEngine.Object;
 
 namespace Framework.UIModule
 {
-    // ReSharper disable once ClassNeverInstantiated.Global
+    [UsedImplicitly]
     public class UIPanelManager : Singleton<UIPanelManager>
     {
-        public GameObject UIRoot { get; private set; }
-        public Camera UICamera { get; private set; }
-        public Canvas UICanvas { get; private set; }
-        public Image UIMask { get; set; }
+        public GameObject UIRoot { get; }
+        public Camera UICamera { get; }
+        public Canvas UICanvas { get; }
+        public Image UIMask { get; }
 
         // 层级节点
         private readonly Transform[] layers;
