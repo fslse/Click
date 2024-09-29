@@ -12,9 +12,8 @@ namespace Scripts.Fire.Singleton
             {
                 if (instance) return instance;
                 GameObject go = new GameObject(typeof(T).Name);
-                instance = go.AddComponent<T>();
-                DontDestroyOnLoad(go);
-                return instance;
+                if (!go.transform.parent) DontDestroyOnLoad(go); // DontDestroyOnLoad方法仅对根节点有效
+                return instance = go.AddComponent<T>();
             }
         }
     }

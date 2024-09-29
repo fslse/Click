@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     /// <summary>
     /// 音频轨道组配置。
@@ -34,12 +34,5 @@ namespace Framework.AudioModule
         public float Volume => volume;
 
         public int AgentHelperCount => agentHelperCount;
-    }
-
-    [CreateAssetMenu(menuName = "Custom/AudioGroup", fileName = "AudioGroupConfigAsset", order = -1)]
-    public class AudioGroupConfigAsset : ScriptableObject
-    {
-        [SerializeField] private AudioGroupConfig[] audioGroupConfigs;
-        public AudioGroupConfig[] AudioGroupConfigs => audioGroupConfigs;
     }
 }

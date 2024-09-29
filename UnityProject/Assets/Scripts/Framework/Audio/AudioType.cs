@@ -1,4 +1,4 @@
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     public enum AudioType
     {

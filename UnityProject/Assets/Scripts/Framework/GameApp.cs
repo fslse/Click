@@ -1,5 +1,7 @@
 using System;
+using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Framework.Audio;
 using Framework.UIModule;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
@@ -31,7 +33,13 @@ namespace Framework
             // UIPanelManager 初始化
             DontDestroyOnLoad(UIPanelManager.Instance.UIRoot);
 
-            // 初始化完成 30%
+            // GameApp下模块初始化
+
+            // AudioModule 初始化
+            if (!AudioModule.Instance.InstanceRoot.parent)
+                DontDestroyOnLoad(AudioModule.Instance.InstanceRoot.gameObject);
+
+            // 初始化完成 走30%
             UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
             {
                 Value = 0.9f

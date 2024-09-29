@@ -8,7 +8,7 @@ using Scripts.Fire.Singleton;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     /// <summary>
     /// 音效管理，为游戏提供统一的音效播放接口。
@@ -17,21 +17,19 @@ namespace Framework.AudioModule
     [UsedImplicitly]
     public class AudioModule : Singleton<AudioModule>
     {
-        private AudioMixer audioMixer;
-        private AudioGroupConfig[] audioGroupConfigs;
-
-        private float volume = 1f;
-        private bool enable = true;
+        private readonly AudioMixer audioMixer;
         private readonly AudioCategory[] audioCategories = new AudioCategory[(int)AudioType.Max];
         private readonly float[] categoriesVolume = new float[(int)AudioType.Max];
-        private bool unityAudioDisabled;
+        private readonly bool unityAudioDisabled;
+        private float volume = 1f;
+        private bool enable = true;
 
         #region Public Propreties
 
         /// <summary>
         /// 实例对象根节点。
         /// </summary>
-        public Transform InstanceRoot { get; private set; }
+        public Transform InstanceRoot { get; }
 
         /// <summary>
         /// 总音量控制。
@@ -230,36 +228,18 @@ namespace Framework.AudioModule
 
         #endregion
 
-        /// <summary>
-        /// 初始化音频模块。
-        /// </summary>
-        /// <param name="groupConfigs">音频轨道组配置。</param>
-        /// <param name="instanceRoot">实例化根节点。</param>
-        /// <param name="mixer">音频混响器。</param>
-        public void Initialize(AudioGroupConfig[] groupConfigs, Transform instanceRoot = null, AudioMixer mixer = null)
+        private AudioModule()
         {
-            if (InstanceRoot == null)
-            {
-                InstanceRoot = instanceRoot;
-            }
+            InstanceRoot = new GameObject("Audio").transform;
+            InstanceRoot.SetParent(GameApp.Instance.transform);
+            InstanceRoot.localPosition = Vector3.zero;
 
-            if (groupConfigs == null)
-            {
-                GameLog.LogError("AudioGroupConfig[] is invalid.");
-            }
+            audioMixer = AssetManager.Instance.LoadAsset<AudioMixer>("Assets/AssetPackages/Audio/AudioMixer.mixer");
+            var audioGroupConfigs = AssetManager.Instance.LoadAsset<AudioGroupConfigAsset>("Assets/AssetPackages/Audio/AudioGroupConfigAsset.asset").AudioGroupConfigs;
 
-            audioGroupConfigs = groupConfigs;
-
-            if (InstanceRoot == null)
-            {
-                InstanceRoot = new GameObject("Audio").transform;
-                InstanceRoot.SetParent(GameApp.Instance.transform);
-                InstanceRoot.localPosition = Vector3.zero;
-            }
-
+#if UNITY_EDITOR
             try
             {
-#if UNITY_EDITOR
                 TypeInfo typeInfo = typeof(AudioSettings).GetTypeInfo();
                 PropertyInfo propertyInfo = typeInfo.GetDeclaredProperty("unityAudioDisabled");
                 unityAudioDisabled = (bool)propertyInfo.GetValue(null);
@@ -267,28 +247,18 @@ namespace Framework.AudioModule
                 {
                     return;
                 }
-#endif
             }
             catch (Exception e)
             {
                 GameLog.LogError(e.ToString());
             }
-
-            if (mixer != null)
-            {
-                audioMixer = mixer;
-            }
-
-            if (audioMixer == null)
-            {
-                audioMixer = AssetManager.Instance.LoadAsset<AudioMixer>("AudioMixer");
-            }
+#endif
 
             for (int index = 0; index < (int)AudioType.Max; ++index)
             {
                 AudioType audioType = (AudioType)index;
                 AudioGroupConfig audioGroupConfig = audioGroupConfigs!.First(a => a.audioType == audioType);
-                audioCategories[index] = new AudioCategory(audioGroupConfig.AgentHelperCount, audioMixer, audioGroupConfig);
+                audioCategories[index] = new AudioCategory(audioGroupConfig.AgentHelperCount, InstanceRoot, audioMixer, audioGroupConfig);
                 categoriesVolume[index] = audioGroupConfig.Volume;
             }
 

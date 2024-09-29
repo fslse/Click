@@ -4,7 +4,7 @@ using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     public class AudioCategory
     {
@@ -53,10 +53,11 @@ namespace Framework.AudioModule
         /// <summary>
         /// 音频轨道构造函数。
         /// </summary>
-        /// <param name="maxChannel">最大Channel。</param>
+        /// <param name="channelCount">Channel数量。</param>
+        /// <param name="root">音频模块根节点</param>
         /// <param name="audioMixer">音频混响器。</param>
         /// <param name="audioGroupConfig">音频轨道组配置。</param>
-        public AudioCategory(int maxChannel, AudioMixer audioMixer, AudioGroupConfig audioGroupConfig)
+        public AudioCategory(int channelCount, Transform root, AudioMixer audioMixer, AudioGroupConfig audioGroupConfig)
         {
             AudioMixer = audioMixer;
             AudioGroupConfig = audioGroupConfig;
@@ -65,8 +66,8 @@ namespace Framework.AudioModule
 
             AudioAgents = new List<AudioAgent>(32);
             InstanceRoot = new GameObject($"Audio Category - {AudioMixerGroup.name}").transform;
-            InstanceRoot.SetParent(AudioModule.Instance.InstanceRoot);
-            for (int index = 0; index < maxChannel; index++)
+            InstanceRoot.SetParent(root);
+            for (int index = 0; index < channelCount; index++)
             {
                 AudioAgent audioAgent = new AudioAgent();
                 audioAgent.Init(this, index);

@@ -1,4 +1,4 @@
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     /// <summary>
     /// 音频代理辅助器运行时状态枚举。

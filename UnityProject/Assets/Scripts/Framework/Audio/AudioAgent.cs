@@ -5,7 +5,7 @@ using Scripts.Fire.Manager;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Framework.AudioModule
+namespace Framework.Audio
 {
     /// <summary>
     /// 音频代理辅助器。
