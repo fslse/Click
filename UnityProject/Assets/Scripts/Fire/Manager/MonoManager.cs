@@ -1,5 +1,4 @@
 using System;
-using Scripts.Fire.Singleton;
 using UnityEngine.Events;
 
 namespace Scripts.Fire.Manager
@@ -7,7 +6,7 @@ namespace Scripts.Fire.Manager
     /// <summary>
     /// 适用于对时序不敏感的帧更新事件
     /// </summary>
-    public class MonoManager : MonoSingleton<MonoManager>
+    public class MonoManager : Manager<MonoManager>
     {
         private event UnityAction OnFixedUpdate;
         private event UnityAction OnUpdate;

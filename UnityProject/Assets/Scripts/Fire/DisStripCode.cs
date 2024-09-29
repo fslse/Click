@@ -7,11 +7,12 @@ namespace Scripts.Fire
     /// 防止裁剪引用。
     /// <remarks>如果在主工程无引用，link.xml的防裁剪也无效。</remarks>
     /// </summary>
+    [DefaultExecutionOrder(-99999)]
     public class DisStripCode : MonoBehaviour
     {
         private void Awake()
         {
-            //UnityEngine.Physics
+            // UnityEngine.Physics
             RegisterType<Collider>();
             RegisterType<Collider2D>();
             RegisterType<Collision>();
@@ -24,11 +25,11 @@ namespace Scripts.Fire
             RegisterType<Ray>();
             RegisterType<Ray2D>();
 
-            //UnityEngine.Graphics
+            // UnityEngine.Graphics
             RegisterType<Mesh>();
             RegisterType<MeshRenderer>();
 
-            //UnityEngine.Animation
+            // UnityEngine.Animation
             RegisterType<AnimationClip>();
             RegisterType<AnimationCurve>();
             RegisterType<AnimationEvent>();
@@ -47,6 +48,11 @@ namespace Scripts.Fire
 #if UNITY_EDITOR
             GameLog.LogDebug("DisStripCode RegisterType", typeof(T).Name);
 #endif
+        }
+
+        private void Start()
+        {
+            Destroy(gameObject);
         }
     }
 }

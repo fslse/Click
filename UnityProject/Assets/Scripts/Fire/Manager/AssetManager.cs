@@ -4,14 +4,13 @@ using System.IO;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Scripts.Fire.Log;
-using Scripts.Fire.Singleton;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Scripts.Fire.Manager
 {
-    public class AssetManager : MonoSingleton<AssetManager>
+    public class AssetManager : Manager<AssetManager>
     {
         private AssetBundleManifest abManifest;
         private readonly Dictionary<string, AssetBundle> loadedAssetBundles = new();
