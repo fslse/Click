@@ -6,7 +6,13 @@ using UnityEngine;
 
 public static class Tools
 {
-    [MenuItem("Tools/Customer Tools/Configuration Tables", false, -999999)]
+    [MenuItem("Tools/Customer Tools/Configuration Tables/Root", false, -999999)]
+    private static void Open()
+    {
+        Process.Start(new ProcessStartInfo($"{Application.dataPath}/../Luban-Tools", "explorer.exe"));
+    }
+
+    [MenuItem("Tools/Customer Tools/Configuration Tables/Run", false, -999998)]
     private static void Gen()
     {
         Process process = new Process();
@@ -42,7 +48,13 @@ public static class Tools
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("Tools/Customer Tools/Protocol Buffers", false, -888888)]
+    [MenuItem("Tools/Customer Tools/Protocol Buffers/Root", false, -888888)]
+    private static void Open1()
+    {
+        Process.Start(new ProcessStartInfo($"{Application.dataPath}/../Google.Protobuf_28.2", "explorer.exe"));
+    }
+
+    [MenuItem("Tools/Customer Tools/Protocol Buffers/Run", false, -888887)]
     private static void Gen1()
     {
         string path = $"{Application.dataPath}/Scripts/Game/Protocol";
