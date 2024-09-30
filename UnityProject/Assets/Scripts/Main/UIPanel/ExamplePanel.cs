@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ZLogger;
 
-namespace Game.GameLogic.UIPanel
+namespace Main.UIPanel
 {
     public class ExamplePanel : UIPanelBase
     {

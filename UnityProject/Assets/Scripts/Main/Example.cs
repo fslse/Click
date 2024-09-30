@@ -7,7 +7,7 @@ using Scripts.Fire.Log;
 using UnityEngine;
 using AudioType = Framework.Audio.AudioType;
 
-namespace Game.GameLogic
+namespace Main
 {
     public class Example : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace Game.GameLogic
             test();
         }
 
-        AudioAgent audioAgent;
+        private AudioAgent audioAgent;
 
         private async void test()
         {

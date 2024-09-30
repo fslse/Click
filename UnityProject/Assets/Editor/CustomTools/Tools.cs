@@ -7,13 +7,13 @@ using UnityEngine;
 public static class Tools
 {
     [MenuItem("Tools/Customer Tools/Configuration Tables/Root", false, -999999)]
-    private static void Open()
+    private static void CT_Tool_RootDir()
     {
         Process.Start(new ProcessStartInfo($"{Application.dataPath}/../Luban-Tools", "explorer.exe"));
     }
 
     [MenuItem("Tools/Customer Tools/Configuration Tables/Run", false, -999998)]
-    private static void Gen()
+    private static void CT_Tool_Run()
     {
         Process process = new Process();
         process.StartInfo.FileName = "dotnet";
@@ -22,7 +22,7 @@ public static class Tools
                                       $"-c cs-newtonsoft-json " +
                                       $"-d json " +
                                       $"--conf {Application.dataPath}/../Luban-Tools/DataTables/config.json " +
-                                      $"-x outputCodeDir={Application.dataPath}/Scripts/Game/Config " +
+                                      $"-x outputCodeDir={Application.dataPath}/Scripts/GameConfig " +
                                       $"-x outputDataDir={Application.dataPath}/AssetPackages/Config/Json";
 
         process.StartInfo.UseShellExecute = false;
@@ -49,15 +49,15 @@ public static class Tools
     }
 
     [MenuItem("Tools/Customer Tools/Protocol Buffers/Root", false, -888888)]
-    private static void Open1()
+    private static void PB_Tool_RootDir()
     {
         Process.Start(new ProcessStartInfo($"{Application.dataPath}/../Google.Protobuf_28.2", "explorer.exe"));
     }
 
     [MenuItem("Tools/Customer Tools/Protocol Buffers/Run", false, -888887)]
-    private static void Gen1()
+    private static void PB_Tool_Run()
     {
-        string path = $"{Application.dataPath}/Scripts/Game/Protocol";
+        string path = $"{Application.dataPath}/Scripts/GameProtocol";
         DirectoryInfo dir = Directory.CreateDirectory(path);
         FileInfo[] files = dir.GetFiles();
         foreach (var file in files)
