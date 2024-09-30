@@ -1,3 +1,6 @@
+using JetBrains.Annotations;
+using Scripts.Fire.Singleton;
+
 namespace Scripts.Fire.Startup
 {
     public abstract class StartupTask
@@ -26,8 +29,19 @@ namespace Scripts.Fire.Startup
         }
     }
 
-    public sealed class StartupProgressMessage
+    [UsedImplicitly]
+    public sealed class StartupProgressMessage : Singleton<StartupProgressMessage>
     {
-        public float Value { get; set; }
+        public float Value { get; private set; }
+
+        private StartupProgressMessage()
+        {
+        }
+
+        public StartupProgressMessage Message(float progress)
+        {
+            Value = progress;
+            return Instance;
+        }
     }
 }

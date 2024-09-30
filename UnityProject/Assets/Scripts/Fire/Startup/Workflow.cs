@@ -65,10 +65,7 @@ namespace Scripts.Fire.Startup
         /// <param name="p">该任务完成情况 [0,100]</param>
         public void OnProgress(StartupTask task, int p)
         {
-            UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
-            {
-                Value = (totalPercent + task.percent * p / 100) / 100
-            });
+            UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message((totalPercent + task.percent * p / 100) / 100));
         }
     }
 }

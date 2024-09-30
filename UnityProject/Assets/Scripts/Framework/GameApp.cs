@@ -41,10 +41,7 @@ namespace Framework
             // UIPanelManager 初始化
             DontDestroyOnLoad(UIPanelManager.Instance.UIRoot);
 
-            UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
-            {
-                Value = 0.65f
-            });
+            UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.65f));
 
             // GameApp下模块初始化
 
@@ -52,10 +49,7 @@ namespace Framework
             if (!AudioModule.Instance.InstanceRoot.parent)
                 DontDestroyOnLoad(AudioModule.Instance.InstanceRoot.gameObject);
 
-            UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
-            {
-                Value = 0.7f
-            });
+            UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.7f));
 
             // 业务初始化
             Type type = GameManager.Instance.assembly[3].GetType("Main.NewBehaviourScript");
@@ -75,10 +69,7 @@ namespace Framework
             while (asyncOperation.progress < 0.899999f)
             {
                 await UniTask.NextFrame();
-                UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
-                {
-                    Value = 0.9f + asyncOperation.progress / 0.9f / 10
-                });
+                UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
             }
 
             await UniTask.Delay(480);

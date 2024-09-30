@@ -19,10 +19,7 @@ namespace Main
         {
             // todo: sdk初始化、向服务器发送请求、用户数据初始化 20%
 
-            UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
-            {
-                Value = 0.9f
-            });
+            UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f));
             GameApp.StartGame().Forget();
         }
     }
