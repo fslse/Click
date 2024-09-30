@@ -31,6 +31,9 @@ namespace Framework.Audio
         /// </summary>
         public Transform InstanceRoot { get; }
 
+        /// <summary>
+        /// 是否启用该音频轨道。
+        /// </summary>
         public bool Enable
         {
             get => enable;
@@ -41,10 +44,7 @@ namespace Framework.Audio
                     enable = value;
                     if (!enable)
                     {
-                        foreach (var audioAgent in AudioAgents)
-                        {
-                            audioAgent?.Stop();
-                        }
+                        Stop(false);
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace Framework.Audio
         /// 音频轨道构造函数。
         /// </summary>
         /// <param name="channelCount">Channel数量。</param>
-        /// <param name="root">音频模块根节点</param>
+        /// <param name="root">音频模块根节点。</param>
         /// <param name="audioMixer">音频混响器。</param>
         /// <param name="audioGroupConfig">音频轨道组配置。</param>
         public AudioCategory(int channelCount, Transform root, AudioMixer audioMixer, AudioGroupConfig audioGroupConfig)
@@ -64,9 +64,10 @@ namespace Framework.Audio
             AudioMixerGroup[] audioMixerGroups = audioMixer.FindMatchingGroups($"Master/{AudioGroupConfig.audioType.ToString()}");
             AudioMixerGroup = audioMixerGroups.Length > 0 ? audioMixerGroups[0] : audioMixer.FindMatchingGroups("Master")[0];
 
-            AudioAgents = new List<AudioAgent>(32);
             InstanceRoot = new GameObject($"Audio Category - {AudioMixerGroup.name}").transform;
             InstanceRoot.SetParent(root);
+
+            AudioAgents = new List<AudioAgent>(32);
             for (int index = 0; index < channelCount; index++)
             {
                 AudioAgent audioAgent = new AudioAgent();
@@ -76,10 +77,10 @@ namespace Framework.Audio
         }
 
         /// <summary>
-        /// 播放音频。
+        /// 播放指定音频。
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="async"></param>
+        /// <param name="path">音频资源路径。</param>
+        /// <param name="async">是否异步。</param>
         /// <returns></returns>
         public AudioAgent Play(string path, bool async)
         {
@@ -125,12 +126,12 @@ namespace Framework.Audio
         }
 
         /// <summary>
-        /// 停止播放音频。
+        /// 停止播放该轨道所有音频。
         /// </summary>
-        /// <param name="fade">是否渐出</param>
+        /// <param name="fade">是否渐出。</param>
         public void Stop(bool fade)
         {
-            foreach (var audioAgent in AudioAgents.Where(t => t != null))
+            foreach (var audioAgent in AudioAgents.Where(agent => agent != null))
             {
                 audioAgent.Stop(fade);
             }
@@ -142,7 +143,7 @@ namespace Framework.Audio
         /// <param name="elapseSeconds">逻辑流逝时间，以秒为单位。</param>
         public void Update(float elapseSeconds)
         {
-            foreach (var audioAgent in AudioAgents.Where(t => t != null))
+            foreach (var audioAgent in AudioAgents.Where(agent => agent != null))
             {
                 audioAgent.Update(elapseSeconds);
             }

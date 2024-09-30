@@ -36,8 +36,7 @@ namespace Framework.Audio
             {
                 if (source)
                 {
-                    volume = value;
-                    source.volume = volume;
+                    source.volume = volume = value;
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace Framework.Audio
     /// <summary>
     /// 音效管理，为游戏提供统一的音效播放接口。
     /// </summary>
-    /// <remarks>场景3D音效挂到场景物件、技能3D音效挂到技能特效上，并在AudioSource的Output上设置对应分类的AudioMixerGroup</remarks>
+    /// <remarks>场景3D音效挂到场景物体、技能3D音效挂到技能特效上，并在AudioSource的Output上设置对应分类的AudioMixerGroup</remarks>
     [UsedImplicitly]
     public class AudioModule : Singleton<AudioModule>
     {
@@ -27,7 +27,7 @@ namespace Framework.Audio
         #region Public Propreties
 
         /// <summary>
-        /// 实例对象根节点。
+        /// 场景上实例对象节点。
         /// </summary>
         public Transform InstanceRoot { get; }
 
@@ -161,7 +161,7 @@ namespace Framework.Audio
                     return;
                 }
 
-                audioCategories[(int)AudioType.Music].Enable = value;
+                // audioCategories[(int)AudioType.Music].Enable = value;
 
                 // 音乐采用0音量方式，避免恢复播放时的复杂逻辑
                 if (value)
@@ -259,7 +259,7 @@ namespace Framework.Audio
                 AudioType audioType = (AudioType)index;
                 AudioGroupConfig audioGroupConfig = audioGroupConfigs!.First(a => a.audioType == audioType);
                 audioCategories[index] = new AudioCategory(audioGroupConfig.AgentHelperCount, InstanceRoot, audioMixer, audioGroupConfig);
-                categoriesVolume[index] = audioGroupConfig.Volume;
+                audioMixer.SetFloat($"{audioGroupConfig.Name}Volume", Mathf.Log10(categoriesVolume[index] = audioGroupConfig.Volume) * 20f);
             }
 
             MonoManager.Instance.AddListener(() =>
@@ -274,12 +274,12 @@ namespace Framework.Audio
         /// <summary>
         /// 播放，如果超过最大发声数采用fadeout的方式复用最久播放的AudioSource。
         /// </summary>
-        /// <param name="type">声音类型</param>
-        /// <param name="path">声音文件路径</param>
-        /// <param name="loop">是否循环播放</param>>
-        /// <param name="vol">音量（0-1.0）</param>
-        /// <param name="async">是否异步加载</param>
-        /// <returns>音频代理辅助器</returns>
+        /// <param name="type">音效类型</param>
+        /// <param name="path">资源路径</param>
+        /// <param name="loop">是否循环</param>
+        /// <param name="vol">音量 ( 0.0 - 1.0 )</param>
+        /// <param name="async">是否异步</param>
+        /// <returns></returns>
         public AudioAgent Play(AudioType type, string path, bool loop = false, float vol = 1.0f, bool async = false)
         {
             if (unityAudioDisabled)
