@@ -74,13 +74,11 @@ namespace Framework
                 MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
             }
 
+            var _ = typeof(MessageBroker).GetField("isDisposed", BindingFlags.Instance | BindingFlags.NonPublic);
+            await UniTask.WaitUntil(() => (bool)_!.GetValue(MessageBroker.Default));
+
             GameLog.LogWarning("GC");
             GC.Collect();
-
-            while (!(bool)typeof(MessageBroker).GetField("isDisposed", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(MessageBroker.Default))
-            {
-                await UniTask.Delay(100);
-            }
 
             GameLog.LogWarning("切场景");
             asyncOperation.allowSceneActivation = true;
