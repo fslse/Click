@@ -1,3 +1,4 @@
+using System.Reflection;
 using DG.Tweening;
 using Scripts.Fire.Log;
 using Scripts.Fire.Startup;
@@ -54,12 +55,13 @@ namespace Scripts.Fire
 
                 tween.OnComplete(() =>
                 {
-                    if (target >= 0.99f)
+                    if (target >= 0.999999f)
                     {
                         GameLog.LogWarning("HotFixPresenter Progress Complete");
+                        (MessageBroker.Default as MessageBroker)!.Dispose();
                     }
                 });
-            });
+            }).AddTo(this);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
 using Framework.Audio;
 using Framework.UI;
@@ -7,6 +8,7 @@ using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
 using Scripts.Fire.Startup;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -69,12 +71,17 @@ namespace Framework
             while (asyncOperation.progress < 0.899999f)
             {
                 await UniTask.NextFrame();
-                UniRx.MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
+                MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
             }
 
-            await UniTask.Delay(480);
             GameLog.LogWarning("GC");
             GC.Collect();
+
+            while (!(bool)typeof(MessageBroker).GetField("isDisposed", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(MessageBroker.Default))
+            {
+                await UniTask.Delay(100);
+            }
+
             GameLog.LogWarning("切场景");
             asyncOperation.allowSceneActivation = true;
         }
