@@ -22,7 +22,7 @@ public static class Tools
                                       $"-c cs-newtonsoft-json " +
                                       $"-d json " +
                                       $"--conf {Application.dataPath}/../Luban-Tools/DataTables/config.json " +
-                                      $"-x outputCodeDir={Application.dataPath}/Scripts/GameConfig " +
+                                      $"-x outputCodeDir={Application.dataPath}/Scripts/GameConfig/cs " +
                                       $"-x outputDataDir={Application.dataPath}/AssetPackages/Config/Json";
 
         process.StartInfo.UseShellExecute = false;
@@ -58,14 +58,14 @@ public static class Tools
     private static void PB_Tool_Run()
     {
         string path = $"{Application.dataPath}/Scripts/GameProtocol";
-        DirectoryInfo dir = Directory.CreateDirectory(path);
+        DirectoryInfo dir = Directory.CreateDirectory($"{path}/proto");
         FileInfo[] files = dir.GetFiles();
         foreach (var file in files)
             if (file.Extension == ".proto")
             {
                 Process process = new Process();
                 process.StartInfo.FileName = $"{Application.dataPath}/../Google.Protobuf_28.2/protoc-28.2-win64/bin/protoc.exe";
-                process.StartInfo.Arguments = $"--proto_path={path}/ --csharp_out={path}/cs {file.Name}";
+                process.StartInfo.Arguments = $"--proto_path={path}/proto/ --csharp_out={path}/cs {file.Name}";
 
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
