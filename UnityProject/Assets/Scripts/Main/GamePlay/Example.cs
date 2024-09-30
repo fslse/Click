@@ -7,7 +7,7 @@ using Scripts.Fire.Log;
 using UnityEngine;
 using AudioType = Framework.Audio.AudioType;
 
-namespace Main
+namespace Main.GamePlay
 {
     public class Example : MonoBehaviour
     {

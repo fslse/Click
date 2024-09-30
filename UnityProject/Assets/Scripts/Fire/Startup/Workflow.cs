@@ -22,8 +22,7 @@ namespace Scripts.Fire.Startup
             int totalPower = tasks.Sum(task => task.power);
             foreach (var task in tasks)
             {
-                // 框架初始化的40%在GameApp中处理
-                // Workflow仅处理资源下载和DLL加载的进度
+                // Workflow仅处理 资源下载和DLL加载
                 task.percent = task.power * 100f / totalPower * 0.6f;
             }
 

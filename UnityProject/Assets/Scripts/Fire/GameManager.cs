@@ -47,8 +47,9 @@ namespace Scripts.Fire
             GameLog.LogDebug("GameManager Start");
 
             // 构建启动流程
-            // 40% + 20% + 40% 
-            // 资源下载 + 加载DLL + 框架初始化
+            // 40% + 20% + 10% + 20% + 10% 
+            // 资源下载 + 加载DLL + 框架初始化 + 业务初始化 + 切场景
+            // 这里只处理 资源下载 + 加载DLL
             var workflow = new Workflow();
             workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 5));
             workflow.AddTask(new DownloadAssets(workflow, "DownloadAssets", 35));

@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Framework.Audio;
 using Framework.UI;
+using Scripts.Fire;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
@@ -27,10 +28,23 @@ namespace Framework
             Init().Forget();
         }
 
+        /// <summary>
+        /// 框架初始化 + 业务初始化 + 切场景
+        /// <para></para>
+        /// 业务初始化在 Assembly-CSharp 的 NewBehaviourScript
+        /// <para></para>
+        /// 业务初始化完成后调用 GameApp.Instance.StartGame() 切场景
+        /// <remarks> 10% + 20% + 10% </remarks>
+        /// </summary>
         private async UniTaskVoid Init()
         {
             // UIPanelManager 初始化
             DontDestroyOnLoad(UIPanelManager.Instance.UIRoot);
+
+            UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
+            {
+                Value = 0.65f
+            });
 
             // GameApp下模块初始化
 
@@ -38,13 +52,19 @@ namespace Framework
             if (!AudioModule.Instance.InstanceRoot.parent)
                 DontDestroyOnLoad(AudioModule.Instance.InstanceRoot.gameObject);
 
-            // 初始化完成 走30%
             UniRx.MessageBroker.Default.Publish(new StartupProgressMessage
             {
-                Value = 0.9f
+                Value = 0.7f
             });
 
-            // 切场景
+            // 业务初始化
+            Type type = GameManager.Instance.assembly[3].GetType("Main.NewBehaviourScript");
+            gameObject.AddComponent(type);
+        }
+
+        public static async UniTaskVoid StartGame()
+        {
+            // 切场景，开始游戏 10%
 #if UNITY_EDITOR
             AsyncOperation asyncOperation = EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Game.unity", new LoadSceneParameters(LoadSceneMode.Single));
 #else
