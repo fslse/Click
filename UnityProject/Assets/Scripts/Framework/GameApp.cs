@@ -1,8 +1,7 @@
 using System;
-using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using Framework.Audio;
-using Framework.UIModule;
+using Framework.UI;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;

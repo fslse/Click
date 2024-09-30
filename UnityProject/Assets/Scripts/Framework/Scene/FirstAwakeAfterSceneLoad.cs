@@ -1,9 +1,9 @@
-using Framework.UIModule;
+using Framework.UI;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace Framework.SceneModule
+namespace Framework.Scene
 {
     [DefaultExecutionOrder(-99999)]
     public class FirstAwakeAfterSceneLoad : MonoBehaviour

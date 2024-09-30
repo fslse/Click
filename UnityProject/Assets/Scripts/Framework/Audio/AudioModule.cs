@@ -266,7 +266,7 @@ namespace Framework.Audio
             {
                 foreach (var audioCategory in audioCategories)
                 {
-                    audioCategory?.Update(Time.deltaTime);
+                    audioCategory?.Update(UnityEngine.Time.deltaTime);
                 }
             });
         }

@@ -1,8 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Framework.Audio;
-using Framework.TimeModule;
-using Framework.UIModule;
+using Framework.Time;
+using Framework.UI;
 using Scripts.Fire.Log;
 using UnityEngine;
 using AudioType = Framework.Audio.AudioType;

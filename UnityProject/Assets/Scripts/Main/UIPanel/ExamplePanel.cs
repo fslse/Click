@@ -1,8 +1,8 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Framework.TimeModule;
-using Framework.UIModule;
+using Framework.Time;
+using Framework.UI;
 using Google.Protobuf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

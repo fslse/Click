@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <linker>
-  <assembly fullname="Assembly-CSharp-firstpass">
-    <type fullname="DG.Tweening.DOTweenModuleUI" preserve="all" />
-  </assembly>
   <assembly fullname="DOTween">
     <type fullname="DG.Tweening.Core.TweenerCore`3" preserve="all" />
     <type fullname="DG.Tweening.DOTween" preserve="all" />
@@ -14,10 +11,15 @@
     <type fullname="DG.Tweening.TweenCallback" preserve="all" />
     <type fullname="DG.Tweening.TweenSettingsExtensions" preserve="all" />
   </assembly>
+  <assembly fullname="DOTween.Modules">
+    <type fullname="DG.Tweening.DOTweenModuleUI" preserve="all" />
+  </assembly>
   <assembly fullname="Fire">
     <type fullname="Scripts.Fire.Log.GameLog" preserve="all" />
     <type fullname="Scripts.Fire.Log.GameLog/Log" preserve="all" />
     <type fullname="Scripts.Fire.Manager.AssetManager" preserve="all" />
+    <type fullname="Scripts.Fire.Manager.MonoManager" preserve="all" />
+    <type fullname="Scripts.Fire.Manager.UpdateType" preserve="all" />
     <type fullname="Scripts.Fire.Singleton.MonoSingleton`1" preserve="all" />
     <type fullname="Scripts.Fire.Singleton.Singleton`1" preserve="all" />
     <type fullname="Scripts.Fire.Startup.StartupProgressMessage" preserve="all" />
@@ -153,10 +155,15 @@
     <type fullname="UnityEngine.AssetBundle" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.AudioModule">
+    <type fullname="UnityEngine.Audio.AudioMixer" preserve="all" />
+    <type fullname="UnityEngine.Audio.AudioMixerGroup" preserve="all" />
     <type fullname="UnityEngine.AudioClip" preserve="all" />
+    <type fullname="UnityEngine.AudioListener" preserve="all" />
+    <type fullname="UnityEngine.AudioRolloffMode" preserve="all" />
     <type fullname="UnityEngine.AudioSource" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule">
+    <type fullname="JetBrains.Annotations.UsedImplicitlyAttribute" preserve="all" />
     <type fullname="UnityEngine.AddComponentMenu" preserve="all" />
     <type fullname="UnityEngine.AnimationCurve" preserve="all" />
     <type fullname="UnityEngine.Application" preserve="all" />
@@ -205,6 +212,7 @@
     <type fullname="UnityEngine.PropertyAttribute" preserve="all" />
     <type fullname="UnityEngine.Quaternion" preserve="all" />
     <type fullname="UnityEngine.Random" preserve="all" />
+    <type fullname="UnityEngine.RangeAttribute" preserve="all" />
     <type fullname="UnityEngine.Ray" preserve="all" />
     <type fullname="UnityEngine.Rect" preserve="all" />
     <type fullname="UnityEngine.RectTransform" preserve="all" />
@@ -410,6 +418,7 @@
     <type fullname="System.Reflection.DefaultMemberAttribute" preserve="all" />
     <type fullname="System.Reflection.MemberInfo" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.AsyncStateMachineAttribute" preserve="all" />
+    <type fullname="System.Runtime.CompilerServices.AsyncVoidMethodBuilder" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilationRelaxationsAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.CompilerGeneratedAttribute" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.ExtensionAttribute" preserve="all" />

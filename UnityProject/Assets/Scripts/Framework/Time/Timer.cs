@@ -2,9 +2,8 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
-namespace Framework.TimeModule
+namespace Framework.Time
 {
     public sealed class Timer : PlayerLoopTimer
     {
@@ -34,13 +33,13 @@ namespace Framework.TimeModule
         {
             if (elapsed == 0.0f)
             {
-                if (initialFrame == Time.frameCount)
+                if (initialFrame == UnityEngine.Time.frameCount)
                 {
                     return true;
                 }
             }
 
-            elapsed += ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
+            elapsed += ignoreTimeScale ? UnityEngine.Time.unscaledDeltaTime : UnityEngine.Time.deltaTime;
             return elapsed < interval;
         }
 
@@ -48,7 +47,7 @@ namespace Framework.TimeModule
         protected override void ResetCore(TimeSpan? interval)
         {
             elapsed = 0.0f;
-            initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
+            initialFrame = PlayerLoopHelper.IsMainThread ? UnityEngine.Time.frameCount : -1;
             if (interval != null)
             {
                 this.interval = (float)interval.Value.TotalSeconds;

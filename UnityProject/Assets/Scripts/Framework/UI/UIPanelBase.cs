@@ -4,7 +4,7 @@ using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Framework.UIModule
+namespace Framework.UI
 {
     public abstract class UIPanelBehaviour : MonoBehaviour
     {

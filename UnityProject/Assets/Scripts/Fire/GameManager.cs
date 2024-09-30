@@ -10,6 +10,16 @@ namespace Scripts.Fire
     {
         public static GameManager Instance { get; private set; }
 
+        public readonly string[] assemblyAssetName =
+        {
+            "GameConfig.dll.bytes",
+            "GameProtocol.dll.bytes",
+            "Framework.dll.bytes",
+            "Assembly-CSharp.dll.bytes"
+        };
+
+        public System.Reflection.Assembly[] assembly;
+
         // AfterAssembliesLoaded 表示将会在 BeforeSceneLoad之前调用
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void InitUniTaskLoop()
@@ -34,7 +44,9 @@ namespace Scripts.Fire
         {
             GameLog.LogDebug("GameManager Start");
 
-            // 构建启动流程 40% + 20% + 40% 最后40%在GameApp中 
+            // 构建启动流程
+            // 40% + 20% + 40% 
+            // 资源下载 + 加载DLL + 框架初始化
             var workflow = new Workflow();
             workflow.AddTask(new CheckVersion(workflow, "CheckVersion", 5));
             workflow.AddTask(new DownloadAssets(workflow, "DownloadAssets", 35));

@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace Framework.UIModule
+namespace Framework.UI
 {
     [UsedImplicitly]
     public class UIPanelManager : Singleton<UIPanelManager>
