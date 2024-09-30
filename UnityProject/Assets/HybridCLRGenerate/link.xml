@@ -15,6 +15,7 @@
     <type fullname="DG.Tweening.DOTweenModuleUI" preserve="all" />
   </assembly>
   <assembly fullname="Fire">
+    <type fullname="Scripts.Fire.GameManager" preserve="all" />
     <type fullname="Scripts.Fire.Log.GameLog" preserve="all" />
     <type fullname="Scripts.Fire.Log.GameLog/Log" preserve="all" />
     <type fullname="Scripts.Fire.Manager.AssetManager" preserve="all" />
@@ -415,6 +416,7 @@
     <type fullname="System.ObsoleteAttribute" preserve="all" />
     <type fullname="System.ParamArrayAttribute" preserve="all" />
     <type fullname="System.Predicate`1" preserve="all" />
+    <type fullname="System.Reflection.Assembly" preserve="all" />
     <type fullname="System.Reflection.DefaultMemberAttribute" preserve="all" />
     <type fullname="System.Reflection.MemberInfo" preserve="all" />
     <type fullname="System.Runtime.CompilerServices.AsyncStateMachineAttribute" preserve="all" />

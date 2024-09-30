@@ -31,6 +31,8 @@ namespace Main.GamePlay
 
         private void Update()
         {
+            if (audioAgent == null) return;
+
             // 检测鼠标左键是否按下
             if (Input.GetMouseButtonDown(0))
             {
@@ -38,10 +40,6 @@ namespace Main.GamePlay
                     audioAgent.Stop(true);
                 else
                     audioAgent.GetAudioSource().Play();
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                AudioModule.Instance.MusicEnable = !AudioModule.Instance.MusicEnable;
             }
         }
     }
