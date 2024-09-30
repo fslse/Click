@@ -20,6 +20,8 @@ namespace Scripts.Fire
 
         public System.Reflection.Assembly[] assembly;
 
+        public string version;
+
         // AfterAssembliesLoaded 表示将会在 BeforeSceneLoad之前调用
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         public static void InitUniTaskLoop()
