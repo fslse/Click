@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,8 +30,8 @@ namespace Scripts.Fire.Startup
             GameLog.LogDebug($"Local Version: {workflow.localVersion}");
             GameLog.LogDebug($"Remote Version: {workflow.remoteVersion}");
 
-            long version = Math.Max(workflow.localVersion, workflow.remoteVersion);
-            GameManager.Instance.version = $"{version / 1000000000 % 1000}.{version / 1000000 % 1000}.{version / 1000 % 1000}";
+            long _ = Math.Max(workflow.localVersion, workflow.remoteVersion);
+            GameManager.Instance.version = $"{_ / 1000000000 % 1000}.{_ / 1000000 % 1000}.{_ / 1000 % 1000}";
             GameLog.LogDebug("Game Version", GameManager.Instance.version);
 
             if (workflow.localVersion > workflow.remoteVersion && Directory.Exists(AppConst.PersistentDataPath))
