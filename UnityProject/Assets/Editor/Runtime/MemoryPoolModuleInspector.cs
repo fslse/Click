@@ -25,12 +25,12 @@ internal sealed class MemoryPoolModuleInspector : GameFrameworkInspector
             EditorGUILayout.LabelField("<color=white>Memory Pool</color>", style);
             EditorGUILayout.Separator();
 
-            EditorGUILayout.LabelField("Memory Pool Count", MemoryPool.Count.ToString());
+            EditorGUILayout.LabelField("Memory Pool Count", MemoryPoolManager.Count.ToString());
             showFullClassName = EditorGUILayout.Toggle("Show Full Class Name", showFullClassName);
 
             // 收集内存池信息 按对象类型所属程序集分类
             memoryPoolInfos.Clear();
-            MemoryPoolInfo[] infos = MemoryPool.GetAllMemoryPoolInfos();
+            MemoryPoolInfo[] infos = MemoryPoolManager.GetAllMemoryPoolInfos();
             foreach (MemoryPoolInfo memoryPoolInfo in infos)
             {
                 string assemblyName = memoryPoolInfo.Type.Assembly.GetName().Name;

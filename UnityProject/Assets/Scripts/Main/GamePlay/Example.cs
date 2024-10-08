@@ -29,7 +29,7 @@ namespace Main.GamePlay
             await UniTask.Delay(TimeSpan.FromSeconds(2));
             audioAgent = AudioModule.Instance.Play(AudioType.Music, "Assets/AssetPackages/Audio/AudioClip/test.mp3", true);
 
-            var _ = MemoryPool.Alloc<MyClass>();
+            var _ = MemoryPoolManager.Alloc<MyClass>();
         }
 
         private void Update()

@@ -25,7 +25,7 @@ namespace Framework.MemoryPool
         public abstract void RecycleToPool();
     }
 
-    public static partial class MemoryPool
+    public static partial class MemoryPoolManager
     {
         /// <summary>
         /// 从内存池获取内存对象。

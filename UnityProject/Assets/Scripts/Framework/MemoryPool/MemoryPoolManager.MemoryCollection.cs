@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Framework.MemoryPool
 {
-    public static partial class MemoryPool
+    public static partial class MemoryPoolManager
     {
         /// <summary>
-        /// 内存池收集器。
+        /// 内存池对象容器。
         /// </summary>
         private sealed class MemoryCollection
         {

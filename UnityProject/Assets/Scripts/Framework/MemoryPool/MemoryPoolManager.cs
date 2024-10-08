@@ -7,7 +7,7 @@ namespace Framework.MemoryPool
     /// <summary>
     /// 内存池。
     /// </summary>
-    public static partial class MemoryPool
+    public static partial class MemoryPoolManager
     {
         private static readonly Dictionary<Type, MemoryCollection> memoryCollections = new();
 
