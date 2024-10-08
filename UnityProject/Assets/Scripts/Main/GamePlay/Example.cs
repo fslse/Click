@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Framework.Audio;
+using Framework.MemoryPool;
 using Framework.Time;
 using Framework.UI;
 using Scripts.Fire.Log;
@@ -27,6 +28,8 @@ namespace Main.GamePlay
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2));
             audioAgent = AudioModule.Instance.Play(AudioType.Music, "Assets/AssetPackages/Audio/AudioClip/test.mp3", true);
+
+            var _ = MemoryPool.Alloc<MyClass>();
         }
 
         private void Update()
@@ -41,6 +44,17 @@ namespace Main.GamePlay
                 else
                     audioAgent.GetAudioSource().Play();
             }
+        }
+    }
+
+    public class MyClass : MemoryObject
+    {
+        public override void InitFromPool()
+        {
+        }
+
+        public override void RecycleToPool()
+        {
         }
     }
 }
