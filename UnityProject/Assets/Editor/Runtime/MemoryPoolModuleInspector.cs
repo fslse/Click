@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Framework;
-using Framework.MemoryPool;
+using Framework.Core.MemoryPool;
 using UnityEditor;
 using UnityEngine;
+using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
 
 [CustomEditor(typeof(GameApp))]
 internal sealed class MemoryPoolModuleInspector : GameFrameworkInspector

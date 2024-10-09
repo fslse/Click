@@ -1,12 +1,13 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Framework.Audio;
-using Framework.MemoryPool;
-using Framework.Time;
-using Framework.UI;
+using Framework.Core.MemoryPool;
+using Framework.Modules.Audio;
+using Framework.Modules.Time;
+using Framework.Modules.UI;
 using Scripts.Fire.Log;
 using UnityEngine;
-using AudioType = Framework.Audio.AudioType;
+using AudioType = Framework.Modules.Audio.AudioType;
+using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
 
 namespace Main.GamePlay
 {
