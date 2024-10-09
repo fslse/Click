@@ -9,54 +9,54 @@ namespace Framework.Core.DataStruct
     /// 游戏框架链表类。
     /// </summary>
     /// <typeparam name="T">指定链表的元素类型。</typeparam>
-    public sealed class GameFrameworkLinkedList<T> : ICollection<T>, IEnumerable<T>, ICollection, IEnumerable
+    public sealed class GameFrameworkLinkedList<T> : ICollection<T>, ICollection
     {
-        private readonly LinkedList<T> _linkedList;
-        private readonly Queue<LinkedListNode<T>> _cachedNodes;
+        private readonly LinkedList<T> linkedList;
+        private readonly Queue<LinkedListNode<T>> cachedNodes;
 
         /// <summary>
         /// 初始化游戏框架链表类的新实例。
         /// </summary>
         public GameFrameworkLinkedList()
         {
-            _linkedList = new LinkedList<T>();
-            _cachedNodes = new Queue<LinkedListNode<T>>();
+            linkedList = new LinkedList<T>();
+            cachedNodes = new Queue<LinkedListNode<T>>();
         }
 
         /// <summary>
         /// 获取链表中实际包含的结点数量。
         /// </summary>
-        public int Count => _linkedList.Count;
+        public int Count => linkedList.Count;
 
         /// <summary>
         /// 获取链表结点缓存数量。
         /// </summary>
-        public int CachedNodeCount => _cachedNodes.Count;
+        public int CachedNodeCount => cachedNodes.Count;
 
         /// <summary>
         /// 获取链表的第一个结点。
         /// </summary>
-        public LinkedListNode<T> First => _linkedList.First;
+        public LinkedListNode<T> First => linkedList.First;
 
         /// <summary>
         /// 获取链表的最后一个结点。
         /// </summary>
-        public LinkedListNode<T> Last => _linkedList.Last;
+        public LinkedListNode<T> Last => linkedList.Last;
 
         /// <summary>
         /// 获取一个值，该值指示 ICollection`1 是否为只读。
         /// </summary>
-        public bool IsReadOnly => ((ICollection<T>)_linkedList).IsReadOnly;
+        public bool IsReadOnly => ((ICollection<T>)linkedList).IsReadOnly;
 
         /// <summary>
         /// 获取可用于同步对 ICollection 的访问的对象。
         /// </summary>
-        public object SyncRoot => ((ICollection)_linkedList).SyncRoot;
+        public object SyncRoot => ((ICollection)linkedList).SyncRoot;
 
         /// <summary>
         /// 获取一个值，该值指示是否同步对 ICollection 的访问（线程安全）。
         /// </summary>
-        public bool IsSynchronized => ((ICollection)_linkedList).IsSynchronized;
+        public bool IsSynchronized => ((ICollection)linkedList).IsSynchronized;
 
         /// <summary>
         /// 在链表中指定的现有结点后添加包含指定值的新结点。
@@ -67,7 +67,7 @@ namespace Framework.Core.DataStruct
         public LinkedListNode<T> AddAfter(LinkedListNode<T> node, T value)
         {
             LinkedListNode<T> newNode = AcquireNode(value);
-            _linkedList.AddAfter(node, newNode);
+            linkedList.AddAfter(node, newNode);
             return newNode;
         }
 
@@ -78,7 +78,7 @@ namespace Framework.Core.DataStruct
         /// <param name="newNode">指定的新结点。</param>
         public void AddAfter(LinkedListNode<T> node, LinkedListNode<T> newNode)
         {
-            _linkedList.AddAfter(node, newNode);
+            linkedList.AddAfter(node, newNode);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Framework.Core.DataStruct
         public LinkedListNode<T> AddBefore(LinkedListNode<T> node, T value)
         {
             LinkedListNode<T> newNode = AcquireNode(value);
-            _linkedList.AddBefore(node, newNode);
+            linkedList.AddBefore(node, newNode);
             return newNode;
         }
 
@@ -101,7 +101,7 @@ namespace Framework.Core.DataStruct
         /// <param name="newNode">指定的新结点。</param>
         public void AddBefore(LinkedListNode<T> node, LinkedListNode<T> newNode)
         {
-            _linkedList.AddBefore(node, newNode);
+            linkedList.AddBefore(node, newNode);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Framework.Core.DataStruct
         public LinkedListNode<T> AddFirst(T value)
         {
             LinkedListNode<T> node = AcquireNode(value);
-            _linkedList.AddFirst(node);
+            linkedList.AddFirst(node);
             return node;
         }
 
@@ -122,7 +122,7 @@ namespace Framework.Core.DataStruct
         /// <param name="node">指定的新结点。</param>
         public void AddFirst(LinkedListNode<T> node)
         {
-            _linkedList.AddFirst(node);
+            linkedList.AddFirst(node);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Framework.Core.DataStruct
         public LinkedListNode<T> AddLast(T value)
         {
             LinkedListNode<T> node = AcquireNode(value);
-            _linkedList.AddLast(node);
+            linkedList.AddLast(node);
             return node;
         }
 
@@ -143,7 +143,7 @@ namespace Framework.Core.DataStruct
         /// <param name="node">指定的新结点。</param>
         public void AddLast(LinkedListNode<T> node)
         {
-            _linkedList.AddLast(node);
+            linkedList.AddLast(node);
         }
 
         /// <summary>
@@ -151,14 +151,14 @@ namespace Framework.Core.DataStruct
         /// </summary>
         public void Clear()
         {
-            LinkedListNode<T> current = _linkedList.First;
+            LinkedListNode<T> current = linkedList.First;
             while (current != null)
             {
                 ReleaseNode(current);
                 current = current.Next;
             }
 
-            _linkedList.Clear();
+            linkedList.Clear();
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Framework.Core.DataStruct
         /// </summary>
         public void ClearCachedNodes()
         {
-            _cachedNodes.Clear();
+            cachedNodes.Clear();
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Framework.Core.DataStruct
         /// <returns>某值是否在链表中。</returns>
         public bool Contains(T value)
         {
-            return _linkedList.Contains(value);
+            return linkedList.Contains(value);
         }
 
         /// <summary>
@@ -186,17 +186,17 @@ namespace Framework.Core.DataStruct
         /// <param name="index">array 中从零开始的索引，从此处开始复制。</param>
         public void CopyTo(T[] array, int index)
         {
-            _linkedList.CopyTo(array, index);
+            linkedList.CopyTo(array, index);
         }
 
         /// <summary>
-        /// 从特定的 ICollection 索引开始，将数组的元素复制到一个数组中。
+        /// 从特定的 ICollection 索引开始，将 ICollection 的元素复制到一个 Array 中。
         /// </summary>
         /// <param name="array">一维数组，它是从 ICollection 复制的元素的目标。数组必须具有从零开始的索引。</param>
         /// <param name="index">array 中从零开始的索引，从此处开始复制。</param>
         public void CopyTo(Array array, int index)
         {
-            ((ICollection)_linkedList).CopyTo(array, index);
+            ((ICollection)linkedList).CopyTo(array, index);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Framework.Core.DataStruct
         /// <returns>包含指定值的第一个结点。</returns>
         public LinkedListNode<T> Find(T value)
         {
-            return _linkedList.Find(value);
+            return linkedList.Find(value);
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Framework.Core.DataStruct
         /// <returns>包含指定值的最后一个结点。</returns>
         public LinkedListNode<T> FindLast(T value)
         {
-            return _linkedList.FindLast(value);
+            return linkedList.FindLast(value);
         }
 
         /// <summary>
@@ -226,10 +226,10 @@ namespace Framework.Core.DataStruct
         /// <returns>是否移除成功。</returns>
         public bool Remove(T value)
         {
-            LinkedListNode<T> node = _linkedList.Find(value);
+            LinkedListNode<T> node = linkedList.Find(value);
             if (node != null)
             {
-                _linkedList.Remove(node);
+                linkedList.Remove(node);
                 ReleaseNode(node);
                 return true;
             }
@@ -243,7 +243,7 @@ namespace Framework.Core.DataStruct
         /// <param name="node">指定的结点。</param>
         public void Remove(LinkedListNode<T> node)
         {
-            _linkedList.Remove(node);
+            linkedList.Remove(node);
             ReleaseNode(node);
         }
 
@@ -252,13 +252,13 @@ namespace Framework.Core.DataStruct
         /// </summary>
         public void RemoveFirst()
         {
-            LinkedListNode<T> first = _linkedList.First;
+            LinkedListNode<T> first = linkedList.First;
             if (first == null)
             {
                 throw new Exception("First is invalid.");
             }
 
-            _linkedList.RemoveFirst();
+            linkedList.RemoveFirst();
             ReleaseNode(first);
         }
 
@@ -267,31 +267,22 @@ namespace Framework.Core.DataStruct
         /// </summary>
         public void RemoveLast()
         {
-            LinkedListNode<T> last = _linkedList.Last;
+            LinkedListNode<T> last = linkedList.Last;
             if (last == null)
             {
                 throw new Exception("Last is invalid.");
             }
 
-            _linkedList.RemoveLast();
+            linkedList.RemoveLast();
             ReleaseNode(last);
-        }
-
-        /// <summary>
-        /// 返回循环访问集合的枚举数。
-        /// </summary>
-        /// <returns>循环访问集合的枚举数。</returns>
-        public Enumerator GetEnumerator()
-        {
-            return new Enumerator(_linkedList);
         }
 
         private LinkedListNode<T> AcquireNode(T value)
         {
-            LinkedListNode<T> node = null;
-            if (_cachedNodes.Count > 0)
+            LinkedListNode<T> node;
+            if (cachedNodes.Count > 0)
             {
-                node = _cachedNodes.Dequeue();
+                node = cachedNodes.Dequeue();
                 node.Value = value;
             }
             else
@@ -304,8 +295,8 @@ namespace Framework.Core.DataStruct
 
         private void ReleaseNode(LinkedListNode<T> node)
         {
-            node.Value = default(T);
-            _cachedNodes.Enqueue(node);
+            node.Value = default;
+            cachedNodes.Enqueue(node);
         }
 
         /// <summary>
@@ -336,12 +327,21 @@ namespace Framework.Core.DataStruct
         }
 
         /// <summary>
+        /// 返回循环访问集合的枚举数。
+        /// </summary>
+        /// <returns>循环访问集合的枚举数。</returns>
+        public Enumerator GetEnumerator()
+        {
+            return new Enumerator(linkedList);
+        }
+
+        /// <summary>
         /// 循环访问集合的枚举数。
         /// </summary>
         [StructLayout(LayoutKind.Auto)]
-        public struct Enumerator : IEnumerator<T>, IEnumerator
+        public struct Enumerator : IEnumerator<T>
         {
-            private LinkedList<T>.Enumerator m_Enumerator;
+            private LinkedList<T>.Enumerator enumerator;
 
             internal Enumerator(LinkedList<T> linkedList)
             {
@@ -350,25 +350,25 @@ namespace Framework.Core.DataStruct
                     throw new Exception("Linked list is invalid.");
                 }
 
-                m_Enumerator = linkedList.GetEnumerator();
+                enumerator = linkedList.GetEnumerator();
             }
 
             /// <summary>
             /// 获取当前结点。
             /// </summary>
-            public T Current => m_Enumerator.Current;
+            public T Current => enumerator.Current;
 
             /// <summary>
             /// 获取当前的枚举数。
             /// </summary>
-            object IEnumerator.Current => m_Enumerator.Current;
+            object IEnumerator.Current => enumerator.Current;
 
             /// <summary>
             /// 清理枚举数。
             /// </summary>
             public void Dispose()
             {
-                m_Enumerator.Dispose();
+                enumerator.Dispose();
             }
 
             /// <summary>
@@ -377,7 +377,7 @@ namespace Framework.Core.DataStruct
             /// <returns>返回下一个结点。</returns>
             public bool MoveNext()
             {
-                return m_Enumerator.MoveNext();
+                return enumerator.MoveNext();
             }
 
             /// <summary>
@@ -385,7 +385,7 @@ namespace Framework.Core.DataStruct
             /// </summary>
             void IEnumerator.Reset()
             {
-                ((IEnumerator<T>)m_Enumerator).Reset();
+                ((IEnumerator<T>)enumerator).Reset();
             }
         }
     }
