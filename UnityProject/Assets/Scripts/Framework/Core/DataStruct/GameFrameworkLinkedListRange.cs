@@ -10,10 +10,10 @@ namespace Framework.Core.DataStruct
     /// </summary>
     /// <typeparam name="T">指定链表范围的元素类型。</typeparam>
     [StructLayout(LayoutKind.Auto)]
-    public readonly struct GameFrameworkLinkedListRange<T> : IEnumerable<T>, IEnumerable
+    public readonly struct GameFrameworkLinkedListRange<T> : IEnumerable<T>
     {
-        private readonly LinkedListNode<T> _first;
-        private readonly LinkedListNode<T> _terminal;
+        private readonly LinkedListNode<T> first;
+        private readonly LinkedListNode<T> terminal;
 
         /// <summary>
         /// 初始化游戏框架链表范围的新实例。
@@ -27,24 +27,24 @@ namespace Framework.Core.DataStruct
                 throw new Exception("Range is invalid.");
             }
 
-            _first = first;
-            _terminal = terminal;
+            this.first = first;
+            this.terminal = terminal;
         }
 
         /// <summary>
         /// 获取链表范围是否有效。
         /// </summary>
-        public bool IsValid => _first != null && _terminal != null && _first != _terminal;
+        public bool IsValid => first != null && terminal != null && first != terminal;
 
         /// <summary>
         /// 获取链表范围的开始结点。
         /// </summary>
-        public LinkedListNode<T> First => _first;
+        public LinkedListNode<T> First => first;
 
         /// <summary>
         /// 获取链表范围的终结标记结点。
         /// </summary>
-        public LinkedListNode<T> Terminal => _terminal;
+        public LinkedListNode<T> Terminal => terminal;
 
         /// <summary>
         /// 获取链表范围的结点数量。
@@ -59,7 +59,7 @@ namespace Framework.Core.DataStruct
                 }
 
                 int count = 0;
-                for (LinkedListNode<T> current = _first; current != null && current != _terminal; current = current.Next)
+                for (LinkedListNode<T> current = first; current != null && current != terminal; current = current.Next)
                 {
                     count++;
                 }
@@ -75,7 +75,7 @@ namespace Framework.Core.DataStruct
         /// <returns>是否包含指定值。</returns>
         public bool Contains(T value)
         {
-            for (LinkedListNode<T> current = _first; current != null && current != _terminal; current = current.Next)
+            for (LinkedListNode<T> current = first; current != null && current != terminal; current = current.Next)
             {
                 if (current.Value.Equals(value))
                 {
@@ -117,11 +117,11 @@ namespace Framework.Core.DataStruct
         /// 循环访问集合的枚举数。
         /// </summary>
         [StructLayout(LayoutKind.Auto)]
-        public struct Enumerator : IEnumerator<T>, IEnumerator
+        public struct Enumerator : IEnumerator<T>
         {
-            private readonly GameFrameworkLinkedListRange<T> m_GameFrameworkLinkedListRange;
-            private LinkedListNode<T> m_Current;
-            private T m_CurrentValue;
+            private readonly GameFrameworkLinkedListRange<T> gameFrameworkLinkedListRange;
+            private LinkedListNode<T> currentNode;
+            private T currentValue;
 
             internal Enumerator(GameFrameworkLinkedListRange<T> range)
             {
@@ -130,20 +130,20 @@ namespace Framework.Core.DataStruct
                     throw new Exception("Range is invalid.");
                 }
 
-                m_GameFrameworkLinkedListRange = range;
-                m_Current = m_GameFrameworkLinkedListRange._first;
-                m_CurrentValue = default(T);
+                gameFrameworkLinkedListRange = range;
+                currentNode = gameFrameworkLinkedListRange.first;
+                currentValue = default;
             }
 
             /// <summary>
             /// 获取当前结点。
             /// </summary>
-            public T Current => m_CurrentValue;
+            public T Current => currentValue;
 
             /// <summary>
             /// 获取当前的枚举数。
             /// </summary>
-            object IEnumerator.Current => m_CurrentValue;
+            object IEnumerator.Current => currentValue;
 
             /// <summary>
             /// 清理枚举数。
@@ -158,13 +158,13 @@ namespace Framework.Core.DataStruct
             /// <returns>返回下一个结点。</returns>
             public bool MoveNext()
             {
-                if (m_Current == null || m_Current == m_GameFrameworkLinkedListRange._terminal)
+                if (currentNode == null || currentNode == gameFrameworkLinkedListRange.terminal)
                 {
                     return false;
                 }
 
-                m_CurrentValue = m_Current.Value;
-                m_Current = m_Current.Next;
+                currentValue = currentNode.Value;
+                currentNode = currentNode.Next;
                 return true;
             }
 
@@ -173,8 +173,8 @@ namespace Framework.Core.DataStruct
             /// </summary>
             void IEnumerator.Reset()
             {
-                m_Current = m_GameFrameworkLinkedListRange._first;
-                m_CurrentValue = default(T);
+                currentNode = gameFrameworkLinkedListRange.first;
+                currentValue = default;
             }
         }
     }
