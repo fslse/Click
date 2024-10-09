@@ -9,18 +9,18 @@ namespace Framework.Core.DataStruct
     /// <typeparam name="TValue">指定字典Value的元素类型。</typeparam>
     public class GameFrameworkDictionary<TKey, TValue>
     {
-        protected readonly List<TKey> KeyList = new List<TKey>();
-        protected readonly Dictionary<TKey, TValue> Dictionary = new Dictionary<TKey, TValue>();
+        protected readonly List<TKey> keyList = new();
+        protected readonly Dictionary<TKey, TValue> dictionary = new();
 
         /// <summary>
         /// 存储键的列表。
         /// </summary>
-        public List<TKey> Keys => KeyList;
+        public List<TKey> Keys => keyList;
 
         /// <summary>
         /// 存储字典实例。
         /// </summary>
-        public int Count => KeyList.Count;
+        public int Count => keyList.Count;
 
         /// <summary>
         /// 通过KEY的数组下标获取元素。
@@ -29,7 +29,7 @@ namespace Framework.Core.DataStruct
         /// <returns>TValue。</returns>
         public TValue GetValueByIndex(int index)
         {
-            return Dictionary[KeyList[index]];
+            return dictionary[keyList[index]];
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Framework.Core.DataStruct
         /// <param name="item">TValue。</param>
         public void SetValue(int index, TValue item)
         {
-            Dictionary[KeyList[index]] = item;
+            dictionary[keyList[index]] = item;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Framework.Core.DataStruct
         /// <param name="key">TKey。</param>
         public TValue this[TKey key]
         {
-            get => Dictionary[key];
+            get => dictionary[key];
             set
             {
                 if (!ContainsKey(key))
@@ -57,50 +57,58 @@ namespace Framework.Core.DataStruct
                 }
                 else
                 {
-                    Dictionary[key] = value;
+                    dictionary[key] = value;
                 }
             }
         }
 
-        /// <summary>Removes all keys and values from the <see cref="T:Framework.Core.DataStruct.GameFrameworkDictionary`2" />.</summary>
+        /// <summary>
+        /// Removes all keys and values from the <see cref="T:Framework.Core.DataStruct.GameFrameworkDictionary`2" />.
+        /// </summary>
         public void Clear()
         {
-            KeyList.Clear();
-            Dictionary.Clear();
+            keyList.Clear();
+            dictionary.Clear();
         }
 
-        /// <summary>Adds the specified key and value to the dictionary.</summary>
+        /// <summary>
+        /// Adds the specified key and value to the dictionary.
+        /// </summary>
         /// <param name="key">The key of the element to add.</param>
         /// <param name="item">The value of the element to add. The value can be <see langword="null" /> for reference types.</param>
         public virtual void Add(TKey key, TValue item)
         {
-            KeyList.Add(key);
-            Dictionary.Add(key, item);
+            keyList.Add(key);
+            dictionary.Add(key, item);
         }
 
-        /// <summary>Gets the value associated with the specified key.</summary>
+        /// <summary>
+        /// Gets the value associated with the specified key.
+        /// </summary>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value" /> parameter. This parameter is passed uninitialized.</param>
         public bool TryGetValue(TKey key, out TValue value)
         {
-            return Dictionary.TryGetValue(key, out value);
+            return dictionary.TryGetValue(key, out value);
         }
 
-        /// <summary>Determines whether the <see cref="T:System.Collections.Generic.Dictionary`2" /> contains the specified key.</summary>
-        /// <param name="key">The key to locate in the </param>
+        /// <summary>
+        /// Determines whether the <see cref="T:System.Collections.Generic.Dictionary`2" /> contains the specified key.
+        /// </summary>
+        /// <param name="key">The key to locate in the dictionary</param>
         public bool ContainsKey(TKey key)
         {
-            return Dictionary.ContainsKey(key);
+            return dictionary.ContainsKey(key);
         }
 
         public TKey GetKey(int index)
         {
-            return KeyList[index];
+            return keyList[index];
         }
 
         public bool Remove(TKey key)
         {
-            return KeyList.Remove(key) && Dictionary.Remove(key);
+            return keyList.Remove(key) && dictionary.Remove(key);
         }
     }
 
@@ -114,7 +122,7 @@ namespace Framework.Core.DataStruct
         public override void Add(TKey key, TValue item)
         {
             base.Add(key, item);
-            KeyList.Sort();
+            keyList.Sort();
         }
     }
 }
