@@ -9,15 +9,14 @@ namespace Framework.Core.DataStruct
     [StructLayout(LayoutKind.Auto)]
     internal readonly struct TypeNamePair : IEquatable<TypeNamePair>
     {
-        private readonly Type _type;
-        private readonly string _name;
+        private readonly Type type;
+        private readonly string name;
 
         /// <summary>
         /// 初始化类型和名称的组合值的新实例。
         /// </summary>
         /// <param name="type">类型。</param>
-        public TypeNamePair(Type type)
-            : this(type, string.Empty)
+        public TypeNamePair(Type type) : this(type, string.Empty)
         {
         }
 
@@ -28,24 +27,19 @@ namespace Framework.Core.DataStruct
         /// <param name="name">名称。</param>
         public TypeNamePair(Type type, string name)
         {
-            if (type == null)
-            {
-                throw new Exception("Type is invalid.");
-            }
-
-            _type = type;
-            _name = name ?? string.Empty;
+            this.type = type ?? throw new Exception("Type is invalid.");
+            this.name = name ?? string.Empty;
         }
 
         /// <summary>
         /// 获取类型。
         /// </summary>
-        public Type Type => _type;
+        public Type Type => type;
 
         /// <summary>
         /// 获取名称。
         /// </summary>
-        public string Name => _name;
+        public string Name => name;
 
         /// <summary>
         /// 获取类型和名称的组合值字符串。
@@ -53,13 +47,13 @@ namespace Framework.Core.DataStruct
         /// <returns>类型和名称的组合值字符串。</returns>
         public override string ToString()
         {
-            if (_type == null)
+            if (type == null)
             {
                 throw new Exception("Type is invalid.");
             }
 
-            string typeName = _type.FullName;
-            return (string.IsNullOrEmpty(_name) ? typeName : $"{typeName}.{_name}") ?? string.Empty;
+            string typeName = type.FullName;
+            return (string.IsNullOrEmpty(name) ? typeName : $"{typeName}.{name}")!;
         }
 
         /// <summary>
@@ -68,7 +62,7 @@ namespace Framework.Core.DataStruct
         /// <returns>对象的哈希值。</returns>
         public override int GetHashCode()
         {
-            return _type.GetHashCode() ^ _name.GetHashCode();
+            return type.GetHashCode() ^ name.GetHashCode();
         }
 
         /// <summary>
@@ -78,7 +72,7 @@ namespace Framework.Core.DataStruct
         /// <returns>被比较的对象是否与自身相等。</returns>
         public override bool Equals(object obj)
         {
-            return obj is TypeNamePair && Equals((TypeNamePair)obj);
+            return obj is TypeNamePair pair && Equals(pair);
         }
 
         /// <summary>
@@ -88,7 +82,7 @@ namespace Framework.Core.DataStruct
         /// <returns>被比较的对象是否与自身相等。</returns>
         public bool Equals(TypeNamePair value)
         {
-            return _type == value._type && _name == value._name;
+            return type == value.type && name == value.name;
         }
 
         /// <summary>
