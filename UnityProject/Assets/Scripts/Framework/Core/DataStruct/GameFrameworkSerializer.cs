@@ -10,20 +10,20 @@ namespace Framework.Core.DataStruct
     /// <typeparam name="T">要序列化的数据类型。</typeparam>
     public abstract class GameFrameworkSerializer<T>
     {
-        private readonly Dictionary<byte, SerializeCallback> _serializeCallbacks;
-        private readonly Dictionary<byte, DeserializeCallback> _deserializeCallbacks;
-        private readonly Dictionary<byte, TryGetValueCallback> _tryGetValueCallbacks;
-        private byte _latestSerializeCallbackVersion;
+        private readonly Dictionary<byte, SerializeCallback> serializeCallbacks;
+        private readonly Dictionary<byte, DeserializeCallback> deserializeCallbacks;
+        private readonly Dictionary<byte, TryGetValueCallback> tryGetValueCallbacks;
+        private byte latestSerializeCallbackVersion;
 
         /// <summary>
         /// 初始化游戏框架序列化器基类的新实例。
         /// </summary>
         public GameFrameworkSerializer()
         {
-            _serializeCallbacks = new Dictionary<byte, SerializeCallback>();
-            _deserializeCallbacks = new Dictionary<byte, DeserializeCallback>();
-            _tryGetValueCallbacks = new Dictionary<byte, TryGetValueCallback>();
-            _latestSerializeCallbackVersion = 0;
+            serializeCallbacks = new Dictionary<byte, SerializeCallback>();
+            deserializeCallbacks = new Dictionary<byte, DeserializeCallback>();
+            tryGetValueCallbacks = new Dictionary<byte, TryGetValueCallback>();
+            latestSerializeCallbackVersion = 0;
         }
 
         /// <summary>
@@ -57,15 +57,10 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">序列化回调函数。</param>
         public void RegisterSerializeCallback(byte version, SerializeCallback callback)
         {
-            if (callback == null)
+            serializeCallbacks[version] = callback ?? throw new Exception("Serialize callback is invalid.");
+            if (version > latestSerializeCallbackVersion)
             {
-                throw new Exception("Serialize callback is invalid.");
-            }
-
-            _serializeCallbacks[version] = callback;
-            if (version > _latestSerializeCallbackVersion)
-            {
-                _latestSerializeCallbackVersion = version;
+                latestSerializeCallbackVersion = version;
             }
         }
 
@@ -76,12 +71,7 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">反序列化回调函数。</param>
         public void RegisterDeserializeCallback(byte version, DeserializeCallback callback)
         {
-            if (callback == null)
-            {
-                throw new Exception("Deserialize callback is invalid.");
-            }
-
-            _deserializeCallbacks[version] = callback;
+            deserializeCallbacks[version] = callback ?? throw new Exception("Deserialize callback is invalid.");
         }
 
         /// <summary>
@@ -91,12 +81,7 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">尝试从指定流获取指定键的值回调函数。</param>
         public void RegisterTryGetValueCallback(byte version, TryGetValueCallback callback)
         {
-            if (callback == null)
-            {
-                throw new Exception("Try get value callback is invalid.");
-            }
-
-            _tryGetValueCallbacks[version] = callback;
+            tryGetValueCallbacks[version] = callback ?? throw new Exception("Try get value callback is invalid.");
         }
 
         /// <summary>
@@ -107,12 +92,12 @@ namespace Framework.Core.DataStruct
         /// <returns>是否序列化数据成功。</returns>
         public bool Serialize(Stream stream, T data)
         {
-            if (_serializeCallbacks.Count <= 0)
+            if (serializeCallbacks.Count <= 0)
             {
                 throw new Exception("No serialize callback registered.");
             }
 
-            return Serialize(stream, data, _latestSerializeCallbackVersion);
+            return Serialize(stream, data, latestSerializeCallbackVersion);
         }
 
         /// <summary>
@@ -129,8 +114,7 @@ namespace Framework.Core.DataStruct
             stream.WriteByte(header[1]);
             stream.WriteByte(header[2]);
             stream.WriteByte(version);
-            SerializeCallback callback = null;
-            if (!_serializeCallbacks.TryGetValue(version, out callback))
+            if (!serializeCallbacks.TryGetValue(version, out var callback))
             {
                 throw new Exception($"Serialize callback '{version}' is not exist.");
             }
@@ -151,13 +135,11 @@ namespace Framework.Core.DataStruct
             byte header2 = (byte)stream.ReadByte();
             if (header0 != header[0] || header1 != header[1] || header2 != header[2])
             {
-                throw new Exception(
-                    $"Header is invalid, need '{(char)header[0]}{(char)header[1]}{(char)header[2]}', current '{(char)header0}{(char)header1}{(char)header2}'.");
+                throw new Exception($"Header is invalid, need '{(char)header[0]}{(char)header[1]}{(char)header[2]}', current '{(char)header0}{(char)header1}{(char)header2}'.");
             }
 
             byte version = (byte)stream.ReadByte();
-            DeserializeCallback callback = null;
-            if (!_deserializeCallbacks.TryGetValue(version, out callback))
+            if (!deserializeCallbacks.TryGetValue(version, out var callback))
             {
                 throw new Exception($"Deserialize callback '{version}' is not exist.");
             }
@@ -185,13 +167,7 @@ namespace Framework.Core.DataStruct
             }
 
             byte version = (byte)stream.ReadByte();
-            TryGetValueCallback callback = null;
-            if (!_tryGetValueCallbacks.TryGetValue(version, out callback))
-            {
-                return false;
-            }
-
-            return callback(stream, key, out value);
+            return tryGetValueCallbacks.TryGetValue(version, out var callback) && callback(stream, key, out value);
         }
 
         /// <summary>
