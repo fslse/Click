@@ -1,5 +1,8 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Framework.Core.GameEvent;
+using Framework.Core.MemoryPool;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;
@@ -224,10 +227,57 @@ namespace Framework.Modules.UI
         {
             Hide(() =>
             {
+                RemoveAllUIEvent();
                 UIPanelManager.Instance.RecyclePanel(this);
                 UIPanelManager.Instance.UIMask.raycastTarget = false;
             }).Forget();
         }
+
+        #region UIEvent
+
+        private UIEventManager eventManager;
+
+        protected UIEventManager EventManager => eventManager ??= MemoryPoolManager.Acquire<UIEventManager>();
+
+        protected void AddUIEvent(int eventType, Action handler)
+        {
+            EventManager.AddEvent(eventType, handler);
+        }
+
+        protected void AddUIEvent<T1>(int eventType, Action<T1> handler)
+        {
+            EventManager.AddEvent(eventType, handler);
+        }
+
+        protected void AddUIEvent<T1, T2>(int eventType, Action<T1, T2> handler)
+        {
+            EventManager.AddEvent(eventType, handler);
+        }
+
+        protected void AddUIEvent<T1, T2, T3>(int eventType, Action<T1, T2, T3> handler)
+        {
+            EventManager.AddEvent(eventType, handler);
+        }
+
+        protected void AddUIEvent<T1, T2, T3, T4>(int eventType, Action<T1, T2, T3, T4> handler)
+        {
+            EventManager.AddEvent(eventType, handler);
+        }
+
+        protected void AddUIEvent<T1, T2, T3, T4, T5>(int eventType, Action<T1, T2, T3, T4, T5> handler)
+        {
+            eventManager.AddEvent(eventType, handler);
+        }
+
+        protected void RemoveAllUIEvent()
+        {
+            if (eventManager != null)
+            {
+                MemoryPoolManager.Release(eventManager);
+            }
+        }
+
+        #endregion
     }
 
     public enum UIPanelLayer
