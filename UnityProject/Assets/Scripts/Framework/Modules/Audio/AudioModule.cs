@@ -27,7 +27,7 @@ namespace Framework.Modules.Audio
         #region Public Propreties
 
         /// <summary>
-        /// 场景上实例对象节点。
+        /// 场景上Audio根节点。
         /// </summary>
         public Transform InstanceRoot { get; }
 

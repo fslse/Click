@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Cysharp.Threading.Tasks;
 using Framework.Modules.Audio;
+using Framework.Modules.ObjectPool;
 using Framework.Modules.UI;
 using Scripts.Fire;
 using Scripts.Fire.Log;
@@ -50,6 +51,9 @@ namespace Framework
             // AudioModule 初始化
             if (!AudioModule.Instance.InstanceRoot.parent)
                 DontDestroyOnLoad(AudioModule.Instance.InstanceRoot.gameObject);
+            // ObjectPoolModule 初始化
+            if (!ObjectPoolModule.Instance.InstanceRoot.parent)
+                DontDestroyOnLoad(ObjectPoolModule.Instance.InstanceRoot.gameObject);
 
             MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.7f));
 
