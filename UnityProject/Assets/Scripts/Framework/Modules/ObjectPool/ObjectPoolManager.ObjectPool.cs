@@ -14,17 +14,17 @@ namespace Framework.Modules.ObjectPool
         /// <typeparam name="T">对象类型。</typeparam>
         private sealed class ObjectPool<T> : ObjectPoolBase, IObjectPool<T> where T : ObjectBase
         {
-            private readonly GameFrameworkMultiDictionary<string, object> _objects;
-            private readonly Dictionary<object, object> _objectMap;
-            private readonly ReleaseObjectFilterCallback<T> _defaultReleaseObjectFilterCallback;
-            private readonly List<T> _cachedCanReleaseObjects;
-            private readonly List<T> _cachedToReleaseObjects;
-            private readonly bool _allowMultiSpawn;
-            private float _autoReleaseInterval;
-            private int _capacity;
-            private float _expireTime;
-            private int _priority;
-            private float _autoReleaseTime;
+            private readonly GameFrameworkMultiDictionary<string, object> objects;
+            private readonly Dictionary<object, object> objectMap;
+            private readonly ReleaseObjectFilterCallback<T> defaultReleaseObjectFilterCallback;
+            private readonly List<T> cachedCanReleaseObjects;
+            private readonly List<T> cachedToReleaseObjects;
+            private readonly bool allowMultiSpawn;
+            private float autoReleaseInterval;
+            private int capacity;
+            private float expireTime;
+            private int priority;
+            private float autoReleaseTime;
 
             /// <summary>
             /// 初始化对象池的新实例。
@@ -35,20 +35,19 @@ namespace Framework.Modules.ObjectPool
             /// <param name="capacity">对象池的容量。</param>
             /// <param name="expireTime">对象池对象过期秒数。</param>
             /// <param name="priority">对象池的优先级。</param>
-            public ObjectPool(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority)
-                : base(name)
+            public ObjectPool(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority) : base(name)
             {
-                _objects = new GameFrameworkMultiDictionary<string, object>();
-                _objectMap = new Dictionary<object, object>();
-                _defaultReleaseObjectFilterCallback = DefaultReleaseObjectFilterCallback;
-                _cachedCanReleaseObjects = new List<T>();
-                _cachedToReleaseObjects = new List<T>();
-                _allowMultiSpawn = allowMultiSpawn;
-                _autoReleaseInterval = autoReleaseInterval;
-                Capacity = capacity;
-                ExpireTime = expireTime;
-                _priority = priority;
-                _autoReleaseTime = 0f;
+                objects = new GameFrameworkMultiDictionary<string, object>();
+                objectMap = new Dictionary<object, object>();
+                defaultReleaseObjectFilterCallback = DefaultReleaseObjectFilterCallback;
+                cachedCanReleaseObjects = new List<T>();
+                cachedToReleaseObjects = new List<T>();
+                this.allowMultiSpawn = allowMultiSpawn;
+                this.autoReleaseInterval = autoReleaseInterval;
+                this.capacity = capacity;
+                this.expireTime = expireTime;
+                this.priority = priority;
+                autoReleaseTime = 0f;
             }
 
             /// <summary>
@@ -59,7 +58,7 @@ namespace Framework.Modules.ObjectPool
             /// <summary>
             /// 获取对象池中对象的数量。
             /// </summary>
-            public override int Count => _objectMap.Count;
+            public override int Count => objectMap.Count;
 
             /// <summary>
             /// 获取对象池中能被释放的对象的数量。
@@ -68,23 +67,23 @@ namespace Framework.Modules.ObjectPool
             {
                 get
                 {
-                    GetCanReleaseObjects(_cachedCanReleaseObjects);
-                    return _cachedCanReleaseObjects.Count;
+                    GetCanReleaseObjects(cachedCanReleaseObjects);
+                    return cachedCanReleaseObjects.Count;
                 }
             }
 
             /// <summary>
             /// 获取是否允许对象被多次获取。
             /// </summary>
-            public override bool AllowMultiSpawn => _allowMultiSpawn;
+            public override bool AllowMultiSpawn => allowMultiSpawn;
 
             /// <summary>
             /// 获取或设置对象池自动释放可释放对象的间隔秒数。
             /// </summary>
             public override float AutoReleaseInterval
             {
-                get => _autoReleaseInterval;
-                set => _autoReleaseInterval = value;
+                get => autoReleaseInterval;
+                set => autoReleaseInterval = value;
             }
 
             /// <summary>
@@ -92,7 +91,7 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public override int Capacity
             {
-                get => _capacity;
+                get => capacity;
                 set
                 {
                     if (value < 0)
@@ -100,12 +99,12 @@ namespace Framework.Modules.ObjectPool
                         throw new Exception("Capacity is invalid.");
                     }
 
-                    if (_capacity == value)
+                    if (capacity == value)
                     {
                         return;
                     }
 
-                    _capacity = value;
+                    capacity = value;
                     Release();
                 }
             }
@@ -115,7 +114,7 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public override float ExpireTime
             {
-                get => _expireTime;
+                get => expireTime;
 
                 set
                 {
@@ -129,7 +128,7 @@ namespace Framework.Modules.ObjectPool
                         return;
                     }
 
-                    _expireTime = value;
+                    expireTime = value;
                     Release();
                 }
             }
@@ -139,8 +138,8 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public override int Priority
             {
-                get => _priority;
-                set => _priority = value;
+                get => priority;
+                set => priority = value;
             }
 
             /// <summary>
@@ -155,11 +154,11 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Object is invalid.");
                 }
 
-                ObjectPoolManager.Object<T> internalObject = ObjectPoolManager.Object<T>.Create(obj, spawned);
-                _objects.Add(obj.Name, internalObject);
-                _objectMap.Add(obj.Target, internalObject);
+                Object<T> internalObject = Object<T>.Create(obj, spawned);
+                objects.Add(obj.Name, internalObject);
+                objectMap.Add(obj.Target, internalObject);
 
-                if (Count > _capacity)
+                if (Count > capacity)
                 {
                     Release();
                 }
@@ -186,12 +185,11 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Name is invalid.");
                 }
 
-                GameFrameworkLinkedListRange<object> objectRange = default(GameFrameworkLinkedListRange<object>);
-                if (_objects.TryGetValue(name, out objectRange))
+                if (objects.TryGetValue(name, out var objectRange))
                 {
-                    foreach (ObjectPoolManager.Object<T> internalObject in objectRange)
+                    foreach (Object<T> internalObject in objectRange)
                     {
-                        if (_allowMultiSpawn || !internalObject.IsInUse)
+                        if (allowMultiSpawn || !internalObject.IsInUse)
                         {
                             return true;
                         }
@@ -222,12 +220,11 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Name is invalid.");
                 }
 
-                GameFrameworkLinkedListRange<object> objectRange = default(GameFrameworkLinkedListRange<object>);
-                if (_objects.TryGetValue(name, out objectRange))
+                if (objects.TryGetValue(name, out var objectRange))
                 {
-                    foreach (ObjectPoolManager.Object<T> internalObject in objectRange)
+                    foreach (Object<T> internalObject in objectRange)
                     {
-                        if (_allowMultiSpawn || !internalObject.IsInUse)
+                        if (allowMultiSpawn || !internalObject.IsInUse)
                         {
                             return internalObject.Spawn();
                         }
@@ -262,11 +259,11 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Target is invalid.");
                 }
 
-                ObjectPoolManager.Object<T> internalObject = GetObject(target);
+                Object<T> internalObject = GetObject(target);
                 if (internalObject != null)
                 {
                     internalObject.Unspawn();
-                    if (Count > _capacity && internalObject.SpawnCount <= 0)
+                    if (Count > capacity && internalObject.SpawnCount <= 0)
                     {
                         Release();
                     }
@@ -305,7 +302,7 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Target is invalid.");
                 }
 
-                ObjectPoolManager.Object<T> internalObject = GetObject(target);
+                Object<T> internalObject = GetObject(target);
                 if (internalObject != null)
                 {
                     internalObject.Locked = locked;
@@ -344,7 +341,7 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Target is invalid.");
                 }
 
-                ObjectPoolManager.Object<T> internalObject = GetObject(target);
+                Object<T> internalObject = GetObject(target);
                 if (internalObject != null)
                 {
                     internalObject.Priority = priority;
@@ -383,7 +380,7 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Target is invalid.");
                 }
 
-                ObjectPoolManager.Object<T> internalObject = GetObject(target);
+                Object<T> internalObject = GetObject(target);
                 if (internalObject == null)
                 {
                     return false;
@@ -394,8 +391,8 @@ namespace Framework.Modules.ObjectPool
                     return false;
                 }
 
-                _objects.Remove(internalObject.Name, internalObject);
-                _objectMap.Remove(internalObject.Peek().Target);
+                objects.Remove(internalObject.Name, internalObject);
+                objectMap.Remove(internalObject.Peek().Target);
 
                 internalObject.Release(false);
                 MemoryPoolManager.Release(internalObject);
@@ -407,7 +404,7 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public override void Release()
             {
-                Release(Count - _capacity, _defaultReleaseObjectFilterCallback);
+                Release(Count - capacity, defaultReleaseObjectFilterCallback);
             }
 
             /// <summary>
@@ -416,7 +413,7 @@ namespace Framework.Modules.ObjectPool
             /// <param name="toReleaseCount">尝试释放对象数量。</param>
             public override void Release(int toReleaseCount)
             {
-                Release(toReleaseCount, _defaultReleaseObjectFilterCallback);
+                Release(toReleaseCount, defaultReleaseObjectFilterCallback);
             }
 
             /// <summary>
@@ -425,7 +422,7 @@ namespace Framework.Modules.ObjectPool
             /// <param name="releaseObjectFilterCallback">释放对象筛选函数。</param>
             public void Release(ReleaseObjectFilterCallback<T> releaseObjectFilterCallback)
             {
-                Release(Count - _capacity, releaseObjectFilterCallback);
+                Release(Count - capacity, releaseObjectFilterCallback);
             }
 
             /// <summary>
@@ -446,15 +443,15 @@ namespace Framework.Modules.ObjectPool
                 }
 
                 DateTime expireTime = DateTime.MinValue;
-                if (_expireTime < float.MaxValue)
+                if (this.expireTime < float.MaxValue)
                 {
-                    expireTime = DateTime.UtcNow.AddSeconds(-_expireTime);
+                    expireTime = DateTime.UtcNow.AddSeconds(-this.expireTime);
                 }
 
-                _autoReleaseTime = 0f;
-                GetCanReleaseObjects(_cachedCanReleaseObjects);
-                List<T> toReleaseObjects = releaseObjectFilterCallback(_cachedCanReleaseObjects, toReleaseCount, expireTime);
-                if (toReleaseObjects == null || toReleaseObjects.Count <= 0)
+                autoReleaseTime = 0f;
+                GetCanReleaseObjects(cachedCanReleaseObjects);
+                List<T> toReleaseObjects = releaseObjectFilterCallback(cachedCanReleaseObjects, toReleaseCount, expireTime);
+                if (toReleaseObjects is not { Count: > 0 })
                 {
                     return;
                 }
@@ -470,9 +467,9 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public override void ReleaseAllUnused()
             {
-                _autoReleaseTime = 0f;
-                GetCanReleaseObjects(_cachedCanReleaseObjects);
-                foreach (T toReleaseObject in _cachedCanReleaseObjects)
+                autoReleaseTime = 0f;
+                GetCanReleaseObjects(cachedCanReleaseObjects);
+                foreach (T toReleaseObject in cachedCanReleaseObjects)
                 {
                     ReleaseObject(toReleaseObject);
                 }
@@ -485,9 +482,9 @@ namespace Framework.Modules.ObjectPool
             public override ObjectInfo[] GetAllObjectInfos()
             {
                 List<ObjectInfo> results = new List<ObjectInfo>();
-                foreach (KeyValuePair<string, GameFrameworkLinkedListRange<object>> objectRanges in _objects)
+                foreach (KeyValuePair<string, GameFrameworkLinkedListRange<object>> objectRanges in objects)
                 {
-                    foreach (ObjectPoolManager.Object<T> internalObject in objectRanges.Value)
+                    foreach (Object<T> internalObject in objectRanges.Value)
                     {
                         results.Add(new ObjectInfo(internalObject.Name, internalObject.Locked, internalObject.CustomCanReleaseFlag, internalObject.Priority,
                             internalObject.LastUseTime, internalObject.SpawnCount));
@@ -499,8 +496,8 @@ namespace Framework.Modules.ObjectPool
 
             internal override void Update(float elapseSeconds, float realElapseSeconds)
             {
-                _autoReleaseTime += realElapseSeconds;
-                if (_autoReleaseTime < _autoReleaseInterval)
+                autoReleaseTime += realElapseSeconds;
+                if (autoReleaseTime < autoReleaseInterval)
                 {
                     return;
                 }
@@ -510,29 +507,28 @@ namespace Framework.Modules.ObjectPool
 
             internal override void Shutdown()
             {
-                foreach (KeyValuePair<object, object> objectInMap in _objectMap)
+                foreach (KeyValuePair<object, object> objectInMap in objectMap)
                 {
-                    ((ObjectPoolManager.Object<T>)objectInMap.Value).Release(true);
+                    ((Object<T>)objectInMap.Value).Release(true);
                     MemoryPoolManager.Release((IMemory)objectInMap.Value);
                 }
 
-                _objects.Clear();
-                _objectMap.Clear();
-                _cachedCanReleaseObjects.Clear();
-                _cachedToReleaseObjects.Clear();
+                objects.Clear();
+                objectMap.Clear();
+                cachedCanReleaseObjects.Clear();
+                cachedToReleaseObjects.Clear();
             }
 
-            private ObjectPoolManager.Object<T> GetObject(object target)
+            private Object<T> GetObject(object target)
             {
                 if (target == null)
                 {
                     throw new Exception("Target is invalid.");
                 }
 
-                //Object<T> internalObject = null;
-                if (_objectMap.TryGetValue(target, out var internalObject))
+                if (objectMap.TryGetValue(target, out var internalObject))
                 {
-                    return internalObject as ObjectPoolManager.Object<T>;
+                    return internalObject as Object<T>;
                 }
 
                 return null;
@@ -546,9 +542,9 @@ namespace Framework.Modules.ObjectPool
                 }
 
                 results.Clear();
-                foreach (KeyValuePair<object, object> objectInMap in _objectMap)
+                foreach (KeyValuePair<object, object> objectInMap in objectMap)
                 {
-                    ObjectPoolManager.Object<T> internalObject = (ObjectPoolManager.Object<T>)objectInMap.Value;
+                    Object<T> internalObject = (Object<T>)objectInMap.Value;
                     if (internalObject.IsInUse || internalObject.Locked || !internalObject.CustomCanReleaseFlag)
                     {
                         continue;
@@ -560,7 +556,7 @@ namespace Framework.Modules.ObjectPool
 
             private List<T> DefaultReleaseObjectFilterCallback(List<T> candidateObjects, int toReleaseCount, DateTime expireTime)
             {
-                _cachedToReleaseObjects.Clear();
+                cachedToReleaseObjects.Clear();
 
                 if (expireTime > DateTime.MinValue)
                 {
@@ -568,13 +564,12 @@ namespace Framework.Modules.ObjectPool
                     {
                         if (candidateObjects[i].LastUseTime <= expireTime)
                         {
-                            _cachedToReleaseObjects.Add(candidateObjects[i]);
+                            cachedToReleaseObjects.Add(candidateObjects[i]);
                             candidateObjects.RemoveAt(i);
-                            continue;
                         }
                     }
 
-                    toReleaseCount -= _cachedToReleaseObjects.Count;
+                    toReleaseCount -= cachedToReleaseObjects.Count;
                 }
 
                 for (int i = 0; toReleaseCount > 0 && i < candidateObjects.Count; i++)
@@ -589,11 +584,11 @@ namespace Framework.Modules.ObjectPool
                         }
                     }
 
-                    _cachedToReleaseObjects.Add(candidateObjects[i]);
+                    cachedToReleaseObjects.Add(candidateObjects[i]);
                     toReleaseCount--;
                 }
 
-                return _cachedToReleaseObjects;
+                return cachedToReleaseObjects;
             }
         }
     }
