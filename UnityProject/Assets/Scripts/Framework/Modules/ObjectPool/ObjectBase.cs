@@ -17,7 +17,7 @@ namespace Framework.Modules.ObjectPool
             Target = null;
             Locked = false;
             Priority = 0;
-            LastUseTime = default(DateTime);
+            LastUseTime = default;
         }
 
         /// <summary>
@@ -41,55 +41,14 @@ namespace Framework.Modules.ObjectPool
         public int Priority { get; set; }
 
         /// <summary>
-        /// 获取自定义释放检查标记。
-        /// </summary>
-        public virtual bool CustomCanReleaseFlag => true;
-
-        /// <summary>
         /// 获取对象上次使用时间。
         /// </summary>
         public DateTime LastUseTime { get; internal set; }
 
         /// <summary>
-        /// 初始化对象基类。
+        /// 获取自定义释放检查标记。
         /// </summary>
-        /// <param name="target">对象。</param>
-        protected void Initialize(object target)
-        {
-            Initialize(null, target, false, 0);
-        }
-
-        /// <summary>
-        /// 初始化对象基类。
-        /// </summary>
-        /// <param name="name">对象名称。</param>
-        /// <param name="target">对象。</param>
-        protected void Initialize(string name, object target)
-        {
-            Initialize(name, target, false, 0);
-        }
-
-        /// <summary>
-        /// 初始化对象基类。
-        /// </summary>
-        /// <param name="name">对象名称。</param>
-        /// <param name="target">对象。</param>
-        /// <param name="locked">对象是否被加锁。</param>
-        protected void Initialize(string name, object target, bool locked)
-        {
-            Initialize(name, target, locked, 0);
-        }
-
-        /// <summary>
-        /// 初始化对象基类。
-        /// </summary>
-        /// <param name="name">对象名称。</param>
-        /// <param name="target">对象。</param>
-        /// <param name="priority">对象的优先级。</param>
-        protected void Initialize(string name, object target, int priority)
-        {
-            Initialize(name, target, false, priority);
-        }
+        public virtual bool CustomCanReleaseFlag => true;
 
         /// <summary>
         /// 初始化对象基类。
@@ -98,7 +57,7 @@ namespace Framework.Modules.ObjectPool
         /// <param name="target">对象。</param>
         /// <param name="locked">对象是否被加锁。</param>
         /// <param name="priority">对象的优先级。</param>
-        protected void Initialize(string name, object target, bool locked, int priority)
+        protected void Initialize(string name, object target, bool locked = false, int priority = 0)
         {
             Name = name ?? string.Empty;
             Target = target ?? throw new Exception($"Target '{name}' is invalid.");

@@ -4,7 +4,7 @@ using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
 
 namespace Framework.Modules.ObjectPool
 {
-    internal sealed partial class ObjectPoolManager : IObjectPoolManager
+    internal sealed partial class ObjectPoolManager
     {
         /// <summary>
         /// 内部对象。
@@ -12,42 +12,30 @@ namespace Framework.Modules.ObjectPool
         /// <typeparam name="T">对象类型。</typeparam>
         private sealed class Object<T> : IMemory where T : ObjectBase
         {
-            private T _object;
-            private int _spawnCount;
+            private T @object;
+            private int spawnCount;
 
             /// <summary>
             /// 初始化内部对象的新实例。
             /// </summary>
             public Object()
             {
-                _object = null;
-                _spawnCount = 0;
+                @object = null;
+                spawnCount = 0;
             }
 
             /// <summary>
             /// 获取对象名称。
             /// </summary>
-            public string Name
-            {
-                get
-                {
-                    return _object.Name;
-                }
-            }
+            public string Name => @object.Name;
 
             /// <summary>
             /// 获取对象是否被加锁。
             /// </summary>
             public bool Locked
             {
-                get
-                {
-                    return _object.Locked;
-                }
-                internal set
-                {
-                    _object.Locked = value;
-                }
+                get => @object.Locked;
+                internal set => @object.Locked = value;
             }
 
             /// <summary>
@@ -55,59 +43,29 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public int Priority
             {
-                get
-                {
-                    return _object.Priority;
-                }
-                internal set
-                {
-                    _object.Priority = value;
-                }
-            }
-
-            /// <summary>
-            /// 获取自定义释放检查标记。
-            /// </summary>
-            public bool CustomCanReleaseFlag
-            {
-                get
-                {
-                    return _object.CustomCanReleaseFlag;
-                }
+                get => @object.Priority;
+                internal set => @object.Priority = value;
             }
 
             /// <summary>
             /// 获取对象上次使用时间。
             /// </summary>
-            public DateTime LastUseTime
-            {
-                get
-                {
-                    return _object.LastUseTime;
-                }
-            }
+            public DateTime LastUseTime => @object.LastUseTime;
+
+            /// <summary>
+            /// 获取自定义释放检查标记。
+            /// </summary>
+            public bool CustomCanReleaseFlag => @object.CustomCanReleaseFlag;
 
             /// <summary>
             /// 获取对象是否正在使用。
             /// </summary>
-            public bool IsInUse
-            {
-                get
-                {
-                    return _spawnCount > 0;
-                }
-            }
+            public bool IsInUse => spawnCount > 0;
 
             /// <summary>
             /// 获取对象的获取计数。
             /// </summary>
-            public int SpawnCount
-            {
-                get
-                {
-                    return _spawnCount;
-                }
-            }
+            public int SpawnCount => spawnCount;
 
             /// <summary>
             /// 创建内部对象。
@@ -123,8 +81,8 @@ namespace Framework.Modules.ObjectPool
                 }
 
                 Object<T> internalObject = MemoryPoolManager.Acquire<Object<T>>();
-                internalObject._object = obj;
-                internalObject._spawnCount = spawned ? 1 : 0;
+                internalObject.@object = obj;
+                internalObject.spawnCount = spawned ? 1 : 0;
                 if (spawned)
                 {
                     obj.OnSpawn();
@@ -138,8 +96,8 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public void Clear()
             {
-                _object = null;
-                _spawnCount = 0;
+                @object = null;
+                spawnCount = 0;
             }
 
             /// <summary>
@@ -148,7 +106,7 @@ namespace Framework.Modules.ObjectPool
             /// <returns>对象。</returns>
             public T Peek()
             {
-                return _object;
+                return @object;
             }
 
             /// <summary>
@@ -157,10 +115,10 @@ namespace Framework.Modules.ObjectPool
             /// <returns>对象。</returns>
             public T Spawn()
             {
-                _spawnCount++;
-                _object.LastUseTime = DateTime.UtcNow;
-                _object.OnSpawn();
-                return _object;
+                spawnCount++;
+                @object.LastUseTime = DateTime.UtcNow;
+                @object.OnSpawn();
+                return @object;
             }
 
             /// <summary>
@@ -168,10 +126,10 @@ namespace Framework.Modules.ObjectPool
             /// </summary>
             public void Unspawn()
             {
-                _object.OnUnspawn();
-                _object.LastUseTime = DateTime.UtcNow;
-                _spawnCount--;
-                if (_spawnCount < 0)
+                @object.OnUnspawn();
+                @object.LastUseTime = DateTime.UtcNow;
+                spawnCount--;
+                if (spawnCount < 0)
                 {
                     throw new Exception($"Object '{Name}' spawn count is less than 0.");
                 }
@@ -183,8 +141,8 @@ namespace Framework.Modules.ObjectPool
             /// <param name="isShutdown">是否是关闭对象池时触发。</param>
             public void Release(bool isShutdown)
             {
-                _object.Release(isShutdown);
-                MemoryPoolManager.Release(_object);
+                @object.Release(isShutdown);
+                MemoryPoolManager.Release(@object);
             }
         }
     }
