@@ -34,8 +34,8 @@ namespace Main.UIPanel
             img.sprite = await AssetManager.Instance.LoadAssetAsync<Sprite>("Assets/AssetPackages/UIPanel/ExamplePanel/Texture/panel_border_brown.png");
             img1.sprite = AssetManager.Instance.LoadAsset<Sprite>("Assets/AssetPackages/UIPanel/ExamplePanel/Texture/panel_border_grey_detail.png");
 
-            const string gameConfDir = "Assets/AssetPackages/Config/Json";
-            var tables = new cfg.Tables(file => JsonConvert.DeserializeObject(AssetManager.Instance.LoadAsset<TextAsset>($"{gameConfDir}/{file}.json").text) as JArray);
+            const string GameConfDir = "Assets/AssetPackages/Config/Json";
+            var tables = new cfg.Tables(file => JsonConvert.DeserializeObject(AssetManager.Instance.LoadAsset<TextAsset>($"{GameConfDir}/{file}.json").text) as JArray);
 
             await UniTask.Delay(TimeSpan.FromSeconds(5));
             tmp1.text = ZString.Join("\n", tables.TbScratchCardReward.Get(1001).Prizes[1].PrizeItems[0].Cash);

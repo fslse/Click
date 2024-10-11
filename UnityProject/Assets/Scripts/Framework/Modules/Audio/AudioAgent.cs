@@ -17,7 +17,8 @@ namespace Framework.Modules.Audio
 
         private float volume = 1f;
         private float fadeOutTimer;
-        private const float fadeOutDuration = 0.2f;
+
+        private const float FadeOutDuration = 0.2f;
 
         private AudioAgentRuntimeState audioAgentRuntimeState = AudioAgentRuntimeState.None;
 
@@ -201,7 +202,7 @@ namespace Framework.Modules.Audio
             {
                 if (fade)
                 {
-                    fadeOutTimer = fadeOutDuration;
+                    fadeOutTimer = FadeOutDuration;
                     audioAgentRuntimeState = AudioAgentRuntimeState.FadingOut;
                 }
                 else
@@ -254,7 +255,7 @@ namespace Framework.Modules.Audio
                 case AudioAgentRuntimeState.FadingOut when fadeOutTimer > 0f:
                 {
                     fadeOutTimer -= elapseSeconds;
-                    source.volume = volume * fadeOutTimer / fadeOutDuration;
+                    source.volume = volume * fadeOutTimer / FadeOutDuration;
                     break;
                 }
                 case AudioAgentRuntimeState.FadingOut:
