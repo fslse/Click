@@ -10,9 +10,9 @@ namespace Scripts.Fire.Log
     public static class GameLog
     {
 #if UNITY_EDITOR
-        private const string logPath = "Logs/Runtime/";
+        private const string LogPath = "Logs/Runtime/";
 #else
-        private static readonly string logPath = Application.persistentDataPath + "/Logs/Runtime/";
+        private static readonly string LogPath = Application.persistentDataPath + "/Logs/Runtime/";
 #endif
 
         public abstract class Log
@@ -30,14 +30,14 @@ namespace Scripts.Fire.Log
             logging.SetMinimumLevel(LogLevel.Trace);
 
             // Add to output to the file
-            logging.AddZLoggerFile(logPath + "GameLog.log", options => { options.UseJsonFormatter(); });
+            logging.AddZLoggerFile(LogPath + "GameLog.log", options => { options.UseJsonFormatter(); });
 
             // Add to output the file that rotates at constant intervals.
             logging.AddZLoggerRollingFile(options =>
                 {
                     // File name determined by parameters to be rotated
                     options.FilePathSelector = (timestamp, sequenceNumber) =>
-                        $"{logPath}GameLog_{timestamp.ToLocalTime():yyyy-MM-dd}_{sequenceNumber:000}.log";
+                        $"{LogPath}GameLog_{timestamp.ToLocalTime():yyyy-MM-dd}_{sequenceNumber:000}.log";
 
                     // The period of time for which you want to rotate files at time intervals.
                     options.RollingInterval = RollingInterval.Day;
