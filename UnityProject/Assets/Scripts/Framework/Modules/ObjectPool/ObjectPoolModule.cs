@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Singleton;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Framework.Modules.ObjectPool
 {
@@ -54,19 +53,6 @@ namespace Framework.Modules.ObjectPool
             poolRoot.localPosition = Vector3.zero;
             objectPoolRoots.Add(name, poolRoot);
             return poolRoot;
-        }
-
-        /// <summary>
-        /// 销毁场景上所有的GameObject。
-        /// </summary>
-        public void DestroyAllPoolsInScene()
-        {
-            var transforms = InstanceRoot.GetComponentsInChildren<Transform>(true);
-            foreach (var _ in transforms)
-            {
-                if (_ != InstanceRoot)
-                    Object.Destroy(_.gameObject);
-            }
         }
 
         /// <summary>
