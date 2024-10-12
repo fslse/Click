@@ -32,8 +32,6 @@ namespace Framework.Modules.UI
         // Panel字典 针对所有层级
         private readonly Dictionary<string, UIPanelBase> panelDict = new();
 
-        private readonly Image transition; // 全局过渡动画
-
         public GameObject UIRoot { get; }
         public Camera UICamera { get; }
         public Canvas UICanvas { get; }
@@ -48,9 +46,6 @@ namespace Framework.Modules.UI
             UICamera = UIRoot.transform.Find("UICamera").GetComponent<Camera>();
             UICanvas = UIRoot.transform.Find("UICanvas").GetComponent<Canvas>();
             UIMask = UICanvas.transform.Find("--- UIMask ---").GetComponent<Image>();
-
-            // /
-            transition = UICanvas.transform.Find("--- Transition ---").GetComponent<Image>();
 
             // 获取层级节点
             var mainGame = UICanvas.transform.Find("MainGame");
@@ -182,16 +177,6 @@ namespace Framework.Modules.UI
             uiPanelBase.gameObject.transform.SetParent(layers[(int)UIPanelLayer.Recycle], false);
             if (panelNames.Contains(uiPanelBase.PanelName))
                 panelNames.Remove(uiPanelBase.PanelName); // 删除第一个匹配项
-        }
-
-        public void Transition(Action action, float duration = 0.5f)
-        {
-            var seq = DOTween.Sequence();
-            var tweener1 = DOTween.To(() => transition.color, value => transition.color = value, new Color(0, 0, 0, 1), duration);
-            var tweener2 = DOTween.To(() => transition.color, value => transition.color = value, new Color(0, 0, 0, 0), duration);
-            seq.Append(tweener1);
-            seq.AppendCallback(() => { action?.Invoke(); });
-            seq.Append(tweener2);
         }
     }
 }
