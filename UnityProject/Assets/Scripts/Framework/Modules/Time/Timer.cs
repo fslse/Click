@@ -1,154 +1,163 @@
 using System;
-using System.Diagnostics;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Framework.Core.MemoryPool;
+
+// ReSharper disable ParameterHidesMember
 
 namespace Framework.Modules.Time
 {
-    public sealed class Timer : PlayerLoopTimer
+    public abstract class Timer : MemoryObject, IDisposable, IPlayerLoopItem
     {
-        private int initialFrame;
-        private float elapsed;
-        private float interval;
-        private readonly bool ignoreTimeScale;
+        private bool periodic;
+        private PlayerLoopTiming playerLoopTiming;
+        private CancellationToken cancellationToken;
 
-        /// <summary>
-        /// Timer 构造函数
-        /// </summary>
-        /// <param name="interval">间隔</param>
-        /// <param name="periodic">是否循环</param>
-        /// <param name="playerLoopTiming">tick时间点</param>
-        /// <param name="cancellationToken">MonoBehaviour类中一般使用this.GetCancellationTokenOnDestroy()</param>
-        /// <param name="timerCallback">回调事件</param>
-        /// <param name="state">事件参数</param>
-        /// <param name="ignoreTimeScale">是否忽略时间缩放</param>
-        public Timer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken,
-            Action<object> timerCallback, object state = null, bool ignoreTimeScale = false) : base(periodic, playerLoopTiming, cancellationToken, timerCallback, state)
+        private Action<object> timerCallback;
+        private object state;
+
+        private bool isRunning;
+        private bool tryStop;
+        private bool isDisposed;
+
+        #region SetTimer
+
+        private const PlayerLoopTiming DefaultPlayerLoopTiming = PlayerLoopTiming.EarlyUpdate;
+
+        public void SetTimer(TimeSpan interval, Action<object> timerCallback, object state = null)
         {
-            this.ignoreTimeScale = ignoreTimeScale;
+            SetTimerCore(false, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
             ResetCore(interval);
         }
 
-        protected override bool MoveNextCore()
+        public void SetTimer(TimeSpan interval, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
         {
-            if (elapsed == 0.0f)
-            {
-                if (initialFrame == UnityEngine.Time.frameCount)
-                {
-                    return true;
-                }
-            }
-
-            elapsed += ignoreTimeScale ? UnityEngine.Time.unscaledDeltaTime : UnityEngine.Time.deltaTime;
-            return elapsed < interval;
+            SetTimerCore(false, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
+            ResetCore(interval);
         }
 
-        // ReSharper disable once ParameterHidesMember
-        protected override void ResetCore(TimeSpan? interval)
+        public void SetTimer(TimeSpan interval, bool periodic, Action<object> timerCallback, object state = null)
         {
-            elapsed = 0.0f;
-            initialFrame = PlayerLoopHelper.IsMainThread ? UnityEngine.Time.frameCount : -1;
-            if (interval != null)
+            SetTimerCore(periodic, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
+            ResetCore(interval);
+        }
+
+        public void SetTimer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, Action<object> timerCallback, object state = null)
+        {
+            SetTimerCore(periodic, playerLoopTiming, CancellationToken.None, timerCallback, state);
+            ResetCore(interval);
+        }
+
+        public void SetTimer(TimeSpan interval, bool periodic, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
+        {
+            SetTimerCore(periodic, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
+            ResetCore(interval);
+        }
+
+        public void SetTimer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken, Action<object> timerCallback,
+            object state = null)
+        {
+            SetTimerCore(periodic, playerLoopTiming, cancellationToken, timerCallback, state);
+            ResetCore(interval);
+        }
+
+        private void SetTimerCore(bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken, Action<object> timerCallback, object state)
+        {
+            this.periodic = periodic;
+            this.playerLoopTiming = playerLoopTiming;
+            this.cancellationToken = cancellationToken;
+            this.timerCallback = timerCallback;
+            this.state = state;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Restart(Reset and Start) timer.
+        /// </summary>
+        public void Restart()
+        {
+            if (isDisposed) throw new ObjectDisposedException(null);
+
+            ResetCore(null); // init state
+            if (!isRunning)
             {
-                this.interval = (float)interval.Value.TotalSeconds;
+                isRunning = true;
+                PlayerLoopHelper.AddAction(playerLoopTiming, this);
             }
+
+            tryStop = false;
         }
 
         /// <summary>
-        /// Start timer.
+        /// Restart(Reset and Start) and change interval.
         /// </summary>
-        public void Start()
+        public void Restart(TimeSpan interval)
         {
-            Restart();
+            if (isDisposed) throw new ObjectDisposedException(null);
+
+            ResetCore(interval); // init state
+            if (!isRunning)
+            {
+                isRunning = true;
+                PlayerLoopHelper.AddAction(playerLoopTiming, this);
+            }
+
+            tryStop = false;
         }
 
         /// <summary>
         /// Stop timer.
         /// </summary>
-        public new void Stop()
+        public void Stop()
         {
-            base.Stop();
+            tryStop = true;
         }
 
-        public new void Dispose()
-        {
-            base.Dispose();
-        }
-    }
+        protected abstract void ResetCore(TimeSpan? interval);
 
-    public sealed class RealTimer : PlayerLoopTimer
-    {
-        private ValueStopwatch stopwatch;
-        private long intervalTicks;
-
-        public RealTimer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken,
-            Action<object> timerCallback, object state = null) : base(periodic, playerLoopTiming, cancellationToken, timerCallback, state)
+        public void Dispose()
         {
-            ResetCore(interval);
+            isDisposed = true;
         }
 
-        protected override bool MoveNextCore()
+        bool IPlayerLoopItem.MoveNext()
         {
-            return stopwatch.ElapsedTicks < intervalTicks;
-        }
-
-        protected override void ResetCore(TimeSpan? interval)
-        {
-            stopwatch = ValueStopwatch.StartNew();
-            if (interval != null)
+            if (isDisposed)
             {
-                intervalTicks = interval.Value.Ticks;
+                isRunning = false;
+                return false;
             }
-        }
 
-        public void Start()
-        {
-            Restart();
-        }
-
-        public new void Stop()
-        {
-            base.Stop();
-        }
-
-        public new void Dispose()
-        {
-            base.Dispose();
-        }
-    }
-
-    /// <summary>
-    /// 秒表
-    /// </summary>
-    internal readonly struct ValueStopwatch
-    {
-        private static readonly double TimestampToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
-
-        private readonly long startTimestamp;
-
-        private ValueStopwatch(long startTimestamp)
-        {
-            this.startTimestamp = startTimestamp;
-        }
-
-        public static ValueStopwatch StartNew() => new(Stopwatch.GetTimestamp());
-
-        public TimeSpan Elapsed => TimeSpan.FromTicks(ElapsedTicks);
-
-        public bool IsInvalid => startTimestamp == 0;
-
-        public long ElapsedTicks
-        {
-            get
+            if (tryStop)
             {
-                if (startTimestamp == 0)
+                isRunning = false;
+                return false;
+            }
+
+            if (cancellationToken.IsCancellationRequested)
+            {
+                isRunning = false;
+                return false;
+            }
+
+            if (!MoveNextCore())
+            {
+                timerCallback(state);
+
+                if (periodic)
                 {
-                    throw new InvalidOperationException("Detected invalid initialization(use 'default'), only to create from StartNew().");
+                    ResetCore(null);
+                    return true;
                 }
 
-                var delta = Stopwatch.GetTimestamp() - startTimestamp;
-                return (long)(delta * TimestampToTicks);
+                isRunning = false;
+                return false;
             }
+
+            return true;
         }
+
+        protected abstract bool MoveNextCore();
     }
 }

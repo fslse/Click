@@ -16,9 +16,15 @@ namespace Main.GamePlay
         private void Awake()
         {
             GameLog.LogDebug("Example Awake");
-            var timer = new Timer(TimeSpan.FromSeconds(2), false, PlayerLoopTiming.Update, this.GetCancellationTokenOnDestroy(),
-                _ => { UIPanelManager.Instance.ShowPanel("ExamplePanel", UIPanelLayer.Normal).Forget(); });
-            timer.Start();
+
+
+            var timer = MemoryPoolManager.Alloc<DeltaTimer>();
+            timer.SetTimer(TimeSpan.FromSeconds(2), false, _ =>
+            {
+                UIPanelManager.Instance.ShowPanel("ExamplePanel", UIPanelLayer.Normal).Forget();
+                MemoryPoolManager.Dealloc(timer);
+            });
+            timer.Restart();
 
             test();
         }
