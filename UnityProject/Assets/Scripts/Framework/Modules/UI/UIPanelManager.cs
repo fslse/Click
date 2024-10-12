@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
