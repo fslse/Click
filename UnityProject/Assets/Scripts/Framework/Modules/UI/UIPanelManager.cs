@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
@@ -16,24 +17,27 @@ namespace Framework.Modules.UI
     [UsedImplicitly]
     public class UIPanelManager : Singleton<UIPanelManager>
     {
-        public GameObject UIRoot { get; }
-        public Camera UICamera { get; }
-        public Canvas UICanvas { get; }
-        public Image UIMask { get; }
+        /// <summary>
+        /// UIPanel预制体路径
+        /// </summary>
+        private const string UIPanelPrefabsPath = "Assets/AssetPackages/UIPanel";
 
         // 层级节点
         private readonly Transform[] layers;
 
-        private readonly ReactiveCollection<string> panelNames = new(); // 待显示的Panel队列 仅用于Normal层 
+        // Panel队列 仅用于Normal层 
+        private readonly ReactiveCollection<string> panelNames = new();
         private readonly Dictionary<string, object> panelParams = new(); // 对应的参数
 
         // Panel字典 针对所有层级
         private readonly Dictionary<string, UIPanelBase> panelDict = new();
 
-        /// <summary>
-        /// UIPanel预制体路径
-        /// </summary>
-        private const string UIPanelPrefabsPath = "Assets/AssetPackages/UIPanel";
+        private readonly Image transition; // 全局过渡动画
+
+        public GameObject UIRoot { get; }
+        public Camera UICamera { get; }
+        public Canvas UICanvas { get; }
+        public Image UIMask { get; }
 
         public UIPanelBase MainPanel { get; private set; }
 
@@ -46,6 +50,9 @@ namespace Framework.Modules.UI
             UIMask = UICanvas.transform.Find("--- UIMask ---").GetComponent<Image>();
 
             // /
+            transition = UICanvas.transform.Find("--- Transition ---").GetComponent<Image>();
+
+            // 获取层级节点
             var mainGame = UICanvas.transform.Find("MainGame");
             var miniGame = UICanvas.transform.Find("MiniGame");
             var normal = UICanvas.transform.Find("Normal");
@@ -175,6 +182,16 @@ namespace Framework.Modules.UI
             uiPanelBase.gameObject.transform.SetParent(layers[(int)UIPanelLayer.Recycle], false);
             if (panelNames.Contains(uiPanelBase.PanelName))
                 panelNames.Remove(uiPanelBase.PanelName); // 删除第一个匹配项
+        }
+
+        public void Transition(Action action, float duration = 0.5f)
+        {
+            var seq = DOTween.Sequence();
+            var tweener1 = DOTween.To(() => transition.color, value => transition.color = value, new Color(0, 0, 0, 1), duration);
+            var tweener2 = DOTween.To(() => transition.color, value => transition.color = value, new Color(0, 0, 0, 0), duration);
+            seq.Append(tweener1);
+            seq.AppendCallback(() => { action?.Invoke(); });
+            seq.Append(tweener2);
         }
     }
 }
