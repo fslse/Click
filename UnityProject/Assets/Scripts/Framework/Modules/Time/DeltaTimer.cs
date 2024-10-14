@@ -1,19 +1,15 @@
 using System;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 
 namespace Framework.Modules.Time
 {
     public class DeltaTimer : Timer
     {
-        private const PlayerLoopTiming DefaultPlayerLoopTiming = PlayerLoopTiming.EarlyUpdate;
-
         private int initialFrame;
         private float elapsed;
         private float interval;
-        private readonly bool ignoreTimeScale;
 
-        
+        internal bool ignoreTimeScale = true;
 
         protected override void ResetCore(TimeSpan? interval)
         {
@@ -37,15 +33,6 @@ namespace Framework.Modules.Time
 
             elapsed += ignoreTimeScale ? UnityEngine.Time.unscaledDeltaTime : UnityEngine.Time.deltaTime;
             return elapsed < interval;
-        }
-
-        public override void InitFromPool()
-        {
-        }
-
-        public override void RecycleToPool()
-        {
-            Stop();
         }
     }
 }

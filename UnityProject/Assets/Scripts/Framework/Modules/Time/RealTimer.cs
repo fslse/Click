@@ -21,15 +21,6 @@ namespace Framework.Modules.Time
                 intervalTicks = interval.Value.Ticks;
             }
         }
-
-        public override void InitFromPool()
-        {
-        }
-
-        public override void RecycleToPool()
-        {
-            Stop();
-        }
     }
 
     internal readonly struct ValueStopwatch

@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-using Framework.Core.MemoryPool;
 using Framework.Modules.Time;
 using Framework.Modules.UI;
 using Google.Protobuf;
@@ -49,17 +48,13 @@ namespace Main.UIPanel
             tmp.text = rectTransform.position.ToString();
             tmp1.text = PanelLayer.ToString();
 
-            var timer = MemoryPoolManager.Alloc<DeltaTimer>();
-            timer.SetTimer(TimeSpan.FromSeconds(3), _ =>
-            {
-                tmp1.text = "Success";
-                MemoryPoolManager.Dealloc(timer);
-            });
+            var timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(3), _ => { tmp1.text = "Success"; });
+            timer.AutoRelease = true;
             timer.Restart();
 
 
-            var realTimer = MemoryPoolManager.Alloc<RealTimer>();
-            realTimer.SetTimer(TimeSpan.FromSeconds(3), Test);
+            var realTimer = Timer.Create(DelayType.Realtime, TimeSpan.FromSeconds(3), Test);
+            realTimer.AutoRelease = true;
             realTimer.Restart();
         }
 
@@ -105,12 +100,8 @@ namespace Main.UIPanel
             Array.Reverse(bytes); // 大端转小端
             var msg = TestMessage.Parser.ParseFrom(bytes);
 
-            var timer = MemoryPoolManager.Alloc<DeltaTimer>();
-            timer.SetTimer(TimeSpan.FromSeconds(3), _ =>
-            {
-                tmp.text = msg.Response.Power.ToString();
-                MemoryPoolManager.Dealloc(timer);
-            });
+            var timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(3), _ => { tmp.text = msg.Response.Power.ToString(); });
+            timer.AutoRelease = true;
             timer.Restart();
         }
     }

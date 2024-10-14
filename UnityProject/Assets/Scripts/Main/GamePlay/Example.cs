@@ -17,13 +17,9 @@ namespace Main.GamePlay
         {
             GameLog.LogDebug("Example Awake");
 
-
-            var timer = MemoryPoolManager.Alloc<DeltaTimer>();
-            timer.SetTimer(TimeSpan.FromSeconds(2), false, _ =>
-            {
-                UIPanelManager.Instance.ShowPanel("ExamplePanel", UIPanelLayer.Normal).Forget();
-                MemoryPoolManager.Dealloc(timer);
-            });
+            Timer timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(2),
+                _ => { UIPanelManager.Instance.ShowPanel("ExamplePanel", UIPanelLayer.Normal).Forget(); });
+            timer.AutoRelease = true;
             timer.Restart();
 
             test();

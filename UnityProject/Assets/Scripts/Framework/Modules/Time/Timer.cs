@@ -20,45 +20,70 @@ namespace Framework.Modules.Time
         private bool tryStop;
         private bool isDisposed;
 
-        #region SetTimer
+        #region Create
 
         private const PlayerLoopTiming DefaultPlayerLoopTiming = PlayerLoopTiming.EarlyUpdate;
 
-        public void SetTimer(TimeSpan interval, Action<object> timerCallback, object state = null)
+        private static Timer Create(DelayType delayType)
         {
-            SetTimerCore(false, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
-            ResetCore(interval);
+            Timer timer = delayType switch
+            {
+                DelayType.Realtime => MemoryPoolManager.Alloc<RealTimer>(),
+                _ => MemoryPoolManager.Alloc<DeltaTimer>()
+            };
+
+            if (delayType == DelayType.UnscaledDeltaTime)
+                (timer as DeltaTimer)!.ignoreTimeScale = false;
+            return timer;
         }
 
-        public void SetTimer(TimeSpan interval, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
+        public static Timer Create(DelayType delayType, TimeSpan interval, Action<object> timerCallback, object state = null)
         {
-            SetTimerCore(false, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
-            ResetCore(interval);
+            var timer = Create(delayType);
+            timer.SetTimerCore(false, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
         }
 
-        public void SetTimer(TimeSpan interval, bool periodic, Action<object> timerCallback, object state = null)
+        public static Timer Create(DelayType delayType, TimeSpan interval, bool periodic, Action<object> timerCallback, object state = null)
         {
-            SetTimerCore(periodic, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
-            ResetCore(interval);
+            var timer = Create(delayType);
+            timer.SetTimerCore(periodic, DefaultPlayerLoopTiming, CancellationToken.None, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
         }
 
-        public void SetTimer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, Action<object> timerCallback, object state = null)
+        public static Timer Create(DelayType delayType, TimeSpan interval, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
         {
-            SetTimerCore(periodic, playerLoopTiming, CancellationToken.None, timerCallback, state);
-            ResetCore(interval);
+            var timer = Create(delayType);
+            timer.SetTimerCore(false, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
         }
 
-        public void SetTimer(TimeSpan interval, bool periodic, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
+        public static Timer Create(DelayType delayType, TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, Action<object> timerCallback, object state = null)
         {
-            SetTimerCore(periodic, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
-            ResetCore(interval);
+            var timer = Create(delayType);
+            timer.SetTimerCore(periodic, playerLoopTiming, CancellationToken.None, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
         }
 
-        public void SetTimer(TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken, Action<object> timerCallback,
-            object state = null)
+        public static Timer Create(DelayType delayType, TimeSpan interval, bool periodic, CancellationToken cancellationToken, Action<object> timerCallback, object state = null)
         {
-            SetTimerCore(periodic, playerLoopTiming, cancellationToken, timerCallback, state);
-            ResetCore(interval);
+            var timer = Create(delayType);
+            timer.SetTimerCore(periodic, DefaultPlayerLoopTiming, cancellationToken, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
+        }
+
+        public static Timer Create(DelayType delayType, TimeSpan interval, bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken,
+            Action<object> timerCallback, object state = null)
+        {
+            var timer = Create(delayType);
+            timer.SetTimerCore(periodic, playerLoopTiming, cancellationToken, timerCallback, state);
+            timer.ResetCore(interval);
+            return timer;
         }
 
         private void SetTimerCore(bool periodic, PlayerLoopTiming playerLoopTiming, CancellationToken cancellationToken, Action<object> timerCallback, object state)
@@ -71,6 +96,41 @@ namespace Framework.Modules.Time
         }
 
         #endregion
+
+        private bool autoRelease;
+
+        public bool AutoRelease
+        {
+            get => autoRelease;
+            set
+            {
+                if (periodic)
+                {
+                    throw new InvalidOperationException("Cannot change 'AutoRelease' because it is periodic.");
+                }
+
+                if (isRunning)
+                {
+                    throw new InvalidOperationException("Cannot change 'AutoRelease' while running.");
+                }
+
+                if (isDisposed)
+                {
+                    throw new ObjectDisposedException("this timer is already disposed.");
+                }
+
+                autoRelease = value;
+            }
+        }
+
+        /// <summary>
+        /// 回收
+        /// </summary>
+        /// <param name="timer"></param>
+        public static void Release(Timer timer)
+        {
+            MemoryPoolManager.Dealloc(timer);
+        }
 
         /// <summary>
         /// Restart(Reset and Start) timer.
@@ -151,6 +211,11 @@ namespace Framework.Modules.Time
                     return true;
                 }
 
+                if (AutoRelease)
+                {
+                    Release(this);
+                }
+
                 isRunning = false;
                 return false;
             }
@@ -159,5 +224,15 @@ namespace Framework.Modules.Time
         }
 
         protected abstract bool MoveNextCore();
+
+        public override void InitFromPool()
+        {
+            isDisposed = false;
+        }
+
+        public override void RecycleToPool()
+        {
+            Dispose();
+        }
     }
 }
