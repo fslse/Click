@@ -21,12 +21,12 @@ namespace Main.GamePlay
             timer.AutoRelease = true;
             timer.Restart();
 
-            test();
+            Test();
         }
 
         private AudioAgent audioAgent;
 
-        private async void test()
+        private async void Test()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(2));
             audioAgent = AudioModule.Instance.Play(AudioType.Music, "Assets/AssetPackages/Audio/AudioClip/test.mp3", true);
