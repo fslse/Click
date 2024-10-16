@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core.GameEvent
+namespace Framework.Core.Event
 {
     /// <summary>
     /// 封装消息的底层分发和注册。

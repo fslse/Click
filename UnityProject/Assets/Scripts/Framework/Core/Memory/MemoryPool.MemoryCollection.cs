@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core.MemoryManagement
+namespace Framework.Core.Memory
 {
     public static partial class MemoryPool
     {

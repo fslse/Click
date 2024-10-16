@@ -1,4 +1,4 @@
-﻿namespace Framework.Core.MemoryManagement
+﻿namespace Framework.Core.Memory
 {
     /// <summary>
     /// 内存对象Interface。

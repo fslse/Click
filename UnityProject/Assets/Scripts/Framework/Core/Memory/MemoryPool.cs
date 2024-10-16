@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Scripts.Fire;
 
-namespace Framework.Core.MemoryManagement
+namespace Framework.Core.Memory
 {
     /// <summary>
     /// 内存池。

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Core.GameEvent
+namespace Framework.Core.Event
 {
     /// <summary>
     /// 游戏全局事件类。
@@ -10,7 +10,7 @@ namespace Framework.Core.GameEvent
         /// <summary>
         /// 全局事件管理器。
         /// </summary>
-        private static readonly EventManager eventManager = new EventManager();
+        private static readonly EventManager eventManager = new();
 
         public static EventManager EventManager => eventManager;
 

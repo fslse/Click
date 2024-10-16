@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Memory;
 
-namespace Framework.Core.GameEvent
+namespace Framework.Core.Event
 {
     /// <summary>
     /// 游戏事件管理器。

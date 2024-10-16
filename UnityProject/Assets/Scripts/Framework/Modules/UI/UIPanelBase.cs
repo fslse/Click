@@ -1,8 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Framework.Core.GameEvent;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Event;
+using Framework.Core.Memory;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;

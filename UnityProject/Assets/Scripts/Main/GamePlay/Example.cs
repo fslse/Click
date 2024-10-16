@@ -1,6 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Memory;
 using Framework.Modules.Audio;
 using Framework.Modules.Time;
 using Framework.Modules.UI;

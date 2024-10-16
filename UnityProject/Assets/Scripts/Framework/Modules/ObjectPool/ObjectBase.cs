@@ -1,5 +1,5 @@
 ﻿using System;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Memory;
 
 namespace Framework.Modules.ObjectPool
 {

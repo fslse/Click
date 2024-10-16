@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Framework.Core.DataStruct;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Memory;
 
 namespace Framework.Modules.ObjectPool
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Framework;
-using Framework.Core.MemoryManagement;
+using Framework.Core.Memory;
 using UnityEditor;
 using UnityEngine;
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Scripts.Fire.Log;
 
-namespace Framework.Core.GameEvent
+namespace Framework.Core.Event
 {
     /// <summary>
     /// 事件委托数据类。

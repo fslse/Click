@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Core.MemoryManagement
+namespace Framework.Core.Memory
 {
     /// <summary>
     /// 内存池对象基类。

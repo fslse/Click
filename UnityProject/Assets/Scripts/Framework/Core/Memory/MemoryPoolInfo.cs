@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Framework.Core.MemoryManagement
+namespace Framework.Core.Memory
 {
     /// <summary>
     /// 内存池信息。
