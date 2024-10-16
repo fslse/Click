@@ -1,7 +1,7 @@
 ﻿using System;
-using Framework.Core.Utility.DefaultHelper;
+using Framework.Core.Utils.DefaultHelper;
 
-namespace Framework.Core.Utility
+namespace Framework.Core.Utils
 {
     public static partial class Utility
     {

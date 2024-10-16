@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Core.Utility
+namespace Framework.Core.Utils
 {
     public static partial class Utility
     {

@@ -1,4 +1,4 @@
-﻿namespace Framework.Core.Utility
+﻿namespace Framework.Core.Utils
 {
     /// <summary>
     /// 实用函数集。

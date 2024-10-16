@@ -1,9 +1,12 @@
-﻿namespace Framework.Core.Utility.DefaultHelper
+﻿using System;
+using UnityEngine;
+
+namespace Framework.Core.Utils.DefaultHelper
 {
     /// <summary>
     /// 默认 JSON 函数集辅助器。
     /// </summary>
-    public class DefaultJsonHelper : Utility.Json.IJsonHelper
+    public class UnityJsonHelper : Utility.Json.IJsonHelper
     {
         /// <summary>
         /// 将对象序列化为 JSON 字符串。
@@ -12,7 +15,7 @@
         /// <returns>序列化后的 JSON 字符串。</returns>
         public string ToJson(object obj)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            return JsonUtility.ToJson(obj);
         }
 
         /// <summary>
@@ -23,7 +26,7 @@
         /// <returns>反序列化后的对象。</returns>
         public T ToObject<T>(string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+            return JsonUtility.FromJson<T>(json);
         }
 
         /// <summary>
@@ -32,9 +35,9 @@
         /// <param name="objectType">对象类型。</param>
         /// <param name="json">要反序列化的 JSON 字符串。</param>
         /// <returns>反序列化后的对象。</returns>
-        public object ToObject(System.Type objectType, string json)
+        public object ToObject(Type objectType, string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject(json, objectType);
+            return JsonUtility.FromJson(json, objectType);
         }
     }
 }

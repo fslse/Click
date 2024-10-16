@@ -6,7 +6,7 @@ using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Framework.Core.Utility
+namespace Framework.Core.Utils
 {
     public static partial class Utility
     {
