@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core.MemoryPool
+namespace Framework.Core.MemoryManagement
 {
-    public static partial class MemoryPoolManager
+    public static partial class MemoryPool
     {
         /// <summary>
         /// 内存池对象容器。

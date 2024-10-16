@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Framework.Core.MemoryPool;
+using Framework.Core.MemoryManagement;
 
 // ReSharper disable ParameterHidesMember
 
@@ -28,8 +28,8 @@ namespace Framework.Modules.Time
         {
             Timer timer = delayType switch
             {
-                DelayType.Realtime => MemoryPoolManager.Alloc<RealTimer>(),
-                _ => MemoryPoolManager.Alloc<DeltaTimer>()
+                DelayType.Realtime => MemoryPool.Alloc<RealTimer>(),
+                _ => MemoryPool.Alloc<DeltaTimer>()
             };
 
             if (delayType == DelayType.UnscaledDeltaTime)
@@ -129,7 +129,7 @@ namespace Framework.Modules.Time
         /// <param name="timer"></param>
         public static void Release(Timer timer)
         {
-            MemoryPoolManager.Dealloc(timer);
+            MemoryPool.Dealloc(timer);
         }
 
         /// <summary>

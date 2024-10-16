@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Framework;
-using Framework.Core.MemoryPool;
+using Framework.Core.MemoryManagement;
 using UnityEditor;
 using UnityEngine;
-using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
 
 [CustomEditor(typeof(GameApp))]
 internal sealed class MemoryPoolModuleInspector : GameFrameworkInspector
@@ -26,12 +25,12 @@ internal sealed class MemoryPoolModuleInspector : GameFrameworkInspector
             EditorGUILayout.LabelField("<color=white>Memory Pool</color>", style);
             EditorGUILayout.Separator();
 
-            EditorGUILayout.LabelField("Memory Pool Count", MemoryPoolManager.Count.ToString());
+            EditorGUILayout.LabelField("Memory Pool Count", MemoryPool.Count.ToString());
             showFullClassName = EditorGUILayout.Toggle("Show Full Class Name", showFullClassName);
 
             // 收集内存池信息 按对象类型所属程序集分类
             memoryPoolInfos.Clear();
-            MemoryPoolInfo[] infos = MemoryPoolManager.GetAllMemoryPoolInfos();
+            MemoryPoolInfo[] infos = MemoryPool.GetAllMemoryPoolInfos();
             foreach (MemoryPoolInfo memoryPoolInfo in infos)
             {
                 string assemblyName = memoryPoolInfo.Type.Assembly.GetName().Name;

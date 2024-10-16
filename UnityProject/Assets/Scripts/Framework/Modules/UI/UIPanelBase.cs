@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Framework.Core.GameEvent;
-using Framework.Core.MemoryPool;
+using Framework.Core.MemoryManagement;
 using Scripts.Fire.Log;
 using UnityEngine;
 using UnityEngine.UI;
@@ -237,7 +237,7 @@ namespace Framework.Modules.UI
 
         private UIEventManager eventManager;
 
-        protected UIEventManager EventManager => eventManager ??= MemoryPoolManager.Acquire<UIEventManager>();
+        protected UIEventManager EventManager => eventManager ??= MemoryPool.Acquire<UIEventManager>();
 
         protected void AddUIEvent(int eventType, Action handler)
         {
@@ -273,7 +273,7 @@ namespace Framework.Modules.UI
         {
             if (eventManager != null)
             {
-                MemoryPoolManager.Release(eventManager);
+                MemoryPool.Release(eventManager);
             }
         }
 

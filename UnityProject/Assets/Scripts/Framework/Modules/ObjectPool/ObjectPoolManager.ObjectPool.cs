@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Framework.Core.DataStruct;
-using Framework.Core.MemoryPool;
-using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
+using Framework.Core.MemoryManagement;
 
 namespace Framework.Modules.ObjectPool
 {
@@ -395,7 +394,7 @@ namespace Framework.Modules.ObjectPool
                 objectMap.Remove(internalObject.Peek().Target);
 
                 internalObject.Release(false);
-                MemoryPoolManager.Release(internalObject);
+                MemoryPool.Release(internalObject);
                 return true;
             }
 
@@ -510,7 +509,7 @@ namespace Framework.Modules.ObjectPool
                 foreach (KeyValuePair<object, object> objectInMap in objectMap)
                 {
                     ((Object<T>)objectInMap.Value).Release(true);
-                    MemoryPoolManager.Release((IMemory)objectInMap.Value);
+                    MemoryPool.Release((IMemory)objectInMap.Value);
                 }
 
                 objects.Clear();

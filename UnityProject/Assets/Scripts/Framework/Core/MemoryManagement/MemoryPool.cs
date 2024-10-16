@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Scripts.Fire;
 
-namespace Framework.Core.MemoryPool
+namespace Framework.Core.MemoryManagement
 {
     /// <summary>
     /// 内存池。
     /// </summary>
-    public static partial class MemoryPoolManager
+    public static partial class MemoryPool
     {
         private static readonly Dictionary<Type, MemoryCollection> memoryCollections = new();
 

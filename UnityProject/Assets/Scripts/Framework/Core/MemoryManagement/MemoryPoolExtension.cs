@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Core.MemoryPool
+namespace Framework.Core.MemoryManagement
 {
     /// <summary>
     /// 内存池对象基类。
@@ -25,7 +25,7 @@ namespace Framework.Core.MemoryPool
         public abstract void RecycleToPool();
     }
 
-    public static partial class MemoryPoolManager
+    public static partial class MemoryPool
     {
         /// <summary>
         /// 从内存池获取内存对象。

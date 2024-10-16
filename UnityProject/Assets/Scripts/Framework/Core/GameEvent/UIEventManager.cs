@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Framework.Core.MemoryPool;
+using Framework.Core.MemoryManagement;
 
 namespace Framework.Core.GameEvent
 {

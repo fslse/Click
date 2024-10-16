@@ -1,13 +1,12 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Framework.Core.MemoryPool;
+using Framework.Core.MemoryManagement;
 using Framework.Modules.Audio;
 using Framework.Modules.Time;
 using Framework.Modules.UI;
 using Scripts.Fire.Log;
 using UnityEngine;
 using AudioType = Framework.Modules.Audio.AudioType;
-using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
 
 namespace Main.GamePlay
 {
@@ -32,7 +31,7 @@ namespace Main.GamePlay
             await UniTask.Delay(TimeSpan.FromSeconds(2));
             audioAgent = AudioModule.Instance.Play(AudioType.Music, "Assets/AssetPackages/Audio/AudioClip/test.mp3", true);
 
-            var _ = MemoryPoolManager.Alloc<MyClass>();
+            var _ = MemoryPool.Alloc<MyClass>();
         }
 
         private void Update()

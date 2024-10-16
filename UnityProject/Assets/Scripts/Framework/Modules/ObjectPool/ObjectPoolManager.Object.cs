@@ -1,6 +1,5 @@
 ﻿using System;
-using Framework.Core.MemoryPool;
-using MemoryPoolManager = Framework.Core.MemoryPool.MemoryPoolManager;
+using Framework.Core.MemoryManagement;
 
 namespace Framework.Modules.ObjectPool
 {
@@ -80,7 +79,7 @@ namespace Framework.Modules.ObjectPool
                     throw new Exception("Object is invalid.");
                 }
 
-                Object<T> internalObject = MemoryPoolManager.Acquire<Object<T>>();
+                Object<T> internalObject = MemoryPool.Acquire<Object<T>>();
                 internalObject.@object = obj;
                 internalObject.spawnCount = spawned ? 1 : 0;
                 if (spawned)
@@ -142,7 +141,7 @@ namespace Framework.Modules.ObjectPool
             public void Release(bool isShutdown)
             {
                 @object.Release(isShutdown);
-                MemoryPoolManager.Release(@object);
+                MemoryPool.Release(@object);
             }
         }
     }
