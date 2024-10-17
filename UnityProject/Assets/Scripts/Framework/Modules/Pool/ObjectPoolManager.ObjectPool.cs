@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Framework.Core.DataStruct;
 using Framework.Core.Memory;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     internal sealed partial class ObjectPoolManager
     {

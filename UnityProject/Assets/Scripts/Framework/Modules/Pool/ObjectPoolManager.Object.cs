@@ -1,7 +1,7 @@
 ﻿using System;
 using Framework.Core.Memory;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     internal sealed partial class ObjectPoolManager
     {

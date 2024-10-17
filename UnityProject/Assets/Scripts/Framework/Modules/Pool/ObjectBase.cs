@@ -1,7 +1,7 @@
 ﻿using System;
 using Framework.Core.Memory;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     /// <summary>
     /// 对象基类。

@@ -282,6 +282,9 @@
     <type fullname="UnityEngine.Touch" preserve="all" />
     <type fullname="UnityEngine.TouchPhase" preserve="all" />
   </assembly>
+  <assembly fullname="UnityEngine.JSONSerializeModule">
+    <type fullname="UnityEngine.JsonUtility" preserve="all" />
+  </assembly>
   <assembly fullname="UnityEngine.PhysicsModule">
     <type fullname="UnityEngine.BoxCollider" preserve="all" />
     <type fullname="UnityEngine.Collider" preserve="all" />

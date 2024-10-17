@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Framework.Core.DataStruct;
 using Scripts.Fire.Manager;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     /// <summary>
     /// 对象池管理器。

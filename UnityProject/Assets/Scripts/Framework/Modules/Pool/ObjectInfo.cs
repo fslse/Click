@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     /// <summary>
     /// 对象信息。

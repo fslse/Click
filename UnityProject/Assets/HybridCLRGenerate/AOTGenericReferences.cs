@@ -9,6 +9,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"Fire.dll",
 		"Google.Protobuf.dll",
 		"Luban.Runtime.dll",
+		"Newtonsoft.Json.dll",
 		"StompyRobot.SRF.dll",
 		"System.Core.dll",
 		"System.dll",
@@ -17,6 +18,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		"UnityEngine.AndroidJNIModule.dll",
 		"UnityEngine.AssetBundleModule.dll",
 		"UnityEngine.CoreModule.dll",
+		"UnityEngine.JSONSerializeModule.dll",
 		"ZString.dll",
 		"mscorlib.dll",
 	};
@@ -27,21 +29,21 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 
 	// {{ AOT generic types
 	// Cysharp.Text.Utf16ValueStringBuilder.TryFormat<float>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utility.Utility.Http.<Get>d__0,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utility.Utility.Http.<Post>d__1,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utility.Utility.Http.<Post>d__2,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utility.Utility.Http.<Post>d__3,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Get>d__0,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Post>d__1,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Post>d__2,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Post>d__3,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Modules.UI.UIPanelManager.<GetPanel>d__25,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utility.Utility.Http.<Get>d__0,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utility.Utility.Http.<Post>d__1,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utility.Utility.Http.<Post>d__2,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utility.Utility.Http.<Post>d__3,object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utils.Utility.Http.<Get>d__0,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utils.Utility.Http.<Post>d__1,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utils.Utility.Http.<Post>d__2,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utils.Utility.Http.<Post>d__3,object>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Modules.UI.UIPanelManager.<GetPanel>d__25,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22,object>
@@ -162,7 +164,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Action<FairyGUI.GoWrapper.RendererInfo>
 	// System.Action<FairyGUI.TextField.CharPosition>
 	// System.Action<FairyGUI.TextField.LineCharInfo>
-	// System.Action<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Action<Framework.Modules.Pool.ObjectInfo>
 	// System.Action<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Action<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Action<System.Collections.Generic.KeyValuePair<object,object>>
@@ -197,7 +199,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ArraySortHelper<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.ArraySortHelper<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.ArraySortHelper<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.ArraySortHelper<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.ArraySortHelper<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.ArraySortHelper<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.ArraySortHelper<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.ArraySortHelper<System.Collections.Generic.KeyValuePair<object,object>>
@@ -216,7 +218,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Comparer<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.Comparer<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.Comparer<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.Comparer<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.Comparer<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.Comparer<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.Comparer<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.Comparer<System.Collections.Generic.KeyValuePair<object,object>>
@@ -335,7 +337,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ICollection<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.ICollection<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.ICollection<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.ICollection<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.ICollection<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.ICollection<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<byte,object>>
@@ -364,7 +366,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IComparer<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.IComparer<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.IComparer<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.IComparer<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.IComparer<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.IComparer<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.IComparer<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.IComparer<System.Collections.Generic.KeyValuePair<object,object>>
@@ -383,7 +385,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.IEnumerable<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.IEnumerable<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.IEnumerable<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.IEnumerable<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.IEnumerable<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.UIntPtr,object>>
@@ -414,7 +416,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.IEnumerator<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.IEnumerator<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.IEnumerator<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.IEnumerator<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.IEnumerator<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.UIntPtr,object>>
@@ -450,7 +452,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.IList<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.IList<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.IList<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.IList<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.IList<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.IList<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.IList<System.Collections.Generic.KeyValuePair<object,object>>
@@ -488,7 +490,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List.Enumerator<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.List.Enumerator<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.List.Enumerator<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.List.Enumerator<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.List.Enumerator<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.List.Enumerator<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.List.Enumerator<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.List.Enumerator<System.Collections.Generic.KeyValuePair<object,object>>
@@ -507,7 +509,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.List<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.List<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.List<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.List<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.List<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.List<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<object,object>>
@@ -526,7 +528,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectComparer<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.Generic.ObjectComparer<FairyGUI.TextField.CharPosition>
 	// System.Collections.Generic.ObjectComparer<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.Generic.ObjectComparer<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.Generic.ObjectComparer<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.Generic.ObjectComparer<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.Generic.ObjectComparer<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.ObjectComparer<System.Collections.Generic.KeyValuePair<object,object>>
@@ -581,7 +583,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.ObjectModel.ReadOnlyCollection<FairyGUI.GoWrapper.RendererInfo>
 	// System.Collections.ObjectModel.ReadOnlyCollection<FairyGUI.TextField.CharPosition>
 	// System.Collections.ObjectModel.ReadOnlyCollection<FairyGUI.TextField.LineCharInfo>
-	// System.Collections.ObjectModel.ReadOnlyCollection<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Collections.ObjectModel.ReadOnlyCollection<Framework.Modules.Pool.ObjectInfo>
 	// System.Collections.ObjectModel.ReadOnlyCollection<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Collections.ObjectModel.ReadOnlyCollection<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.ObjectModel.ReadOnlyCollection<System.Collections.Generic.KeyValuePair<object,object>>
@@ -600,7 +602,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Comparison<FairyGUI.GoWrapper.RendererInfo>
 	// System.Comparison<FairyGUI.TextField.CharPosition>
 	// System.Comparison<FairyGUI.TextField.LineCharInfo>
-	// System.Comparison<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Comparison<Framework.Modules.Pool.ObjectInfo>
 	// System.Comparison<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Comparison<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Comparison<System.Collections.Generic.KeyValuePair<object,object>>
@@ -690,7 +692,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Predicate<FairyGUI.GoWrapper.RendererInfo>
 	// System.Predicate<FairyGUI.TextField.CharPosition>
 	// System.Predicate<FairyGUI.TextField.LineCharInfo>
-	// System.Predicate<Framework.Modules.ObjectPool.ObjectInfo>
+	// System.Predicate<Framework.Modules.Pool.ObjectInfo>
 	// System.Predicate<I2.Loc.LocalizationParamsManager.ParamValue>
 	// System.Predicate<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Predicate<System.Collections.Generic.KeyValuePair<object,object>>
@@ -903,21 +905,21 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// string Cysharp.Text.ZString.JoinInternal<float>(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<float>)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter&,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>,Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>&,Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utility.Utility.Http.<Get>d__0>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utility.Utility.Http.<Get>d__0&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utility.Utility.Http.<Post>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utility.Utility.Http.<Post>d__1&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utility.Utility.Http.<Post>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utility.Utility.Http.<Post>d__2&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utility.Utility.Http.<Post>d__3>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utility.Utility.Http.<Post>d__3&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>,Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>&,Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utils.Utility.Http.<Get>d__0>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utils.Utility.Http.<Get>d__0&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utils.Utility.Http.<Post>d__1>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utils.Utility.Http.<Post>d__1&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utils.Utility.Http.<Post>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utils.Utility.Http.<Post>d__2&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Core.Utils.Utility.Http.<Post>d__3>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Core.Utils.Utility.Http.<Post>d__3&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Modules.UI.UIPanelManager.<GetPanel>d__25>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Modules.UI.UIPanelManager.<GetPanel>d__25&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.Start<Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>(Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utility.Utility.Http.<Get>d__0>(Framework.Core.Utility.Utility.Http.<Get>d__0&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utility.Utility.Http.<Post>d__1>(Framework.Core.Utility.Utility.Http.<Post>d__1&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utility.Utility.Http.<Post>d__2>(Framework.Core.Utility.Utility.Http.<Post>d__2&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utility.Utility.Http.<Post>d__3>(Framework.Core.Utility.Utility.Http.<Post>d__3&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4>(Framework.Core.Utility.Utility.Http.<SendWebRequest>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utils.Utility.Http.<Get>d__0>(Framework.Core.Utils.Utility.Http.<Get>d__0&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utils.Utility.Http.<Post>d__1>(Framework.Core.Utils.Utility.Http.<Post>d__1&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utils.Utility.Http.<Post>d__2>(Framework.Core.Utils.Utility.Http.<Post>d__2&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utils.Utility.Http.<Post>d__3>(Framework.Core.Utils.Utility.Http.<Post>d__3&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4>(Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Modules.UI.UIPanelManager.<GetPanel>d__25>(Framework.Modules.UI.UIPanelManager.<GetPanel>d__25&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22>(Framework.Modules.UI.UIPanelManager.<Jump2MainPanel>d__22&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24>(Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24&)
@@ -940,6 +942,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object DG.Tweening.TweenSettingsExtensions.SetEase<object>(object,UnityEngine.AnimationCurve)
 		// object DG.Tweening.TweenSettingsExtensions.SetId<object>(object,int)
 		// string Luban.StringUtil.CollectionToString<object>(System.Collections.Generic.IEnumerable<object>)
+		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string)
+		// object Newtonsoft.Json.JsonConvert.DeserializeObject<object>(string,Newtonsoft.Json.JsonSerializerSettings)
 		// object Scripts.Fire.Manager.AssetManager.LoadAsset<object>(string)
 		// Cysharp.Threading.Tasks.UniTask<object> Scripts.Fire.Manager.AssetManager.LoadAssetAsync<object>(string,UnityEngine.Events.UnityAction<object>)
 		// object System.Activator.CreateInstance<object>()
@@ -974,8 +978,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<ushort> System.Linq.Enumerable.Where<ushort>(System.Collections.Generic.IEnumerable<ushort>,System.Func<ushort,bool>)
 		// System.Span<float> System.MemoryExtensions.AsSpan<float>(float[])
 		// System.Span<ushort> System.MemoryExtensions.AsSpan<ushort>(ushort[],int)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Main.GamePlay.Example.<test>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Main.GamePlay.Example.<test>d__2&)
-		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<Main.GamePlay.Example.<test>d__2>(Main.GamePlay.Example.<test>d__2&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Main.GamePlay.Example.<Test>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Main.GamePlay.Example.<Test>d__2&)
+		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.Start<Main.GamePlay.Example.<Test>d__2>(Main.GamePlay.Example.<Test>d__2&)
 		// byte& System.Runtime.CompilerServices.Unsafe.Add<byte>(byte&,int)
 		// ushort& System.Runtime.CompilerServices.Unsafe.Add<ushort>(ushort&,int)
 		// byte& System.Runtime.CompilerServices.Unsafe.As<byte,byte>(byte&)
@@ -1007,6 +1011,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object[] UnityEngine.GameObject.GetComponents<object>()
 		// System.Void UnityEngine.GameObject.GetComponentsInChildren<object>(bool,System.Collections.Generic.List<object>)
 		// object[] UnityEngine.GameObject.GetComponentsInChildren<object>(bool)
+		// object UnityEngine.JsonUtility.FromJson<object>(string)
 		// object UnityEngine.Object.FindFirstObjectByType<object>()
 		// object[] UnityEngine.Object.FindObjectsOfType<object>()
 		// object UnityEngine.Object.Instantiate<object>(object)

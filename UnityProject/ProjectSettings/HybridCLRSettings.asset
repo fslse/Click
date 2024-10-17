@@ -31,6 +31,7 @@ MonoBehaviour:
   - Fire
   - Google.Protobuf
   - Luban.Runtime
+  - Newtonsoft.Json
   - StompyRobot.SRF
   - System.Core
   - System
@@ -39,6 +40,7 @@ MonoBehaviour:
   - UnityEngine.AndroidJNIModule
   - UnityEngine.AssetBundleModule
   - UnityEngine.CoreModule
+  - UnityEngine.JSONSerializeModule
   - ZString
   - mscorlib
   outputLinkFile: HybridCLRGenerate/link.xml

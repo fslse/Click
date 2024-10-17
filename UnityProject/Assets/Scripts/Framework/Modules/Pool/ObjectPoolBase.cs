@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Modules.ObjectPool
+namespace Framework.Modules.Pool
 {
     /// <summary>
     /// 对象池基类。
