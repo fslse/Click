@@ -22,6 +22,8 @@ public class SpritePostprocessor : AssetPostprocessor
 {
     private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
+        bool flag = false;
+
         deletedAssets = deletedAssets.Concat(movedFromAssetPaths).ToArray();
         deletedAssets = new HashSet<string>(deletedAssets).Where(s => s.StartsWith(Define.AtlasPath) || s.StartsWith(Define.SpritePath)).ToArray();
         deletedAssets = deletedAssets.Where(s => s.Contains('.')).ToArray();
@@ -32,6 +34,7 @@ public class SpritePostprocessor : AssetPostprocessor
 
         if (deletedAssets.Length > 0)
         {
+            flag = true;
             Debug.Log($"Delete Sprite Count: {deletedAssets.Length}\nINFO:\n{string.Join("\n", deletedAssets)}");
         }
 
@@ -45,8 +48,12 @@ public class SpritePostprocessor : AssetPostprocessor
 
         if (importedAssets.Length > 0)
         {
+            flag = true;
             Debug.Log($"Import Sprite Count: {importedAssets.Length}\nINFO:\n{string.Join("\n", importedAssets)}");
         }
+
+        if (flag)
+            Debug.LogWarning("SpritePostprocessor");
 
         foreach (var s in movedAssets)
         {
@@ -123,13 +130,13 @@ public static class EditorSpriteSaveInfo
             for (int i = 0; i < dirtyAtlasList.Count; i++)
             {
                 string atlasName = dirtyAtlasList[i];
-                Debug.Log("更新图集: " + atlasName);
+                Debug.LogWarning("Update atlas: " + atlasName);
                 var curProgress = (float)i / dirtyAtlasList.Count;
                 if (curProgress > lastProgress + 0.01f)
                 {
                     lastProgress = curProgress;
-                    var progressText = $"当前进度: {i}/{dirtyAtlasList.Count} {atlasName}";
-                    bool cancel = EditorUtility.DisplayCancelableProgressBar("刷新图集" + atlasName, progressText, curProgress);
+                    var progressText = $"Progress: {i}/{dirtyAtlasList.Count} {atlasName}";
+                    bool cancel = EditorUtility.DisplayCancelableProgressBar($"Update atlas: {atlasName}", progressText, curProgress);
                     if (cancel)
                     {
                         break;
