@@ -90,4 +90,16 @@ public static class Tools
 
         AssetDatabase.Refresh();
     }
+
+    [MenuItem("Tools/Customer Tools/Generate Atlas", false, -777777)]
+    private static void GenAtlas()
+    {
+        EditorSpriteSaveInfo.GenAtlas();
+    }
+
+    [MenuItem("Tools/Customer Tools/Generate Atlas - Force", false, -777776)]
+    private static void ForceGenAtlas()
+    {
+        EditorSpriteSaveInfo.GenAtlas(true);
+    }
 }
