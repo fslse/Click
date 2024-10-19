@@ -9,10 +9,10 @@ namespace Scripts.Fire
 
 #if VERSION_DEV
         private const string HTTP_SERVER_ADDRESS = HTTP_SERVER_TEST;
-        public static bool DevMode = true;
+        public static readonly bool DevMode = true;
 #elif VERSION_RELEASE
         private const string HTTP_SERVER_ADDRESS = HTTP_SERVER_RELEASE;
-        public static bool DevMode = false;
+        public static readonly bool DevMode = false;
 #endif
 
         public const string AssetsDir = "assets";
@@ -27,12 +27,7 @@ namespace Scripts.Fire
         // 远程资源路径
         public const string RemoteAssetsPath = $"{HTTP_SERVER_ADDRESS}/test/{AssetsDir}/";
 
-        // 是否开启热更新
-        public const bool HotUpdate = true;
-
         // 帧率
         public const int GameFrameRate = 60;
-
-        // todo: 设备唯一标识码（Android、IOS） 要求卸载重装不变化
     }
 }
