@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Framework.Modules.Audio;
 using Framework.Modules.Pool;
 using Framework.Modules.UI;
@@ -13,7 +12,6 @@ using Scripts.Fire.Startup;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
@@ -21,34 +19,13 @@ using UnityEditor.SceneManagement;
 
 namespace Framework
 {
-    public partial class GameApp : MonoSingleton<GameApp>
+    public class GameApp : MonoSingleton<GameApp>
     {
-        private Image mask;
-
         private void Awake()
         {
             GameLog.LogDebug("GameApp Awake");
-
-            var transition = GameObject.Find("--- Transition ---");
-            DontDestroyOnLoad(transition);
-            mask = transition.transform.Find("Mask").GetComponent<Image>();
         }
 
-        public void Transition(Action action, float duration = 0.5f)
-        {
-            mask.gameObject.SetActive(true);
-            var seq = DOTween.Sequence();
-            var tweener1 = DOTween.To(() => mask.color, value => mask.color = value, new Color(0, 0, 0, 1), duration);
-            var tweener2 = DOTween.To(() => mask.color, value => mask.color = value, new Color(0, 0, 0, 0), duration);
-            seq.Append(tweener1);
-            seq.AppendCallback(() => { action?.Invoke(); });
-            seq.Append(tweener2);
-            seq.AppendCallback(() => { mask.gameObject.SetActive(false); });
-        }
-    }
-
-    public partial class GameApp
-    {
         /// <summary>
         /// 框架初始化 + 业务初始化 + 切场景
         /// <para></para>
@@ -96,7 +73,6 @@ namespace Framework
                 MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
             }
 
-
             var _ = typeof(MessageBroker).GetField("isDisposed", BindingFlags.Instance | BindingFlags.NonPublic);
             await UniTask.WaitUntil(() => (bool)_!.GetValue(MessageBroker.Default));
 
@@ -107,7 +83,7 @@ namespace Framework
             await UniTask.NextFrame();
 
             GameLog.LogWarning("Transition");
-            Transition(() =>
+            GameManager.Instance.Transition(() =>
             {
                 GameLog.LogWarning("切场景");
                 asyncOperation.allowSceneActivation = true;

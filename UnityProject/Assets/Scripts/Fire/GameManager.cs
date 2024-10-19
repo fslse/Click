@@ -1,12 +1,15 @@
+using System;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Scripts.Fire.Log;
 using Scripts.Fire.Startup;
 using UnityEngine;
 using UnityEngine.LowLevel;
+using UnityEngine.UI;
 
 namespace Scripts.Fire
 {
-    public class GameManager : MonoBehaviour
+    public partial class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
 
@@ -36,10 +39,13 @@ namespace Scripts.Fire
             GameLog.LogDebug("GameManager Awake");
             DontDestroyOnLoad(gameObject);
             Instance = this;
+
             // Application.logMessageReceived += GameLog.HandleLog;
             Application.logMessageReceivedThreaded += GameLog.HandleLog; // 多线程
             Application.targetFrameRate = AppConst.GameFrameRate;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+            Init();
         }
 
         private void Start()
@@ -73,6 +79,30 @@ namespace Scripts.Fire
         private void OnDestroy()
         {
             Instance = null;
+        }
+    }
+
+    public partial class GameManager
+    {
+        private Image mask;
+
+        private void Init()
+        {
+            var transition = GameObject.Find("--- Transition ---");
+            DontDestroyOnLoad(transition);
+            mask = transition.transform.Find("Mask").GetComponent<Image>();
+        }
+
+        public void Transition(Action action, float duration = 0.5f)
+        {
+            mask.gameObject.SetActive(true);
+            var seq = DOTween.Sequence();
+            var tweener1 = DOTween.To(() => mask.color, value => mask.color = value, new Color(0, 0, 0, 1), duration);
+            var tweener2 = DOTween.To(() => mask.color, value => mask.color = value, new Color(0, 0, 0, 0), duration);
+            seq.Append(tweener1);
+            seq.AppendCallback(() => { action?.Invoke(); });
+            seq.Append(tweener2);
+            seq.AppendCallback(() => { mask.gameObject.SetActive(false); });
         }
     }
 }

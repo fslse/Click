@@ -2,6 +2,8 @@
     "name": "Fire",
     "rootNamespace": "Scripts",
     "references": [
+        "GUID:86811355edd7833498a1085224f96f89",
+        "GUID:50accbb7639b9c1408c7cd78c8ac0bb7",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "GUID:33661e06c33d31b4c9223810bf503247",

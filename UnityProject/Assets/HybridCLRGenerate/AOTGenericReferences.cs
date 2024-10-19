@@ -50,11 +50,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask<Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.GameApp.<StartGame>d__4>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.GameApp.<StartGame>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.Modules.UI.UIPanelBase.<OnEnter>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid.<>c<Main.UIPanel.ExamplePanel.<InitAsync>d__5>
-	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.GameApp.<StartGame>d__4>
+	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.GameApp.<StartGame>d__2>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.Modules.UI.UIPanelBase.<OnEnter>d__8>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoid<Main.UIPanel.ExamplePanel.<InitAsync>d__5>
@@ -121,8 +121,6 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// Cysharp.Threading.Tasks.UniTaskCompletionSourceCore<Cysharp.Threading.Tasks.AsyncUnit>
 	// Cysharp.Threading.Tasks.UniTaskCompletionSourceCore<object>
 	// Cysharp.Threading.Tasks.UniTaskExtensions.<>c__19<object>
-	// DG.Tweening.Core.DOGetter<UnityEngine.Color>
-	// DG.Tweening.Core.DOSetter<UnityEngine.Color>
 	// Google.Protobuf.Collections.MapField.<>c<object,long>
 	// Google.Protobuf.Collections.MapField.<>c__DisplayClass7_0<object,long>
 	// Google.Protobuf.Collections.MapField.Codec<object,long>
@@ -925,13 +923,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24>(Framework.Modules.UI.UIPanelManager.<ShowNormalPanel>d__24&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23>(Framework.Modules.UI.UIPanelManager.<ShowPanel>d__23&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.Start<Scripts.Fire.Manager.AssetManager.<LoadAssetAsync>d__6<object>>(Scripts.Fire.Manager.AssetManager.<LoadAssetAsync>d__6<object>&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.GameApp.<StartGame>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.GameApp.<StartGame>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.GameApp.<StartGame>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.GameApp.<StartGame>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.Modules.UI.UIPanelBase.<OnEnter>d__8>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.Modules.UI.UIPanelBase.<OnEnter>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Main.UIPanel.ExamplePanel.<InitAsync>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Main.UIPanel.ExamplePanel.<InitAsync>d__5&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.GameApp.<StartGame>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.GameApp.<StartGame>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.GameApp.<StartGame>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.GameApp.<StartGame>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<object>,Main.UIPanel.ExamplePanel.<InitAsync>d__5>(Cysharp.Threading.Tasks.UniTask.Awaiter<object>&,Main.UIPanel.ExamplePanel.<InitAsync>d__5&)
-		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.GameApp.<StartGame>d__4>(Framework.GameApp.<StartGame>d__4&)
+		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.GameApp.<StartGame>d__2>(Framework.GameApp.<StartGame>d__2&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.Modules.UI.UIPanelBase.<OnEnter>d__8>(Framework.Modules.UI.UIPanelBase.<OnEnter>d__8&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d>(Framework.Modules.UI.UIPanelManager.<<-ctor>g__OnNext|21_2>d&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskVoidMethodBuilder.Start<Main.NewBehaviourScript.<Init>d__1>(Main.NewBehaviourScript.<Init>d__1&)
