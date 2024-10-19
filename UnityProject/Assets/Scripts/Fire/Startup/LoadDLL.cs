@@ -21,48 +21,51 @@ namespace Scripts.Fire.Startup
             Execute().Forget();
         }
 
-
         private async UniTask Execute()
         {
-#if UNITY_EDITOR // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。直接查找获得HotUpdate程序集
-            GameManager.Instance.assembly = new System.Reflection.Assembly[GameManager.Instance.assemblyAssetName.Length];
-            for (int i = 0; i < GameManager.Instance.assemblyAssetName.Length; i++)
+            if (Application.isEditor)
             {
-                var name = GameManager.Instance.assemblyAssetName[i].Replace(".dll.bytes", "");
-                GameManager.Instance.assembly[i] = AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == name);
-            }
-#else
-            // / 实机
-            var ab = await AssetManager.Instance.LoadAssetBundleAsync("scripts.ab");
-            GameLog.LogWarning($"DLL AB\n{ZString.Join("\n", ab.GetAllAssetNames())}");
-
-            // 加载热更新dll
-            // 如果有多个热更新dll，按照依赖顺序加载，先加载被依赖的assembly
-            GameManager.Instance.assembly = new System.Reflection.Assembly[GameManager.Instance.assemblyAssetName.Length];
-            for (int i = 0; i < GameManager.Instance.assemblyAssetName.Length; i++)
-            {
-                var name = GameManager.Instance.assemblyAssetName[i];
-                GameManager.Instance.assembly[i] = System.Reflection.Assembly.Load((await ab.LoadAssetAsync<TextAsset>(name) as TextAsset)!.bytes);
-            }
-
-            // 为 AOT Assembly 补充元数据
-            foreach (var assembly in AOTGenericReferences.PatchedAOTAssemblyList)
-            {
-                try
+                // Editor环境下，HotUpdate.dll.bytes已经被自动加载，不需要加载，重复加载反而会出问题。直接查找获得HotUpdate程序集
+                GameManager.Instance.assembly = new System.Reflection.Assembly[GameManager.Instance.assemblyAssetName.Length];
+                for (int i = 0; i < GameManager.Instance.assemblyAssetName.Length; i++)
                 {
-                    var dllBytes = (await ab.LoadAssetAsync<TextAsset>(assembly.Replace("dll", "bytes")) as TextAsset)!.bytes;
-
-                    // HomologousImageMode.SuperSet: This mode relaxes the requirements for AOT dll, you can use either the cut AOT dll or the original AOT dll.
-                    // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
-                    LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, HomologousImageMode.SuperSet);
-                    GameLog.LogDebug($"Load metadata for {assembly}: {errorCode}");
-                }
-                catch (Exception e)
-                {
-                    GameLog.LogError("Failed to load metadata for AOTAssembly", $"{assembly.Replace("dll", "bytes")}\n{e.Message}");
+                    var name = GameManager.Instance.assemblyAssetName[i].Replace(".dll.bytes", "");
+                    GameManager.Instance.assembly[i] = AppDomain.CurrentDomain.GetAssemblies().First(assembly => assembly.GetName().Name == name);
                 }
             }
-#endif
+            else
+            {
+                var ab = await AssetManager.Instance.LoadAssetBundleAsync("scripts.ab");
+                GameLog.LogWarning($"DLL AB\n{ZString.Join("\n", ab.GetAllAssetNames())}");
+
+                // 加载热更新dll
+                // 如果有多个热更新dll，按照依赖顺序加载，先加载被依赖的assembly
+                GameManager.Instance.assembly = new System.Reflection.Assembly[GameManager.Instance.assemblyAssetName.Length];
+                for (int i = 0; i < GameManager.Instance.assemblyAssetName.Length; i++)
+                {
+                    var name = GameManager.Instance.assemblyAssetName[i];
+                    GameManager.Instance.assembly[i] =
+                        System.Reflection.Assembly.Load((await ab.LoadAssetAsync<TextAsset>(name) as TextAsset)!.bytes);
+                }
+
+                // 为 AOT Assembly 补充元数据
+                foreach (var assembly in AOTGenericReferences.PatchedAOTAssemblyList)
+                {
+                    try
+                    {
+                        var dllBytes = (await ab.LoadAssetAsync<TextAsset>(assembly.Replace("dll", "bytes")) as TextAsset)!.bytes;
+
+                        // HomologousImageMode.SuperSet: This mode relaxes the requirements for AOT dll, you can use either the cut AOT dll or the original AOT dll.
+                        // 加载assembly对应的dll，会自动为它hook。一旦aot泛型函数的native函数不存在，用解释器版本代码
+                        LoadImageErrorCode errorCode = RuntimeApi.LoadMetadataForAOTAssembly(dllBytes, HomologousImageMode.SuperSet);
+                        GameLog.LogDebug($"Load metadata for {assembly}: {errorCode}");
+                    }
+                    catch (Exception e)
+                    {
+                        GameLog.LogError("Failed to load metadata for AOTAssembly", $"{assembly.Replace("dll", "bytes")}\n{e.Message}");
+                    }
+                }
+            }
 
             workflow.OnTaskFinished(this);
 
