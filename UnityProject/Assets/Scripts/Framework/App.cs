@@ -11,10 +11,7 @@ namespace Framework
 
             GC.Collect();
 
-            if (GameApp.Instance is null)
-                GameLog.LogError("GameApp.Instance is null");
-
-            return 0;
+            return GameApp.Instance is null ? -1 : 0;
         }
     }
 }
