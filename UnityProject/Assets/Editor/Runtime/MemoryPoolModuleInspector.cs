@@ -7,7 +7,7 @@ using Framework.Core.Memory;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GameApp))]
+[CustomEditor(typeof(GameSystem))]
 internal sealed class MemoryPoolModuleInspector : GameFrameworkInspector
 {
     private readonly Dictionary<string, List<MemoryPoolInfo>> memoryPoolInfos = new(StringComparer.Ordinal);

@@ -1,9 +1,7 @@
 using System;
 using System.Reflection;
 using Cysharp.Threading.Tasks;
-using Framework.Modules.Audio;
-using Framework.Modules.Pool;
-using Framework.Modules.UI;
+using Framework;
 using Scripts.Fire;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
@@ -17,49 +15,30 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace Framework
+namespace Main
 {
     public class GameApp : MonoSingleton<GameApp>
     {
-        private void Awake()
+        private void Start()
         {
-            GameLog.LogDebug("GameApp Awake");
+            GameLog.LogDebug("GameApp Start");
+            StartGame().Forget();
         }
 
         /// <summary>
         /// 框架初始化 + 业务初始化 + 切场景
-        /// <para></para>
-        /// 业务初始化在 Assembly-CSharp 的 NewBehaviourScript
-        /// <para></para>
-        /// 业务初始化完成后调用 GameApp.Instance.StartGame() 切场景
-        /// <remarks> 10% + 20% + 10% </remarks>
+        /// <remarks> 5% + 25% + 10% </remarks>
         /// </summary>
-        private void Start()
-        {
-            // UIPanelManager 初始化
-            DontDestroyOnLoad(UIPanelManager.Instance.UIRoot);
-
-            MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.65f));
-
-            // GameApp下模块初始化
-
-            // AudioModule 初始化
-            if (!AudioModule.Instance.InstanceRoot.parent)
-                DontDestroyOnLoad(AudioModule.Instance.InstanceRoot.gameObject);
-            // ObjectPoolModule 初始化
-            if (!ObjectPoolModule.Instance.InstanceRoot.parent)
-                DontDestroyOnLoad(ObjectPoolModule.Instance.InstanceRoot.gameObject);
-
-            MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.7f));
-
-            // 业务初始化
-            Type type = GameManager.Instance.assembly[3].GetType("Main.NewBehaviourScript");
-            gameObject.AddComponent(type);
-        }
-
         public async UniTaskVoid StartGame()
         {
-            // 切场景，开始游戏 10%
+            // 框架初始化 = 5%
+            if (GameSystem.Instance)
+                MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.65f));
+
+            // 业务初始化 = 25%
+            // todo: 业务逻辑初始化
+
+            // 切场景 = 10%
 #if UNITY_EDITOR
             AsyncOperation asyncOperation = EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Game.unity", new LoadSceneParameters(LoadSceneMode.Single));
 #else

@@ -1,7 +1,7 @@
 using System;
 using Scripts.Fire.Log;
 
-namespace Framework
+namespace Main
 {
     public class App
     {

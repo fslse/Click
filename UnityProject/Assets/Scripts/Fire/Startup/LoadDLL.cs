@@ -72,11 +72,11 @@ namespace Scripts.Fire.Startup
             // 热更新程序集入口
             try
             {
-                GameManager.Instance.assembly[2]!.GetType("Framework.App")!.GetMethod("Main")!.Invoke(null, null);
+                GameManager.Instance.assembly[3]!.GetType("Main.App")!.GetMethod("Main")!.Invoke(null, null);
             }
             catch (Exception e)
             {
-                GameLog.LogError("Failed to run Framework.App.Main", e.Message);
+                GameLog.LogError("Failed to run Main.App.Main", e.Message);
             }
         }
     }

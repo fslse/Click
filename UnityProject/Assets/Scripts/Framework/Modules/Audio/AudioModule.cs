@@ -7,6 +7,7 @@ using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
 using UnityEngine;
 using UnityEngine.Audio;
+using Object = UnityEngine.Object;
 
 namespace Framework.Modules.Audio
 {
@@ -27,7 +28,7 @@ namespace Framework.Modules.Audio
         #region Public Propreties
 
         /// <summary>
-        /// 场景上Audio根节点。
+        /// 场景上音频模块根节点。
         /// </summary>
         public Transform InstanceRoot { get; }
 
@@ -231,8 +232,8 @@ namespace Framework.Modules.Audio
         private AudioModule()
         {
             InstanceRoot = new GameObject("Audio").transform;
-            InstanceRoot.SetParent(GameApp.Instance.transform);
             InstanceRoot.localPosition = Vector3.zero;
+            Object.DontDestroyOnLoad(InstanceRoot.gameObject);
 
             audioMixer = AssetManager.Instance.LoadAsset<AudioMixer>("Assets/AssetPackages/Audio/AudioMixer.mixer");
             var audioGroupConfigs = AssetManager.Instance.LoadAsset<AudioGroupConfigAsset>("Assets/AssetPackages/Audio/AudioGroupConfigAsset.asset").AudioGroupConfigs;

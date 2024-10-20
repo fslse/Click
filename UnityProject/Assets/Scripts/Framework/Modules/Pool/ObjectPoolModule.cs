@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Singleton;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Framework.Modules.Pool
 {
@@ -18,6 +19,9 @@ namespace Framework.Modules.Pool
         private const string DefaultObjectPoolRootName = "ObjectPool";
         private readonly Dictionary<string, Transform> objectPoolRoots;
 
+        /// <summary>
+        /// 场景上对象池模块根节点。
+        /// </summary>
         public Transform InstanceRoot { get; }
 
         /// <summary>
@@ -28,15 +32,15 @@ namespace Framework.Modules.Pool
         private ObjectPoolModule()
         {
             InstanceRoot = new GameObject("ObjectPool").transform;
-            InstanceRoot.SetParent(GameApp.Instance.transform);
             InstanceRoot.localPosition = Vector3.zero;
+            Object.DontDestroyOnLoad(InstanceRoot.gameObject);
 
             objectPoolManager = new ObjectPoolManager();
             objectPoolRoots = new Dictionary<string, Transform>();
         }
 
         /// <summary>
-        /// 获取对象池场景节点。
+        /// 获取指定对象池在场景上的根节点。
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
