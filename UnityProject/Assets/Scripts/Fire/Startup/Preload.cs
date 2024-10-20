@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Scripts.Fire.Manager;
+using UnityEngine;
 
 namespace Scripts.Fire.Startup
 {
@@ -17,6 +18,12 @@ namespace Scripts.Fire.Startup
 
         private async UniTaskVoid Execute()
         {
+            if (Application.isEditor)
+            {
+                Skip();
+                return;
+            }
+
             await AssetManager.Instance.Initialize();
             workflow.OnTaskFinished(this);
         }
