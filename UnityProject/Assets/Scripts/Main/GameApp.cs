@@ -46,11 +46,13 @@ namespace Main
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Scenes/Game");
 #endif
             asyncOperation.allowSceneActivation = false;
-            while (asyncOperation.progress < 0.899999f)
+            while (asyncOperation.progress < 0.9f)
             {
                 await UniTask.NextFrame();
                 MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(0.9f + asyncOperation.progress / 0.9f / 10));
             }
+
+            MessageBroker.Default.Publish(StartupProgressMessage.Instance.Message(1));
 
             var _ = typeof(MessageBroker).GetField("isDisposed", BindingFlags.Instance | BindingFlags.NonPublic);
             await UniTask.WaitUntil(() => (bool)_!.GetValue(MessageBroker.Default));

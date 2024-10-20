@@ -54,7 +54,7 @@ namespace Scripts.Fire
 
                 tween.OnComplete(() =>
                 {
-                    if (target >= 0.999999f)
+                    if (target >= 1)
                     {
                         GameLog.LogWarning("HotFixPresenter Progress Complete");
                         (MessageBroker.Default as MessageBroker)!.Dispose();

@@ -53,7 +53,7 @@ namespace Scripts.Fire
             GameLog.LogDebug("GameManager Start");
 
             // 构建启动流程
-            // 40% + 20% + 10% + 20% + 10% 
+            // 40% + 20% + 5% + 25% + 10% 
             // 资源下载 + 加载DLL + 框架初始化 + 业务初始化 + 切场景
             // 这里只处理 资源下载 + 加载DLL
             var workflow = new Workflow();

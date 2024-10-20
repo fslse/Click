@@ -10,7 +10,7 @@ namespace Framework
         /// <summary>
         /// 框架初始化
         /// </summary>
-        private void Start()
+        private void Awake()
         {
             // UIPanelManager 初始化
             DontDestroyOnLoad(UIPanelManager.Instance.UIRoot);
