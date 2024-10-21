@@ -700,8 +700,7 @@ namespace Framework.Modules.Pool
         /// <param name="expireTime">对象池对象过期秒数。</param>
         /// <param name="priority">对象池的优先级。</param>
         /// <returns>要创建的允许单次获取的对象池。</returns>
-        public IObjectPool<T> CreateSingleSpawnObjectPool<T>(string name, float autoReleaseInterval, int capacity, float expireTime, int priority)
-            where T : ObjectBase
+        public IObjectPool<T> CreateSingleSpawnObjectPool<T>(string name, float autoReleaseInterval, int capacity, float expireTime, int priority) where T : ObjectBase
         {
             return InternalCreateObjectPool<T>(name, false, autoReleaseInterval, capacity, expireTime, priority);
         }
@@ -1069,8 +1068,7 @@ namespace Framework.Modules.Pool
         /// <param name="expireTime">对象池对象过期秒数。</param>
         /// <param name="priority">对象池的优先级。</param>
         /// <returns>要创建的允许多次获取的对象池。</returns>
-        public IObjectPool<T> CreateMultiSpawnObjectPool<T>(string name, float autoReleaseInterval, int capacity, float expireTime, int priority)
-            where T : ObjectBase
+        public IObjectPool<T> CreateMultiSpawnObjectPool<T>(string name, float autoReleaseInterval, int capacity, float expireTime, int priority) where T : ObjectBase
         {
             return InternalCreateObjectPool<T>(name, true, autoReleaseInterval, capacity, expireTime, priority);
         }
@@ -1217,8 +1215,7 @@ namespace Framework.Modules.Pool
             return objectPools.TryGetValue(typeNamePair, out var objectPool) ? objectPool : null;
         }
 
-        private IObjectPool<T> InternalCreateObjectPool<T>(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime,
-            int priority) where T : ObjectBase
+        private IObjectPool<T> InternalCreateObjectPool<T>(string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority) where T : ObjectBase
         {
             TypeNamePair typeNamePair = new TypeNamePair(typeof(T), name);
             if (HasObjectPool<T>(name))
@@ -1231,8 +1228,7 @@ namespace Framework.Modules.Pool
             return objectPool;
         }
 
-        private ObjectPoolBase InternalCreateObjectPool(Type objectType, string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity,
-            float expireTime, int priority)
+        private ObjectPoolBase InternalCreateObjectPool(Type objectType, string name, bool allowMultiSpawn, float autoReleaseInterval, int capacity, float expireTime, int priority)
         {
             if (objectType == null)
             {
