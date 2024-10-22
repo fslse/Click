@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
@@ -13,7 +12,6 @@ using Object = UnityEngine.Object;
 
 namespace Framework.Modules.UI
 {
-    [UsedImplicitly]
     public class UIPanelManager : Singleton<UIPanelManager>
     {
         /// <summary>

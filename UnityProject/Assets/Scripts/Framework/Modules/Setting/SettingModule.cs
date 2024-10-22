@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Scripts.Fire.Log;
 using Scripts.Fire.Singleton;
 
 namespace Framework.Modules.Setting
@@ -16,11 +15,6 @@ namespace Framework.Modules.Setting
         {
             settingManager = new SettingManager();
             settingManager.SetSettingHelper(new PlayerPrefsSettingHelper());
-
-            if (!settingManager.Load())
-            {
-                GameLog.LogError("Failed to load game settings.");
-            }
         }
 
         /// <summary>
@@ -29,11 +23,20 @@ namespace Framework.Modules.Setting
         public int Count => settingManager.Count;
 
         /// <summary>
+        /// 加载游戏配置。
+        /// </summary>
+        /// <returns></returns>
+        public bool Load()
+        {
+            return settingManager.Load();
+        }
+
+        /// <summary>
         /// 保存游戏配置。
         /// </summary>
-        public void Save()
+        public bool Save()
         {
-            settingManager.Save();
+            return settingManager.Save();
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Singleton;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Framework.Modules.Pool
     /// <summary>
     /// 对象池模块。
     /// </summary>
-    [UsedImplicitly]
     public sealed class ObjectPoolModule : Singleton<ObjectPoolModule>
     {
         private readonly IObjectPoolManager objectPoolManager;

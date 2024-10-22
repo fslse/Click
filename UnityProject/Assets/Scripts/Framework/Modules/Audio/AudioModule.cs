@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
 using Scripts.Fire.Log;
 using Scripts.Fire.Manager;
 using Scripts.Fire.Singleton;
@@ -15,7 +14,6 @@ namespace Framework.Modules.Audio
     /// 音效管理，为游戏提供统一的音效播放接口。
     /// </summary>
     /// <remarks>场景3D音效挂到场景物体、技能3D音效挂到技能特效上，并在AudioSource的Output上设置对应分类的AudioMixerGroup</remarks>
-    [UsedImplicitly]
     public class AudioModule : Singleton<AudioModule>
     {
         private readonly AudioMixer audioMixer;

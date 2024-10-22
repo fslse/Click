@@ -1,5 +1,7 @@
+using System;
 using Framework.Modules.Audio;
 using Framework.Modules.Pool;
+using Framework.Modules.Setting;
 using Framework.Modules.UI;
 using Scripts.Fire.Singleton;
 
@@ -19,6 +21,12 @@ namespace Framework
             AudioModule.Instance.InstanceRoot.SetParent(transform);
             // ObjectPoolModule 初始化
             ObjectPoolModule.Instance.InstanceRoot.SetParent(transform);
+
+            // SettingModule 初始化
+            if (!SettingModule.Instance.Load())
+            {
+                throw new Exception("SettingModule 初始化失败");
+            }
 
             DontDestroyOnLoad(gameObject);
         }
