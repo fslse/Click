@@ -48,7 +48,7 @@ namespace Framework.Modules.Setting
         /// <param name="helper">游戏配置辅助器。</param>
         public void SetSettingHelper(ISettingHelper helper)
         {
-            settingHelper = settingHelper ?? throw new Exception("Setting helper is invalid.");
+            settingHelper = helper ?? throw new Exception("Setting helper is invalid.");
         }
 
         /// <summary>

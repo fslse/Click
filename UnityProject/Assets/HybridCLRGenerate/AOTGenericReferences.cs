@@ -464,6 +464,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<int>
 	// System.Collections.Generic.IList<object>
 	// System.Collections.Generic.IList<ushort>
+	// System.Collections.Generic.IReadOnlyDictionary<object,object>
 	// System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>
 	// System.Collections.Generic.KeyValuePair<System.UIntPtr,object>
 	// System.Collections.Generic.KeyValuePair<byte,object>
@@ -571,10 +572,30 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ObjectEqualityComparer<uint>
 	// System.Collections.Generic.Queue.Enumerator<object>
 	// System.Collections.Generic.Queue<object>
+	// System.Collections.Generic.SortedDictionary.<>c__DisplayClass34_0<object,object>
+	// System.Collections.Generic.SortedDictionary.<>c__DisplayClass34_1<object,object>
+	// System.Collections.Generic.SortedDictionary.Enumerator<object,object>
+	// System.Collections.Generic.SortedDictionary.KeyCollection.<>c__DisplayClass5_0<object,object>
+	// System.Collections.Generic.SortedDictionary.KeyCollection.<>c__DisplayClass6_0<object,object>
+	// System.Collections.Generic.SortedDictionary.KeyCollection.Enumerator<object,object>
+	// System.Collections.Generic.SortedDictionary.KeyCollection<object,object>
+	// System.Collections.Generic.SortedDictionary.KeyValuePairComparer<object,object>
+	// System.Collections.Generic.SortedDictionary.ValueCollection.<>c__DisplayClass5_0<object,object>
+	// System.Collections.Generic.SortedDictionary.ValueCollection.<>c__DisplayClass6_0<object,object>
+	// System.Collections.Generic.SortedDictionary.ValueCollection.Enumerator<object,object>
+	// System.Collections.Generic.SortedDictionary.ValueCollection<object,object>
+	// System.Collections.Generic.SortedDictionary<object,object>
+	// System.Collections.Generic.SortedSet.<>c__DisplayClass52_0<System.Collections.Generic.KeyValuePair<object,object>>
+	// System.Collections.Generic.SortedSet.<>c__DisplayClass53_0<System.Collections.Generic.KeyValuePair<object,object>>
+	// System.Collections.Generic.SortedSet.Enumerator<System.Collections.Generic.KeyValuePair<object,object>>
+	// System.Collections.Generic.SortedSet.Node<System.Collections.Generic.KeyValuePair<object,object>>
+	// System.Collections.Generic.SortedSet<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.Generic.Stack.Enumerator<FairyGUI.UpdateContext.ClipInfo>
 	// System.Collections.Generic.Stack.Enumerator<object>
 	// System.Collections.Generic.Stack<FairyGUI.UpdateContext.ClipInfo>
 	// System.Collections.Generic.Stack<object>
+	// System.Collections.Generic.TreeSet<System.Collections.Generic.KeyValuePair<object,object>>
+	// System.Collections.Generic.TreeWalkPredicate<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Collections.ObjectModel.Collection<object>
 	// System.Collections.ObjectModel.ReadOnlyCollection<FairyGUI.GPath.Segment>
 	// System.Collections.ObjectModel.ReadOnlyCollection<FairyGUI.GPathPoint>
@@ -619,6 +640,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Func<System.Collections.Generic.KeyValuePair<object,long>,long>
 	// System.Func<System.Collections.Generic.KeyValuePair<object,long>,object>
 	// System.Func<System.Collections.Generic.KeyValuePair<object,object>,byte>
+	// System.Func<System.Collections.Generic.KeyValuePair<object,object>,object>
 	// System.Func<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>>
 	// System.Func<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>>
 	// System.Func<System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,System.ValueTuple<byte,object>>>>>>>
@@ -670,6 +692,9 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.WhereListIterator<System.Collections.Generic.KeyValuePair<object,object>>
 	// System.Linq.Enumerable.WhereListIterator<object>
 	// System.Linq.Enumerable.WhereListIterator<ushort>
+	// System.Linq.Enumerable.WhereSelectArrayIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
+	// System.Linq.Enumerable.WhereSelectEnumerableIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
+	// System.Linq.Enumerable.WhereSelectListIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
 	// System.Linq.GroupedEnumerable<object,object,object>
 	// System.Linq.IGrouping<object,object>
 	// System.Linq.IdentityFunction.<>c<object>
@@ -953,6 +978,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void System.Array.Reverse<byte>(byte[])
 		// System.Void System.Array.Reverse<byte>(byte[],int,int)
 		// System.Void System.Array.Sort<UnityEngine.Vector2>(UnityEngine.Vector2[],System.Comparison<UnityEngine.Vector2>)
+		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<object,object>(System.Collections.Generic.IReadOnlyDictionary<object,object>,object,object)
 		// bool System.Linq.Enumerable.Any<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Concat<object>(System.Collections.Generic.IEnumerable<object>,System.Collections.Generic.IEnumerable<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.ConcatIterator<object>(System.Collections.Generic.IEnumerable<object>,System.Collections.Generic.IEnumerable<object>)
@@ -966,6 +992,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// object System.Linq.Enumerable.First<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<object,object>> System.Linq.Enumerable.GroupBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
 		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<object,object>> System.Linq.Enumerable.GroupBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>,System.Collections.Generic.IEqualityComparer<object>)
+		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<System.Collections.Generic.KeyValuePair<object,object>,object>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>,System.Func<System.Collections.Generic.KeyValuePair<object,object>,object>)
 		// object[] System.Linq.Enumerable.ToArray<object>(System.Collections.Generic.IEnumerable<object>)
 		// ushort[] System.Linq.Enumerable.ToArray<ushort>(System.Collections.Generic.IEnumerable<ushort>)
 		// System.Collections.Generic.Dictionary<object,object> System.Linq.Enumerable.ToDictionary<object,object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>,System.Func<object,object>)
@@ -973,6 +1000,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>> System.Linq.Enumerable.Where<System.Collections.Generic.KeyValuePair<object,object>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>,System.Func<System.Collections.Generic.KeyValuePair<object,object>,bool>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<ushort> System.Linq.Enumerable.Where<ushort>(System.Collections.Generic.IEnumerable<ushort>,System.Func<ushort,bool>)
+		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<System.Collections.Generic.KeyValuePair<object,object>>.Select<object>(System.Func<System.Collections.Generic.KeyValuePair<object,object>,object>)
 		// System.Span<float> System.MemoryExtensions.AsSpan<float>(float[])
 		// System.Span<ushort> System.MemoryExtensions.AsSpan<ushort>(ushort[],int)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Main.GamePlay.Example.<Test>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Main.GamePlay.Example.<Test>d__2&)
