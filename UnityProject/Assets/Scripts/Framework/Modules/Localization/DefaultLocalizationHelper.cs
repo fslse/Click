@@ -9,7 +9,7 @@ namespace Framework.Modules.Localization
     public class DefaultLocalizationHelper
     {
 #if UNITY_EDITOR
-        public const string I2GlobalSourcesEditorPath = "Assets/Editor/I2Localization/I2Languages.asset";
+        public const string I2GlobalSourcesEditorPath = "Assets/Editor/I2/I2Languages.asset";
 #endif
 
         public const string I2ResAssetNamePrefix = "I2_";
