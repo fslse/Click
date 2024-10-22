@@ -40,12 +40,7 @@ namespace Framework.Core.Utils
             /// <returns>异或后的二进制流。</returns>
             public static byte[] GetXorBytes(byte[] bytes, byte[] code)
             {
-                if (bytes == null)
-                {
-                    return null;
-                }
-
-                return GetXorBytes(bytes, 0, bytes.Length, code);
+                return bytes == null ? null : GetXorBytes(bytes, 0, bytes.Length, code);
             }
 
             /// <summary>

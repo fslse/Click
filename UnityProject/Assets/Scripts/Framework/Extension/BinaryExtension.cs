@@ -9,7 +9,7 @@ namespace Framework.Extension
     /// </summary>
     public static class BinaryExtension
     {
-        private static readonly byte[] s_CachedBytes = new byte[byte.MaxValue + 1];
+        private static readonly byte[] cachedBytes = new byte[byte.MaxValue + 1];
 
         /// <summary>
         /// 从二进制流读取编码后的 32 位有符号整数。
@@ -44,7 +44,7 @@ namespace Framework.Extension
         public static void Write7BitEncodedInt32(this BinaryWriter binaryWriter, int value)
         {
             uint num = (uint)value;
-            while (num >= 0x80)
+            while (num >= 0x80) // 1000 0000
             {
                 binaryWriter.Write((byte)(num | 0x80));
                 num >>= 7;
@@ -151,12 +151,12 @@ namespace Framework.Extension
 
             for (byte i = 0; i < length; i++)
             {
-                s_CachedBytes[i] = binaryReader.ReadByte();
+                cachedBytes[i] = binaryReader.ReadByte();
             }
 
-            Utility.Encryption.GetSelfXorBytes(s_CachedBytes, 0, length, encryptBytes);
-            string value = Utility.Converter.GetString(s_CachedBytes, 0, length);
-            Array.Clear(s_CachedBytes, 0, length);
+            Utility.Encryption.GetSelfXorBytes(cachedBytes, 0, length, encryptBytes);
+            string value = Utility.Converter.GetString(cachedBytes, 0, length);
+            Array.Clear(cachedBytes, 0, length);
             return value;
         }
 
@@ -174,15 +174,15 @@ namespace Framework.Extension
                 return;
             }
 
-            int length = Utility.Converter.GetBytes(value, s_CachedBytes);
+            int length = Utility.Converter.GetBytes(value, cachedBytes);
             if (length > byte.MaxValue)
             {
                 throw new Exception($"String '{value}' is too long.");
             }
 
-            Utility.Encryption.GetSelfXorBytes(s_CachedBytes, encryptBytes);
+            Utility.Encryption.GetSelfXorBytes(cachedBytes, encryptBytes);
             binaryWriter.Write((byte)length);
-            binaryWriter.Write(s_CachedBytes, 0, length);
+            binaryWriter.Write(cachedBytes, 0, length);
         }
     }
 }
