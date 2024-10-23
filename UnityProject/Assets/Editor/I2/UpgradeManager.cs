@@ -179,8 +179,28 @@ namespace I2.Loc
 		}
 		
 		//[MenuItem( "Tools/I2 Localization/Create I2Languages", false, 1)]
-		public static void CreateLanguageSources()
+		public static LanguageSourceAsset CreateLanguageSources()
 		{
+			// fslse modify
+			var globalSourcesAsset = AssetDatabase.LoadAssetAtPath<LanguageSourceAsset>(I2GlobalSourcesEditorPath);
+			if (globalSourcesAsset != null)
+			{
+				return globalSourcesAsset;
+			}
+			
+			var asset = ScriptableObject.CreateInstance<LanguageSourceAsset>();
+
+			var assetFolder = Application.dataPath + I2GlobalSourcesEditorFolderPath.Replace("Assets", "");
+			if (!Directory.Exists(assetFolder))
+				Directory.CreateDirectory(assetFolder);
+            
+			AssetDatabase.CreateAsset(asset, I2GlobalSourcesEditorPath);
+			AssetDatabase.SaveAssets();
+			AssetDatabase.Refresh();
+			
+			return asset;
+			
+#if false			
 			if (LocalizationManager.GlobalSources==null || LocalizationManager.GlobalSources.Length==0)
 				return;
 			
@@ -229,6 +249,7 @@ namespace I2.Loc
             AssetDatabase.CreateAsset(asset, sourcePath);
             AssetDatabase.SaveAssets();
 		    AssetDatabase.Refresh();
+#endif
 		}
 
         [MenuItem("Tools/I2 Localization/Help", false, 30)]
@@ -237,16 +258,29 @@ namespace I2.Loc
         {
             Application.OpenURL(LocalizeInspector.HelpURL_Documentation);
         }
+        
+        // fslse modify
+        private const string I2GlobalSourcesEditorFolderPath = "Assets/Editor/I2";
+        private const string I2GlobalSourcesEditorPath = "Assets/Editor/I2/I2Languages.asset";
 
         [MenuItem("Tools/I2 Localization/Open I2Languages.asset", false, 0)]
         public static void OpenGlobalSource()
         {
+	        // fslse modify
+	        var globalSourcesAsset = CreateLanguageSources();
+
+	        if (globalSourcesAsset == null)
+		        Debug.LogError($"没有找到数据源 {I2GlobalSourcesEditorPath}");
+            
+	        Selection.activeObject = globalSourcesAsset;
+#if false	        
             CreateLanguageSources();
             LanguageSourceAsset GO = Resources.Load<LanguageSourceAsset>(LocalizationManager.GlobalSources[0]);
             if (GO == null)
                 Debug.Log("Unable to find Global Language at Assets/Resources/" + LocalizationManager.GlobalSources[0] + ".asset");
             
             Selection.activeObject = GO;
+#endif
         }
 
 

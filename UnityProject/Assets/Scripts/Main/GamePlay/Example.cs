@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Framework.Core.Memory;
 using Framework.Modules.Audio;
+using Framework.Modules.Localization;
 using Framework.Modules.Time;
 using Framework.Modules.UI;
 using Scripts.Fire.Log;
@@ -15,6 +16,8 @@ namespace Main.GamePlay
         private void Awake()
         {
             GameLog.LogDebug("Example Awake");
+
+            LocalizationModule.Instance.Language = Language.English;
 
             Timer timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(2),
                 _ => { UIPanelManager.Instance.ShowPanel("ExamplePanel", UIPanelLayer.Normal).Forget(); });
