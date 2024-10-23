@@ -25,7 +25,7 @@ namespace Framework.Extension
             {
                 if (shift >= 35)
                 {
-                    throw new Exception("7 bit encoded int is invalid.");
+                    throw new GameFrameworkException("7 bit encoded int is invalid.");
                 }
 
                 b = binaryReader.ReadByte();
@@ -87,7 +87,7 @@ namespace Framework.Extension
             {
                 if (shift >= 70)
                 {
-                    throw new Exception("7 bit encoded int is invalid.");
+                    throw new GameFrameworkException("7 bit encoded int is invalid.");
                 }
 
                 b = binaryReader.ReadByte();
@@ -177,7 +177,7 @@ namespace Framework.Extension
             int length = Utility.Converter.GetBytes(value, cachedBytes);
             if (length > byte.MaxValue)
             {
-                throw new Exception($"String '{value}' is too long.");
+                throw new GameFrameworkException($"String '{value}' is too long.");
             }
 
             Utility.Encryption.GetSelfXorBytes(cachedBytes, encryptBytes);

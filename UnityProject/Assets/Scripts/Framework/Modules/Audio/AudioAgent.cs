@@ -279,7 +279,7 @@ namespace Framework.Modules.Audio
                 case AudioAgentRuntimeState.End:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new GameFrameworkException("AudioAgentRuntimeState is invalid.");
             }
 
             Duration += elapseSeconds;

@@ -95,7 +95,7 @@ namespace Framework.Modules.Pool
                 {
                     if (value < 0)
                     {
-                        throw new Exception("Capacity is invalid.");
+                        throw new GameFrameworkException("Capacity is invalid.");
                     }
 
                     if (capacity == value)
@@ -119,7 +119,7 @@ namespace Framework.Modules.Pool
                 {
                     if (value < 0f)
                     {
-                        throw new Exception("ExpireTime is invalid.");
+                        throw new GameFrameworkException("ExpireTime is invalid.");
                     }
 
                     if (Math.Abs(ExpireTime - value) < 0.01f)
@@ -150,7 +150,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 Object<T> internalObject = Object<T>.Create(obj, spawned);
@@ -181,7 +181,7 @@ namespace Framework.Modules.Pool
             {
                 if (name == null)
                 {
-                    throw new Exception("Name is invalid.");
+                    throw new GameFrameworkException("Name is invalid.");
                 }
 
                 if (objects.TryGetValue(name, out var objectRange))
@@ -216,7 +216,7 @@ namespace Framework.Modules.Pool
             {
                 if (name == null)
                 {
-                    throw new Exception("Name is invalid.");
+                    throw new GameFrameworkException("Name is invalid.");
                 }
 
                 if (objects.TryGetValue(name, out var objectRange))
@@ -241,7 +241,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 Unspawn(obj.Target);
@@ -255,7 +255,7 @@ namespace Framework.Modules.Pool
             {
                 if (target == null)
                 {
-                    throw new Exception("Target is invalid.");
+                    throw new GameFrameworkException("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -269,7 +269,7 @@ namespace Framework.Modules.Pool
                 }
                 else
                 {
-                    throw new Exception(
+                    throw new GameFrameworkException(
                         $"Can not find target in object pool '{new TypeNamePair(typeof(T), Name)}', target type is '{target.GetType().FullName}', target value is '{target}'.");
                 }
             }
@@ -283,7 +283,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 SetLocked(obj.Target, locked);
@@ -298,7 +298,7 @@ namespace Framework.Modules.Pool
             {
                 if (target == null)
                 {
-                    throw new Exception("Target is invalid.");
+                    throw new GameFrameworkException("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -308,7 +308,7 @@ namespace Framework.Modules.Pool
                 }
                 else
                 {
-                    throw new Exception(
+                    throw new GameFrameworkException(
                         $"Can not find target in object pool '{new TypeNamePair(typeof(T), Name)}', target type is '{target.GetType().FullName}', target value is '{target}'.");
                 }
             }
@@ -322,7 +322,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 SetPriority(obj.Target, priority);
@@ -337,7 +337,7 @@ namespace Framework.Modules.Pool
             {
                 if (target == null)
                 {
-                    throw new Exception("Target is invalid.");
+                    throw new GameFrameworkException("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -347,7 +347,7 @@ namespace Framework.Modules.Pool
                 }
                 else
                 {
-                    throw new Exception(
+                    throw new GameFrameworkException(
                         $"Can not find target in object pool '{new TypeNamePair(typeof(T), Name)}', target type is '{target.GetType().FullName}', target value is '{target}'.");
                 }
             }
@@ -361,7 +361,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 return ReleaseObject(obj.Target);
@@ -376,7 +376,7 @@ namespace Framework.Modules.Pool
             {
                 if (target == null)
                 {
-                    throw new Exception("Target is invalid.");
+                    throw new GameFrameworkException("Target is invalid.");
                 }
 
                 Object<T> internalObject = GetObject(target);
@@ -433,7 +433,7 @@ namespace Framework.Modules.Pool
             {
                 if (releaseObjectFilterCallback == null)
                 {
-                    throw new Exception("Release object filter callback is invalid.");
+                    throw new GameFrameworkException("Release object filter callback is invalid.");
                 }
 
                 if (toReleaseCount < 0)
@@ -522,7 +522,7 @@ namespace Framework.Modules.Pool
             {
                 if (target == null)
                 {
-                    throw new Exception("Target is invalid.");
+                    throw new GameFrameworkException("Target is invalid.");
                 }
 
                 if (objectMap.TryGetValue(target, out var internalObject))
@@ -537,7 +537,7 @@ namespace Framework.Modules.Pool
             {
                 if (results == null)
                 {
-                    throw new Exception("Results is invalid.");
+                    throw new GameFrameworkException("Results is invalid.");
                 }
 
                 results.Clear();

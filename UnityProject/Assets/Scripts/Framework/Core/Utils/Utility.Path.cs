@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Framework.Core.Utils
 {
@@ -29,7 +28,7 @@ namespace Framework.Core.Utils
             {
                 if (string.IsNullOrEmpty(directoryName))
                 {
-                    throw new Exception("Directory name is invalid.");
+                    throw new GameFrameworkException("Directory name is invalid.");
                 }
 
                 try

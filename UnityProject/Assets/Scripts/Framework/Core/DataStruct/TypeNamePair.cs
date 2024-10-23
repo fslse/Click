@@ -27,7 +27,7 @@ namespace Framework.Core.DataStruct
         /// <param name="name">名称。</param>
         public TypeNamePair(Type type, string name)
         {
-            this.type = type ?? throw new Exception("Type is invalid.");
+            this.type = type ?? throw new GameFrameworkException("Type is invalid.");
             this.name = name ?? string.Empty;
         }
 
@@ -49,7 +49,7 @@ namespace Framework.Core.DataStruct
         {
             if (type == null)
             {
-                throw new Exception("Type is invalid.");
+                throw new GameFrameworkException("Type is invalid.");
             }
 
             string typeName = type.FullName;

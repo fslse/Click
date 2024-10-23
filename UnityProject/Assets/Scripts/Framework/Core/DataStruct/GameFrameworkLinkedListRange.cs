@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -24,7 +23,7 @@ namespace Framework.Core.DataStruct
         {
             if (first == null || terminal == null || first == terminal)
             {
-                throw new Exception("Range is invalid.");
+                throw new GameFrameworkException("Range is invalid.");
             }
 
             this.first = first;
@@ -127,7 +126,7 @@ namespace Framework.Core.DataStruct
             {
                 if (!range.IsValid)
                 {
-                    throw new Exception("Range is invalid.");
+                    throw new GameFrameworkException("Range is invalid.");
                 }
 
                 gameFrameworkLinkedListRange = range;

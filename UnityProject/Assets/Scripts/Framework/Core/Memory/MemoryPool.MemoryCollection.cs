@@ -48,7 +48,7 @@ namespace Framework.Core.Memory
             {
                 if (typeof(T) != MemoryType)
                 {
-                    throw new Exception("Type is invalid.");
+                    throw new GameFrameworkException("Type is invalid.");
                 }
 
                 UsingMemoryCount++;
@@ -88,7 +88,7 @@ namespace Framework.Core.Memory
                 {
                     if (EnableStrictCheck && memories.Contains(memory))
                     {
-                        throw new Exception("The memory has been released.");
+                        throw new GameFrameworkException("The memory has been released.");
                     }
 
                     memories.Enqueue(memory);
@@ -102,7 +102,7 @@ namespace Framework.Core.Memory
             {
                 if (typeof(T) != MemoryType)
                 {
-                    throw new Exception("Type is invalid.");
+                    throw new GameFrameworkException("Type is invalid.");
                 }
 
                 lock (memories)

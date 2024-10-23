@@ -76,7 +76,7 @@ namespace Framework.Modules.Pool
             {
                 if (obj == null)
                 {
-                    throw new Exception("Object is invalid.");
+                    throw new GameFrameworkException("Object is invalid.");
                 }
 
                 Object<T> internalObject = MemoryPool.Acquire<Object<T>>();
@@ -130,7 +130,7 @@ namespace Framework.Modules.Pool
                 spawnCount--;
                 if (spawnCount < 0)
                 {
-                    throw new Exception($"Object '{Name}' spawn count is less than 0.");
+                    throw new GameFrameworkException($"Object '{Name}' spawn count is less than 0.");
                 }
             }
 

@@ -27,7 +27,7 @@ namespace Framework.Modules.Setting
             {
                 if (settingHelper == null)
                 {
-                    throw new Exception("Setting helper is invalid.");
+                    throw new GameFrameworkException("Setting helper is invalid.");
                 }
 
                 return settingHelper.Count;
@@ -48,7 +48,7 @@ namespace Framework.Modules.Setting
         /// <param name="helper">游戏配置辅助器。</param>
         public void SetSettingHelper(ISettingHelper helper)
         {
-            settingHelper = helper ?? throw new Exception("Setting helper is invalid.");
+            settingHelper = helper ?? throw new GameFrameworkException("Setting helper is invalid.");
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             return settingHelper.Load();
@@ -73,7 +73,7 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             return settingHelper.Save();
@@ -87,7 +87,7 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             return settingHelper.GetAllSettingNames();
@@ -101,7 +101,7 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             settingHelper.GetAllSettingNames(results);
@@ -116,12 +116,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.HasSetting(settingName);
@@ -136,12 +136,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.RemoveSetting(settingName);
@@ -154,7 +154,7 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             settingHelper.RemoveAllSettings();
@@ -169,12 +169,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetBool(settingName);
@@ -190,12 +190,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetBool(settingName, defaultValue);
@@ -210,12 +210,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetBool(settingName, value);
@@ -230,12 +230,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetInt(settingName);
@@ -251,12 +251,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetInt(settingName, defaultValue);
@@ -271,12 +271,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetInt(settingName, value);
@@ -291,12 +291,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetFloat(settingName);
@@ -312,12 +312,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetFloat(settingName, defaultValue);
@@ -332,12 +332,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetFloat(settingName, value);
@@ -352,12 +352,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetString(settingName);
@@ -373,12 +373,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetString(settingName, defaultValue);
@@ -393,12 +393,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetString(settingName, value);
@@ -414,12 +414,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetObject<T>(settingName);
@@ -436,12 +436,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetObject(settingName, defaultObj);
@@ -457,12 +457,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetObject(settingName, obj);
@@ -478,17 +478,17 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetObject(objectType, settingName);
@@ -505,17 +505,17 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             return settingHelper.GetObject(objectType, settingName, defaultObj);
@@ -530,12 +530,12 @@ namespace Framework.Modules.Setting
         {
             if (settingHelper == null)
             {
-                throw new Exception("Setting helper is invalid.");
+                throw new GameFrameworkException("Setting helper is invalid.");
             }
 
             if (string.IsNullOrEmpty(settingName))
             {
-                throw new Exception("Setting name is invalid.");
+                throw new GameFrameworkException("Setting name is invalid.");
             }
 
             settingHelper.SetObject(settingName, obj);

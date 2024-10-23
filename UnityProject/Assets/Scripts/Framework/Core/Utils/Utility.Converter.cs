@@ -32,7 +32,7 @@ namespace Framework.Core.Utils
             {
                 if (ScreenDpi <= 0)
                 {
-                    throw new Exception("You must set screen DPI first.");
+                    throw new GameFrameworkException("You must set screen DPI first.");
                 }
 
                 return InchesToCentimeters * pixels / ScreenDpi;
@@ -47,7 +47,7 @@ namespace Framework.Core.Utils
             {
                 if (ScreenDpi <= 0)
                 {
-                    throw new Exception("You must set screen DPI first.");
+                    throw new GameFrameworkException("You must set screen DPI first.");
                 }
 
                 return CentimetersToInches * centimeters * ScreenDpi;
@@ -62,7 +62,7 @@ namespace Framework.Core.Utils
             {
                 if (ScreenDpi <= 0)
                 {
-                    throw new Exception("You must set screen DPI first.");
+                    throw new GameFrameworkException("You must set screen DPI first.");
                 }
 
                 return pixels / ScreenDpi;
@@ -77,7 +77,7 @@ namespace Framework.Core.Utils
             {
                 if (ScreenDpi <= 0)
                 {
-                    throw new Exception("You must set screen DPI first.");
+                    throw new GameFrameworkException("You must set screen DPI first.");
                 }
 
                 return inches * ScreenDpi;
@@ -115,12 +115,12 @@ namespace Framework.Core.Utils
             {
                 if (buffer == null)
                 {
-                    throw new Exception("Buffer is invalid.");
+                    throw new GameFrameworkException("Buffer is invalid.");
                 }
 
                 if (startIndex < 0 || startIndex + 1 > buffer.Length)
                 {
-                    throw new Exception("Start index is invalid.");
+                    throw new GameFrameworkException("Start index is invalid.");
                 }
 
                 buffer[startIndex] = value ? (byte)1 : (byte)0;
@@ -233,12 +233,12 @@ namespace Framework.Core.Utils
             {
                 if (buffer == null)
                 {
-                    throw new Exception("Buffer is invalid.");
+                    throw new GameFrameworkException("Buffer is invalid.");
                 }
 
                 if (startIndex < 0 || startIndex + 2 > buffer.Length)
                 {
-                    throw new Exception("Start index is invalid.");
+                    throw new GameFrameworkException("Start index is invalid.");
                 }
 
                 fixed (byte* valueRef = buffer)
@@ -354,12 +354,12 @@ namespace Framework.Core.Utils
             {
                 if (buffer == null)
                 {
-                    throw new Exception("Buffer is invalid.");
+                    throw new GameFrameworkException("Buffer is invalid.");
                 }
 
                 if (startIndex < 0 || startIndex + 4 > buffer.Length)
                 {
-                    throw new Exception("Start index is invalid.");
+                    throw new GameFrameworkException("Start index is invalid.");
                 }
 
                 fixed (byte* valueRef = buffer)
@@ -475,12 +475,12 @@ namespace Framework.Core.Utils
             {
                 if (buffer == null)
                 {
-                    throw new Exception("Buffer is invalid.");
+                    throw new GameFrameworkException("Buffer is invalid.");
                 }
 
                 if (startIndex < 0 || startIndex + 8 > buffer.Length)
                 {
-                    throw new Exception("Start index is invalid.");
+                    throw new GameFrameworkException("Start index is invalid.");
                 }
 
                 fixed (byte* valueRef = buffer)
@@ -715,12 +715,12 @@ namespace Framework.Core.Utils
             {
                 if (value == null)
                 {
-                    throw new Exception("Value is invalid.");
+                    throw new GameFrameworkException("Value is invalid.");
                 }
 
                 if (encoding == null)
                 {
-                    throw new Exception("Encoding is invalid.");
+                    throw new GameFrameworkException("Encoding is invalid.");
                 }
 
                 return encoding.GetBytes(value);
@@ -750,12 +750,12 @@ namespace Framework.Core.Utils
             {
                 if (value == null)
                 {
-                    throw new Exception("Value is invalid.");
+                    throw new GameFrameworkException("Value is invalid.");
                 }
 
                 if (encoding == null)
                 {
-                    throw new Exception("Encoding is invalid.");
+                    throw new GameFrameworkException("Encoding is invalid.");
                 }
 
                 return encoding.GetBytes(value, 0, value.Length, buffer, startIndex);
@@ -781,12 +781,12 @@ namespace Framework.Core.Utils
             {
                 if (value == null)
                 {
-                    throw new Exception("Value is invalid.");
+                    throw new GameFrameworkException("Value is invalid.");
                 }
 
                 if (encoding == null)
                 {
-                    throw new Exception("Encoding is invalid.");
+                    throw new GameFrameworkException("Encoding is invalid.");
                 }
 
                 return encoding.GetString(value);
@@ -816,12 +816,12 @@ namespace Framework.Core.Utils
             {
                 if (value == null)
                 {
-                    throw new Exception("Value is invalid.");
+                    throw new GameFrameworkException("Value is invalid.");
                 }
 
                 if (encoding == null)
                 {
-                    throw new Exception("Encoding is invalid.");
+                    throw new GameFrameworkException("Encoding is invalid.");
                 }
 
                 return encoding.GetString(value, startIndex, length);

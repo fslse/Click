@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core.Memory
+﻿namespace Framework.Core.Memory
 {
     /// <summary>
     /// 内存池对象基类。
@@ -47,7 +45,7 @@ namespace Framework.Core.Memory
         {
             if (memory == null)
             {
-                throw new Exception("Memory is invalid.");
+                throw new GameFrameworkException("Memory is invalid.");
             }
 
             memory.RecycleToPool();

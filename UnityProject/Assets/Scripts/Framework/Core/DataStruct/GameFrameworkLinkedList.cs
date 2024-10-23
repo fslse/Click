@@ -255,7 +255,7 @@ namespace Framework.Core.DataStruct
             LinkedListNode<T> first = linkedList.First;
             if (first == null)
             {
-                throw new Exception("First is invalid.");
+                throw new GameFrameworkException("First is invalid.");
             }
 
             linkedList.RemoveFirst();
@@ -270,7 +270,7 @@ namespace Framework.Core.DataStruct
             LinkedListNode<T> last = linkedList.Last;
             if (last == null)
             {
-                throw new Exception("Last is invalid.");
+                throw new GameFrameworkException("Last is invalid.");
             }
 
             linkedList.RemoveLast();
@@ -347,7 +347,7 @@ namespace Framework.Core.DataStruct
             {
                 if (linkedList == null)
                 {
-                    throw new Exception("Linked list is invalid.");
+                    throw new GameFrameworkException("Linked list is invalid.");
                 }
 
                 enumerator = linkedList.GetEnumerator();

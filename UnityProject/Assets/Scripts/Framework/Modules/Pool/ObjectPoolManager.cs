@@ -77,12 +77,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalHasObjectPool(new TypeNamePair(objectType));
@@ -109,12 +109,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalHasObjectPool(new TypeNamePair(objectType, name));
@@ -129,7 +129,7 @@ namespace Framework.Modules.Pool
         {
             if (condition == null)
             {
-                throw new Exception("Condition is invalid.");
+                throw new GameFrameworkException("Condition is invalid.");
             }
 
             foreach (KeyValuePair<TypeNamePair, ObjectPoolBase> objectPool in objectPools)
@@ -162,12 +162,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalGetObjectPool(new TypeNamePair(objectType));
@@ -194,12 +194,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalGetObjectPool(new TypeNamePair(objectType, name));
@@ -214,7 +214,7 @@ namespace Framework.Modules.Pool
         {
             if (condition == null)
             {
-                throw new Exception("Condition is invalid.");
+                throw new GameFrameworkException("Condition is invalid.");
             }
 
             foreach (KeyValuePair<TypeNamePair, ObjectPoolBase> objectPool in objectPools)
@@ -237,7 +237,7 @@ namespace Framework.Modules.Pool
         {
             if (condition == null)
             {
-                throw new Exception("Condition is invalid.");
+                throw new GameFrameworkException("Condition is invalid.");
             }
 
             List<ObjectPoolBase> results = new List<ObjectPoolBase>();
@@ -261,12 +261,12 @@ namespace Framework.Modules.Pool
         {
             if (condition == null)
             {
-                throw new Exception("Condition is invalid.");
+                throw new GameFrameworkException("Condition is invalid.");
             }
 
             if (results == null)
             {
-                throw new Exception("Results is invalid.");
+                throw new GameFrameworkException("Results is invalid.");
             }
 
             results.Clear();
@@ -337,7 +337,7 @@ namespace Framework.Modules.Pool
         {
             if (results == null)
             {
-                throw new Exception("Results is invalid.");
+                throw new GameFrameworkException("Results is invalid.");
             }
 
             results.Clear();
@@ -1107,12 +1107,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectType));
@@ -1139,12 +1139,12 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectType, name));
@@ -1160,7 +1160,7 @@ namespace Framework.Modules.Pool
         {
             if (objectPool == null)
             {
-                throw new Exception("Object pool is invalid.");
+                throw new GameFrameworkException("Object pool is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(typeof(T), objectPool.Name));
@@ -1175,7 +1175,7 @@ namespace Framework.Modules.Pool
         {
             if (objectPool == null)
             {
-                throw new Exception("Object pool is invalid.");
+                throw new GameFrameworkException("Object pool is invalid.");
             }
 
             return InternalDestroyObjectPool(new TypeNamePair(objectPool.ObjectType, objectPool.Name));
@@ -1220,7 +1220,7 @@ namespace Framework.Modules.Pool
             TypeNamePair typeNamePair = new TypeNamePair(typeof(T), name);
             if (HasObjectPool<T>(name))
             {
-                throw new Exception($"Already exist object pool '{typeNamePair}'.");
+                throw new GameFrameworkException($"Already exist object pool '{typeNamePair}'.");
             }
 
             ObjectPool<T> objectPool = new ObjectPool<T>(name, allowMultiSpawn, autoReleaseInterval, capacity, expireTime, priority);
@@ -1232,18 +1232,18 @@ namespace Framework.Modules.Pool
         {
             if (objectType == null)
             {
-                throw new Exception("Object type is invalid.");
+                throw new GameFrameworkException("Object type is invalid.");
             }
 
             if (!typeof(ObjectBase).IsAssignableFrom(objectType))
             {
-                throw new Exception($"Object type '{objectType.FullName}' is invalid.");
+                throw new GameFrameworkException($"Object type '{objectType.FullName}' is invalid.");
             }
 
             TypeNamePair typeNamePair = new TypeNamePair(objectType, name);
             if (HasObjectPool(objectType, name))
             {
-                throw new Exception($"Already exist object pool '{typeNamePair}'.");
+                throw new GameFrameworkException($"Already exist object pool '{typeNamePair}'.");
             }
 
             Type objectPoolType = typeof(ObjectPool<>).MakeGenericType(objectType);

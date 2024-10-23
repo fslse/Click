@@ -52,7 +52,7 @@ namespace Framework.Modules.Setting
         {
             if (results == null)
             {
-                throw new ArgumentNullException();
+                throw new GameFrameworkException("Results is invalid.");
             }
 
             results.Clear();

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace Framework.Core.DataStruct
@@ -57,7 +56,7 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">序列化回调函数。</param>
         public void RegisterSerializeCallback(byte version, SerializeCallback callback)
         {
-            serializeCallbacks[version] = callback ?? throw new Exception("Serialize callback is invalid.");
+            serializeCallbacks[version] = callback ?? throw new GameFrameworkException("Serialize callback is invalid.");
             if (version > latestSerializeCallbackVersion)
             {
                 latestSerializeCallbackVersion = version;
@@ -71,7 +70,7 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">反序列化回调函数。</param>
         public void RegisterDeserializeCallback(byte version, DeserializeCallback callback)
         {
-            deserializeCallbacks[version] = callback ?? throw new Exception("Deserialize callback is invalid.");
+            deserializeCallbacks[version] = callback ?? throw new GameFrameworkException("Deserialize callback is invalid.");
         }
 
         /// <summary>
@@ -81,7 +80,7 @@ namespace Framework.Core.DataStruct
         /// <param name="callback">尝试从指定流获取指定键的值回调函数。</param>
         public void RegisterTryGetValueCallback(byte version, TryGetValueCallback callback)
         {
-            tryGetValueCallbacks[version] = callback ?? throw new Exception("Try get value callback is invalid.");
+            tryGetValueCallbacks[version] = callback ?? throw new GameFrameworkException("Try get value callback is invalid.");
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Framework.Core.DataStruct
         {
             if (serializeCallbacks.Count <= 0)
             {
-                throw new Exception("No serialize callback registered.");
+                throw new GameFrameworkException("No serialize callback registered.");
             }
 
             return Serialize(stream, data, latestSerializeCallbackVersion);
@@ -116,7 +115,7 @@ namespace Framework.Core.DataStruct
             stream.WriteByte(version);
             if (!serializeCallbacks.TryGetValue(version, out var callback))
             {
-                throw new Exception($"Serialize callback '{version}' is not exist.");
+                throw new GameFrameworkException($"Serialize callback '{version}' is not exist.");
             }
 
             return callback(stream, data);
@@ -135,13 +134,13 @@ namespace Framework.Core.DataStruct
             byte header2 = (byte)stream.ReadByte();
             if (header0 != header[0] || header1 != header[1] || header2 != header[2])
             {
-                throw new Exception($"Header is invalid, need '{(char)header[0]}{(char)header[1]}{(char)header[2]}', current '{(char)header0}{(char)header1}{(char)header2}'.");
+                throw new GameFrameworkException($"Header is invalid, need '{(char)header[0]}{(char)header[1]}{(char)header[2]}', current '{(char)header0}{(char)header1}{(char)header2}'.");
             }
 
             byte version = (byte)stream.ReadByte();
             if (!deserializeCallbacks.TryGetValue(version, out var callback))
             {
-                throw new Exception($"Deserialize callback '{version}' is not exist.");
+                throw new GameFrameworkException($"Deserialize callback '{version}' is not exist.");
             }
 
             return callback(stream);

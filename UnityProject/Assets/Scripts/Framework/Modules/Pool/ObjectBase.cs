@@ -60,7 +60,7 @@ namespace Framework.Modules.Pool
         protected void Initialize(string name, object target, bool locked = false, int priority = 0)
         {
             Name = name ?? string.Empty;
-            Target = target ?? throw new Exception($"Target '{name}' is invalid.");
+            Target = target ?? throw new GameFrameworkException($"Target '{name}' is invalid.");
             Locked = locked;
             Priority = priority;
             LastUseTime = DateTime.UtcNow;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -202,7 +201,7 @@ namespace Framework.Core.DataStruct
             {
                 if (dictionary == null)
                 {
-                    throw new Exception("Dictionary is invalid.");
+                    throw new GameFrameworkException("Dictionary is invalid.");
                 }
 
                 enumerator = dictionary.GetEnumerator();

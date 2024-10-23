@@ -1,4 +1,3 @@
-using System;
 using Framework.Modules.Audio;
 using Framework.Modules.Pool;
 using Framework.Modules.Setting;
@@ -25,7 +24,7 @@ namespace Framework
             // SettingModule 初始化
             if (!SettingModule.Instance.Load())
             {
-                throw new Exception("SettingModule 初始化失败");
+                throw new GameFrameworkException("SettingModule 初始化失败");
             }
 
             DontDestroyOnLoad(gameObject);

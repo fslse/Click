@@ -30,7 +30,7 @@ namespace Framework.Core.Utils
             {
                 if (jsonHelper == null)
                 {
-                    throw new Exception("JSON helper is invalid.");
+                    throw new GameFrameworkException("JSON helper is invalid.");
                 }
 
                 try
@@ -39,7 +39,7 @@ namespace Framework.Core.Utils
                 }
                 catch (Exception exception)
                 {
-                    throw new Exception($"Can not convert to JSON with exception '{exception}'.", exception);
+                    throw new GameFrameworkException($"Can not convert to JSON with exception '{exception}'.", exception);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace Framework.Core.Utils
             {
                 if (jsonHelper == null)
                 {
-                    throw new Exception("JSON helper is invalid.");
+                    throw new GameFrameworkException("JSON helper is invalid.");
                 }
 
                 try
@@ -62,7 +62,7 @@ namespace Framework.Core.Utils
                 }
                 catch (Exception exception)
                 {
-                    throw new Exception($"Can not convert to object with exception '{exception}'.", exception);
+                    throw new GameFrameworkException($"Can not convert to object with exception '{exception}'.", exception);
                 }
             }
 
@@ -76,12 +76,12 @@ namespace Framework.Core.Utils
             {
                 if (jsonHelper == null)
                 {
-                    throw new Exception("JSON helper is invalid.");
+                    throw new GameFrameworkException("JSON helper is invalid.");
                 }
 
                 if (objectType == null)
                 {
-                    throw new Exception("Object type is invalid.");
+                    throw new GameFrameworkException("Object type is invalid.");
                 }
 
                 try
@@ -90,7 +90,7 @@ namespace Framework.Core.Utils
                 }
                 catch (Exception exception)
                 {
-                    throw new Exception($"Can not convert to object with exception '{exception}'.", exception);
+                    throw new GameFrameworkException($"Can not convert to object with exception '{exception}'.", exception);
                 }
             }
         }
