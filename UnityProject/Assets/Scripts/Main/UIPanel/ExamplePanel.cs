@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+using Framework.Modules.Localization;
 using Framework.Modules.Time;
 using Framework.Modules.UI;
 using Google.Protobuf;
@@ -100,7 +101,11 @@ namespace Main.UIPanel
             Array.Reverse(bytes); // 大端转小端
             var msg = TestMessage.Parser.ParseFrom(bytes);
 
-            var timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(3), _ => { tmp.text = msg.Response.Power.ToString(); });
+            var timer = Timer.Create(DelayType.DeltaTime, TimeSpan.FromSeconds(3), _ =>
+            {
+                tmp.text = msg.Response.Power.ToString();
+                LocalizationModule.Instance.SetLanguage(LocalizationModule.Instance.SystemLanguage);
+            });
             timer.AutoRelease = true;
             timer.Restart();
         }

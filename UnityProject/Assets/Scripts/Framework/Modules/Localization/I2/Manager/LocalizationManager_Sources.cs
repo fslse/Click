@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Framework.Modules.Localization;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -21,12 +22,58 @@ namespace I2.Loc
 
         public static bool UpdateSources()
 		{
-			UnregisterDeletededSources();
-			RegisterSourceInResources();
-			RegisterSceneSources();
+			// fslse modified
+			
+			// UnregisterDeletededSources();
+			// RegisterSourceInResources();
+			// RegisterSceneSources();
+			
+			// fslse add
+#if UNITY_EDITOR
+			if (!I2Utils.IsPlaying())
+			{
+				RegisterSourceInEditor();
+			}
+#endif			
 			return Sources.Count>0;
 		}
+#if UNITY_EDITOR // fslse add
+        
+		static void RegisterSourceInEditor()
+		{
+			var sourceAsset = GetEditorAsset();
+			if (sourceAsset == null) return;
+			if (sourceAsset && !Sources.Contains(sourceAsset.mSource))
+			{
+				if (!sourceAsset.mSource.mIsGlobalSource)
+					sourceAsset.mSource.mIsGlobalSource = true;
+				sourceAsset.mSource.owner = sourceAsset;
+				AddSource(sourceAsset.mSource);
+			}
+		}
+		
+		private static LanguageSourceAsset m_LastLanguageSourceAsset;
+		
+		public static LanguageSourceAsset GetEditorAsset(bool force = false)
+		{
+			if (m_LastLanguageSourceAsset != null && !force)
+			{
+				return m_LastLanguageSourceAsset;
+			}
+			
+			Debug.Log("I2LocalizationManager 加载编辑器资源数据");
+			var sourceAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<LanguageSourceAsset>(DefaultLocalizationHelper.I2GlobalSourcesEditorPath);
+			if (sourceAsset == null)
+			{
+				Debug.LogError($"Failed to load {DefaultLocalizationHelper.I2GlobalSourcesEditorPath}");
+				return null;
+			}
 
+			m_LastLanguageSourceAsset = sourceAsset;
+			return sourceAsset;
+		}
+		
+#endif 
 		static void UnregisterDeletededSources()
 		{
 			// Delete sources that were part of another scene and not longer available

@@ -1,4 +1,5 @@
 using Framework.Modules.Audio;
+using Framework.Modules.Localization;
 using Framework.Modules.Pool;
 using Framework.Modules.Setting;
 using Framework.Modules.UI;
@@ -20,6 +21,8 @@ namespace Framework
             AudioModule.Instance.InstanceRoot.SetParent(transform);
             // ObjectPoolModule 初始化
             ObjectPoolModule.Instance.InstanceRoot.SetParent(transform);
+            // LocalizationModule 初始化
+            LocalizationModule.Instance.InstanceRoot.SetParent(transform);
 
             // SettingModule 初始化
             if (!SettingModule.Instance.Load())

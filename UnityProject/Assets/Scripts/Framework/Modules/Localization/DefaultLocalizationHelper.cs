@@ -76,11 +76,10 @@ namespace Framework.Modules.Localization
 
         static DefaultLocalizationHelper()
         {
-            RegisterLanguageMap(Language.English);
-            RegisterLanguageMap(Language.ChineseSimplified, "Chinese");
-            RegisterLanguageMap(Language.ChineseTraditional);
+            RegisterLanguageMap(Language.English, "English (United States)");
+            RegisterLanguageMap(Language.ChineseSimplified, "Chinese (Simplified)");
+            RegisterLanguageMap(Language.ChineseTraditional, "Chinese (Traditional)");
             RegisterLanguageMap(Language.Japanese);
-            RegisterLanguageMap(Language.Korean);
         }
 
         private static void RegisterLanguageMap(Language language, string str = "")
