@@ -88,9 +88,7 @@ namespace Scripts.Fire
 
         private void Init()
         {
-            var transition = GameObject.Find("--- Transition ---");
-            DontDestroyOnLoad(transition);
-            mask = transition.transform.Find("Mask").GetComponent<Image>();
+            mask = transform.Find("--- Transition ---/Mask").GetComponent<Image>();
         }
 
         public void Transition(Action action, float duration = 0.5f)

@@ -246,6 +246,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.Enumerator<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary.Enumerator<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary.Enumerator<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary.Enumerator<object,byte>
 	// System.Collections.Generic.Dictionary.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.Enumerator<object,object>
 	// System.Collections.Generic.Dictionary.Enumerator<uint,int>
@@ -257,6 +258,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,byte>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<object,object>
 	// System.Collections.Generic.Dictionary.KeyCollection.Enumerator<uint,int>
@@ -268,6 +270,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.KeyCollection<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary.KeyCollection<object,byte>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,int>
 	// System.Collections.Generic.Dictionary.KeyCollection<object,object>
 	// System.Collections.Generic.Dictionary.KeyCollection<uint,int>
@@ -279,6 +282,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,byte>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,int>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<object,object>
 	// System.Collections.Generic.Dictionary.ValueCollection.Enumerator<uint,int>
@@ -290,6 +294,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary.ValueCollection<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary.ValueCollection<object,byte>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,int>
 	// System.Collections.Generic.Dictionary.ValueCollection<object,object>
 	// System.Collections.Generic.Dictionary.ValueCollection<uint,int>
@@ -301,6 +306,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.Dictionary<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.Dictionary<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.Dictionary<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.Dictionary<object,byte>
 	// System.Collections.Generic.Dictionary<object,int>
 	// System.Collections.Generic.Dictionary<object,object>
 	// System.Collections.Generic.Dictionary<uint,int>
@@ -344,6 +350,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,I2.Loc.GoogleLanguages.LanguageCodeDef>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,I2.Loc.TranslationQuery>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,System.Nullable<UnityEngine.RaycastHit>>>
+	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,byte>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<object,object>>
@@ -393,6 +400,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,I2.Loc.GoogleLanguages.LanguageCodeDef>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,I2.Loc.TranslationQuery>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,System.Nullable<UnityEngine.RaycastHit>>>
+	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,byte>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>
@@ -424,6 +432,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,I2.Loc.GoogleLanguages.LanguageCodeDef>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,I2.Loc.TranslationQuery>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,System.Nullable<UnityEngine.RaycastHit>>>
+	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,byte>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,int>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,long>>
 	// System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<object,object>>
@@ -464,6 +473,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<int>
 	// System.Collections.Generic.IList<object>
 	// System.Collections.Generic.IList<ushort>
+	// System.Collections.Generic.IReadOnlyDictionary<byte,object>
+	// System.Collections.Generic.IReadOnlyDictionary<object,byte>
 	// System.Collections.Generic.IReadOnlyDictionary<object,object>
 	// System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>
 	// System.Collections.Generic.KeyValuePair<System.UIntPtr,object>
@@ -473,6 +484,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.KeyValuePair<object,I2.Loc.GoogleLanguages.LanguageCodeDef>
 	// System.Collections.Generic.KeyValuePair<object,I2.Loc.TranslationQuery>
 	// System.Collections.Generic.KeyValuePair<object,System.Nullable<UnityEngine.RaycastHit>>
+	// System.Collections.Generic.KeyValuePair<object,byte>
 	// System.Collections.Generic.KeyValuePair<object,int>
 	// System.Collections.Generic.KeyValuePair<object,long>
 	// System.Collections.Generic.KeyValuePair<object,object>
@@ -978,6 +990,8 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Void System.Array.Reverse<byte>(byte[])
 		// System.Void System.Array.Reverse<byte>(byte[],int,int)
 		// System.Void System.Array.Sort<UnityEngine.Vector2>(UnityEngine.Vector2[],System.Comparison<UnityEngine.Vector2>)
+		// byte System.Collections.Generic.CollectionExtensions.GetValueOrDefault<object,byte>(System.Collections.Generic.IReadOnlyDictionary<object,byte>,object,byte)
+		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<byte,object>(System.Collections.Generic.IReadOnlyDictionary<byte,object>,byte,object)
 		// object System.Collections.Generic.CollectionExtensions.GetValueOrDefault<object,object>(System.Collections.Generic.IReadOnlyDictionary<object,object>,object,object)
 		// bool System.Linq.Enumerable.Any<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Concat<object>(System.Collections.Generic.IEnumerable<object>,System.Collections.Generic.IEnumerable<object>)
