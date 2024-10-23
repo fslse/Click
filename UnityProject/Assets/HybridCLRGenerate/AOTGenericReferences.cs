@@ -29,6 +29,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 
 	// {{ AOT generic types
 	// Cysharp.Text.Utf16ValueStringBuilder.TryFormat<float>
+	// Cysharp.Text.Utf16ValueStringBuilder.TryFormat<object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Get>d__0,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Post>d__1,object>
 	// Cysharp.Threading.Tasks.CompilerServices.AsyncUniTask.<>c<Framework.Core.Utils.Utility.Http.<Post>d__2,object>
@@ -473,9 +474,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Collections.Generic.IList<int>
 	// System.Collections.Generic.IList<object>
 	// System.Collections.Generic.IList<ushort>
+	// System.Collections.Generic.IReadOnlyCollection<object>
 	// System.Collections.Generic.IReadOnlyDictionary<byte,object>
 	// System.Collections.Generic.IReadOnlyDictionary<object,byte>
 	// System.Collections.Generic.IReadOnlyDictionary<object,object>
+	// System.Collections.Generic.IReadOnlyList<object>
 	// System.Collections.Generic.KeyValuePair<Framework.Core.DataStruct.TypeNamePair,object>
 	// System.Collections.Generic.KeyValuePair<System.UIntPtr,object>
 	// System.Collections.Generic.KeyValuePair<byte,object>
@@ -705,8 +708,11 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	// System.Linq.Enumerable.WhereListIterator<object>
 	// System.Linq.Enumerable.WhereListIterator<ushort>
 	// System.Linq.Enumerable.WhereSelectArrayIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
+	// System.Linq.Enumerable.WhereSelectArrayIterator<object,object>
 	// System.Linq.Enumerable.WhereSelectEnumerableIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
+	// System.Linq.Enumerable.WhereSelectEnumerableIterator<object,object>
 	// System.Linq.Enumerable.WhereSelectListIterator<System.Collections.Generic.KeyValuePair<object,object>,object>
+	// System.Linq.Enumerable.WhereSelectListIterator<object,object>
 	// System.Linq.GroupedEnumerable<object,object,object>
 	// System.Linq.IGrouping<object,object>
 	// System.Linq.IdentityFunction.<>c<object>
@@ -935,9 +941,13 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 	public void RefMethods()
 	{
 		// System.Void Cysharp.Text.Utf16ValueStringBuilder.Append<float>(float)
+		// System.Void Cysharp.Text.Utf16ValueStringBuilder.Append<object>(object)
 		// System.Void Cysharp.Text.Utf16ValueStringBuilder.AppendJoinInternal<float>(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<float>)
+		// System.Void Cysharp.Text.Utf16ValueStringBuilder.AppendJoinInternal<object>(System.ReadOnlySpan<System.Char>,System.Collections.Generic.IReadOnlyList<object>)
 		// string Cysharp.Text.ZString.Join<float>(string,float[])
+		// string Cysharp.Text.ZString.Join<object>(string,System.Collections.Generic.List<object>)
 		// string Cysharp.Text.ZString.JoinInternal<float>(System.ReadOnlySpan<System.Char>,System.ReadOnlySpan<float>)
+		// string Cysharp.Text.ZString.JoinInternal<object>(System.ReadOnlySpan<System.Char>,System.Collections.Generic.IReadOnlyList<object>)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.DOTweenAsyncExtensions.TweenAwaiter&,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Framework.Modules.UI.UIPanelBehaviour.<Hide>d__11&)
 		// System.Void Cysharp.Threading.Tasks.CompilerServices.AsyncUniTaskMethodBuilder<object>.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>,Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4>(Cysharp.Threading.Tasks.UniTask.Awaiter<System.ValueTuple<byte,object>>&,Framework.Core.Utils.Utility.Http.<SendWebRequest>d__4&)
@@ -1007,6 +1017,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<object,object>> System.Linq.Enumerable.GroupBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
 		// System.Collections.Generic.IEnumerable<System.Linq.IGrouping<object,object>> System.Linq.Enumerable.GroupBy<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>,System.Collections.Generic.IEqualityComparer<object>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<System.Collections.Generic.KeyValuePair<object,object>,object>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<object,object>>,System.Func<System.Collections.Generic.KeyValuePair<object,object>,object>)
+		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Select<object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>)
 		// object[] System.Linq.Enumerable.ToArray<object>(System.Collections.Generic.IEnumerable<object>)
 		// ushort[] System.Linq.Enumerable.ToArray<ushort>(System.Collections.Generic.IEnumerable<ushort>)
 		// System.Collections.Generic.Dictionary<object,object> System.Linq.Enumerable.ToDictionary<object,object,object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,object>,System.Func<object,object>)
@@ -1015,6 +1026,7 @@ public class AOTGenericReferences : UnityEngine.MonoBehaviour
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Where<object>(System.Collections.Generic.IEnumerable<object>,System.Func<object,bool>)
 		// System.Collections.Generic.IEnumerable<ushort> System.Linq.Enumerable.Where<ushort>(System.Collections.Generic.IEnumerable<ushort>,System.Func<ushort,bool>)
 		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<System.Collections.Generic.KeyValuePair<object,object>>.Select<object>(System.Func<System.Collections.Generic.KeyValuePair<object,object>,object>)
+		// System.Collections.Generic.IEnumerable<object> System.Linq.Enumerable.Iterator<object>.Select<object>(System.Func<object,object>)
 		// System.Span<float> System.MemoryExtensions.AsSpan<float>(float[])
 		// System.Span<ushort> System.MemoryExtensions.AsSpan<ushort>(ushort[],int)
 		// System.Void System.Runtime.CompilerServices.AsyncVoidMethodBuilder.AwaitUnsafeOnCompleted<Cysharp.Threading.Tasks.UniTask.Awaiter,Main.GamePlay.Example.<Test>d__2>(Cysharp.Threading.Tasks.UniTask.Awaiter&,Main.GamePlay.Example.<Test>d__2&)
