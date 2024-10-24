@@ -77,3 +77,4 @@ crashlytics-build.properties
 /[Aa]ssets/HybridCLRBuildCache
 /[Aa]ssets/StreamingAssets
 /[Aa]ssets/AssetArt/Atlas
+*.unitypackage.meta
